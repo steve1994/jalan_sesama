@@ -26,14 +26,20 @@ import {
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+
 import Home from './src/components/Home';
+import ListPanti from './src/components/ListPanti';
+import GLdana from './src/components/GLdana';
 
 const RootStack = createStackNavigator(
     {
-        Home: {screen: Home}
+        Home: {screen: Home},
+        ListPanti: {screen: ListPanti},
+        GLdana: {screen: GLdana}
+
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'Home', headerMode:'none'
     }
 )
 
