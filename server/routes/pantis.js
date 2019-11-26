@@ -55,7 +55,7 @@ function randomString(length) {
    return result;
 }
 
-router.put('uploadphoto/:idPanti', function (req,res) {
+router.put('/uploadphoto/:idPanti', function (req,res) {
     let idPanti = req.params.idPanti;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
@@ -78,7 +78,7 @@ router.put('uploadphoto/:idPanti', function (req,res) {
     }
 })
 
-router.put('status/:idPanti/:status', function (req,res) {
+router.put('/status/:idPanti/:status', function (req,res) {
     let idPanti = req.params.idPanti;
     let status = req.params.status;
     Panti.findOneAndUpdate({_id:idPanti},{status},function (err,response) {
@@ -86,6 +86,17 @@ router.put('status/:idPanti/:status', function (req,res) {
             res.status(400).json({status:'failed',error:err});
         } else {
             res.status(201).json({status:'success',data:response});
+        }
+    })
+})
+
+router.delete('/:idPanti',function (req,res) {
+    let idPanti = req.params.idPanti;
+    Panti.findOneAndDelete({_id:idPanti},function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            res.status(201).json({status:'success',data:response})
         }
     })
 })

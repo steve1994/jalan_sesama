@@ -54,7 +54,7 @@ function randomString(length) {
    return result;
 }
 
-router.put('uploadphoto/:idSesama', function (req,res) {
+router.put('/uploadphoto/:idSesama', function (req,res) {
     let idSesama = req.params.idSesama;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
@@ -77,7 +77,7 @@ router.put('uploadphoto/:idSesama', function (req,res) {
     }
 })
 
-router.put('status/:idSesama/:status', function (req,res) {
+router.put('/status/:idSesama/:status', function (req,res) {
     let idSesama = req.params.idSesama;
     let status = req.params.status;
     Sesama.findOneAndUpdate({_id:idSesama},{status},function (err,response) {
@@ -85,6 +85,17 @@ router.put('status/:idSesama/:status', function (req,res) {
             res.status(400).json({status:'failed',error:err});
         } else {
             res.status(201).json({status:'success',data:response});
+        }
+    })
+})
+
+router.delete('/:idSesama',function (req,res) {
+    let idSesama = req.params.idSesama;
+    Sesama.findOneAndDelete({_id:idSesama},function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            res.status(201).json({status:'success',data:response})
         }
     })
 })

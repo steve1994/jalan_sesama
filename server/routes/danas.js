@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 const Dana = require('../model/danas');
 
-router.get('panti/:idPanti', function(req, res) {
+router.get('/panti/:idPanti', function(req, res) {
     let idPanti = req.params.idPanti;
     Dana.find({idPanti})
     .exec(function (err,response) {
@@ -15,7 +15,7 @@ router.get('panti/:idPanti', function(req, res) {
     })
 });
 
-router.get('sesama/:idBantuSesama', function(req, res) {
+router.get('/sesama/:idBantuSesama', function(req, res) {
     let idBantuSesama = req.params.idBantuSesama;
     Dana.find({idBantu:idBantuSesama})
     .exec(function (err,response) {
@@ -27,7 +27,7 @@ router.get('sesama/:idBantuSesama', function(req, res) {
     })
 })
 
-router.post('panti/:idPanti', function(req,res) {
+router.post('/panti/:idPanti', function(req,res) {
     let idPanti = req.params.idPanti;
     let idBantu = null;
     let nama = req.body.nama;
@@ -47,7 +47,7 @@ router.post('panti/:idPanti', function(req,res) {
     }
 })
 
-router.post('sesama/:idBantuSesama', function(req,res) {
+router.post('/sesama/:idBantuSesama', function(req,res) {
     let idPanti = null;
     let idBantu = req.params.idBantuSesama;
     let nama = req.body.nama;
@@ -77,7 +77,7 @@ function randomString(length) {
    return result;
 }
 
-router.put('uploadphoto/:idGalangDana', function (req,res) {
+router.put('/uploadphoto/:idGalangDana', function (req,res) {
     let idGalangDana = req.params.idGalangDana;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
@@ -100,7 +100,7 @@ router.put('uploadphoto/:idGalangDana', function (req,res) {
     }
 })
 
-router.put('status/:idGalangDana/:status', function (req,res) {
+router.put('/status/:idGalangDana/:status', function (req,res) {
     let idGalangDana = req.params.idGalangDana;
     let status = req.params.status;
     Dana.findOneAndUpdate({_id:idGalangDana},{status},function (err,response) {
@@ -112,7 +112,7 @@ router.put('status/:idGalangDana/:status', function (req,res) {
     })
 })
 
-router.put('addnominal/:idGalangDana/:nominal', function (req,res) {
+router.put('/addnominal/:idGalangDana/:nominal', function (req,res) {
     let idGalangDana = req.params.idGalangDana;
     let nominal = parseInt(req.params.nominal);
     Dana.find({_id:idGalangDana})
@@ -126,6 +126,28 @@ router.put('addnominal/:idGalangDana/:nominal', function (req,res) {
                 res.status(201).json({status:'success',data:response});
             }
         })
+    })
+})
+
+router.delete('/panti/:idPanti', function (req,res) {
+    let idPanti = req.params.idPanti;
+    Dana.deleteMany({idPanti},function (err) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            res.status(201).json({status:'success'})
+        }
+    })
+})
+
+router.delete('/sesama/:idBantuSesama', function (req,res) {
+    let idSesama = req.params.idBantuSesama;
+    Dana.deleteMany({idBantu:idSesama},function (err) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            res.status(201).json({status:'success'})
+        }
     })
 })
 
