@@ -82,7 +82,7 @@ router.put('uploadphoto/:idGalangDana', function (req,res) {
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
     if (uploadedFile) {
-        uploadedFile.mv(path.join(__dirname,`../public/images/uploaded_image/${fileName}`), function (err) {
+        uploadedFile.mv(path.join(__dirname,`../public/images/uploaded_image/dana/${fileName}`), function (err) {
             if (err) {
                 res.status(400).json({status:'failed',error:err})
             } else {
