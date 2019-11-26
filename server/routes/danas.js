@@ -112,4 +112,21 @@ router.put('status/:idGalangDana/:status', function (req,res) {
     })
 })
 
+router.put('addnominal/:idGalangDana/:nominal', function (req,res) {
+    let idGalangDana = req.params.idGalangDana;
+    let nominal = parseInt(req.params.nominal);
+    Dana.find({_id:idGalangDana})
+    .exec(function(err,response) {
+        let currentNominal = response[0].nominalProcess;
+        currentNominal += nominal;
+        Dana.findOneAndUpdate({_id:idGalangDana},{nominalProcess:currentNominal},function (err,response) {
+            if (err) {
+                res.status(400).json({status:'failed',error:err});
+            } else {
+                res.status(201).json({status:'success',data:response});
+            }
+        })
+    })
+})
+
 module.exports = router;
