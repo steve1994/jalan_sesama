@@ -2,37 +2,45 @@
     userid
     nama
     alamat
+    username
+    password
 
 2. Panti
     idPanti
     userid
+    judul
     nama
     alamat
     jumlah_orang
     foto
     deskripsi
-    status
+    location
+    status_panti
+
 
 3. bantuSesama
     idBantu
     userid
+    judul
     nama
     alamat
     deskripsi
     foto
+    location
     status
 
 4. GALANG_DANA
     idGalang
     idPanti
     idBantu
-    nama
-    alamat
-    deskripsi
-    foto
-    status
+    userid
+    judul
+    deskripsi_penggalangan
+    foto_penggalangan
+    status_galang
     nominalSet
     nominalProcess
+    no_rekeningADM
 
 5. 
 
