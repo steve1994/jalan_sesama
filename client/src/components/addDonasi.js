@@ -25,11 +25,16 @@ import {
   Textarea
 } from 'native-base';
 
+
+
+
 export default class addPanti extends React.Component {
 
   constructor(props) {
     super(props);
   }
+
+  
 
 
   render() {

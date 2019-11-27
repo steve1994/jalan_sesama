@@ -195,7 +195,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-
 		CA01631739114D519AEE601B /* Resources */ = {
 			isa = "PBXGroup";
 			children = (

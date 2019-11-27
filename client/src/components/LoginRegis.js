@@ -28,9 +28,9 @@ import {
   Textarea
 } from 'native-base';
 
-import Tab1 from './About';
-import Tab2 from './Locations';
-import Tab3 from './Donations'
+import FormLogin from './LoginReg/FormLogin';
+import FormRegis from './LoginReg/FormRegis';
+
 
 export default class DTKontrib extends React.Component {
 
@@ -68,60 +68,14 @@ export default class DTKontrib extends React.Component {
           <Tabs>
             <Tab heading={<TabHeading><Icon name="" /><Text>Login</Text></TabHeading>} style={{ backgroundColor: '#156cb3' }}>
 
-              <View
-                behavior="padding"
-                style={styles.Wrapper}>
-                <TextInput
-                  placeholder='username'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  keyboardType='username'
-                  style={styles.inputField} />
-                <TextInput
-                  placeholder='password'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  secureTextEntry={true}
-                  style={styles.inputField} />
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("HomeUser")}>
-                  <Text style={{ color: 'white', marginTop: 10 }}>Login</Text>
-                </TouchableOpacity>
-              </View>
-
+              <FormLogin />
+              
             </Tab>
 
             <Tab heading={<TabHeading><Text>Register</Text></TabHeading>}>
-            <View
-                behavior="padding"
-                style={styles.Wrapper}>
-                <TextInput
-                  placeholder='Nama'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  keyboardType='Nama'
-                  style={styles.inputField} />
-                  <TextInput
-                  placeholder='Alamat'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  keyboardType='Alamat'
-                  style={styles.inputField} />
-                  <TextInput
-                  placeholder='Username'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  keyboardType='Username'
-                  style={styles.inputField} />
-                <TextInput
-                  placeholder='password'
-                  underlineColorAndroid='white'
-                  placeholderTextColor='white'
-                  secureTextEntry={true}
-                  style={styles.inputField} />
-                <TouchableOpacity>
-                  <Text style={{ color: 'white', marginTop: 10 }}>Signup</Text>
-                </TouchableOpacity>
-              </View>
+
+              <FormRegis />
+
             </Tab>
 
           </Tabs>
@@ -151,7 +105,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1F3A93',
-    height:490
+    height: 490
   },
   text: {
     color: 'blue',

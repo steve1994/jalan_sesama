@@ -28,10 +28,6 @@ import {
   Textarea
 } from 'native-base';
 
-import Tab1 from './About';
-import Tab2 from './Locations';
-import Tab3 from './Donations'
-
 export default class DTKontrib extends React.Component {
 
   constructor(props) {
