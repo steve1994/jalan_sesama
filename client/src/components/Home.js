@@ -148,7 +148,6 @@ export default class Home extends React.Component {
       </Container>
     );
   }
-
 }
 const styles = StyleSheet.create({
   container: {
