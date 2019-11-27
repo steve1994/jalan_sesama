@@ -34,7 +34,7 @@ export default class GLdana extends React.Component {
 
     return (
       <Container>
-        <Header style={{ backgroundColor: '#469189' }}>
+        <Header style={{ backgroundColor: '#268026' }}>
 
           <Body>
             <Text style={{ color: "white" }}>
@@ -57,12 +57,14 @@ export default class GLdana extends React.Component {
             <Card style={{ height: 480 }}>
               <Card style={{ backgroundColor: '#156cb3' }}>
                 <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
-                  Mari Galang Dana
+                  Penggalangan Dana
             </Text>
               </Card>
               <Row>
               <CardItem cardBody style={{ margin: 10 }}>
+              <Button transparent light onPress={() => this.props.navigation.navigate("addPanti")} style={{ }}>
                 <Image source={{ uri: "http://pantiyatim.or.id/wp-content/uploads/2018/03/Untitled-2.png" }} style={{ width: 160, height: 110 }} />
+              </Button>
               </CardItem>
               <View cardBody style={{ margin: 5, width: 190, height: 50, padding: 15 }}>
                 <Text style={{ fontSize: 15 }}>
@@ -73,7 +75,9 @@ export default class GLdana extends React.Component {
 
               <Row>
               <CardItem cardBody style={{ margin: 10 }} >
+                <Button transparent light onPress={() => this.props.navigation.navigate("addSesama")} style={{ }}>
                 <Image source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS-DyjoTf6-bdJ4hyaD-ZgcwHKshScLnZWBHRmBil1kge5pPTkE" }} style={{ width: 160, height: 110 }} />
+                </Button>
               </CardItem>
               <View cardBody style={{ margin: 5, width: 190, height: 50, padding: 15 }}>
                 <Text style={{ fontSize: 15 }}>
@@ -84,9 +88,11 @@ export default class GLdana extends React.Component {
 
               <Row>
               <CardItem cardBody style={{ margin: 10 }}>
-                <Image source={{ uri: "https://lh3.googleusercontent.com/GVcvDxX3cUWQtMHOM5wgPpxPsVqSAcGNZeRLJ5J14AGGi7R1eKU8lRqJfF9nmCAYM5K8lg=s136" }} style={{ width: 150, height: 120 }} />
+                <Button transparent light onPress={() => this.props.navigation.navigate("galangKamu")} style={{ }}>
+                <Image source={{ uri: "https://lh3.googleusercontent.com/GVcvDxX3cUWQtMHOM5wgPpxPsVqSAcGNZeRLJ5J14AGGi7R1eKU8lRqJfF9nmCAYM5K8lg=s136" }} style={{ width: 165, height: 120 }} />
+                </Button>
               </CardItem>
-              <View cardBody style={{ margin: 5, width: 190, height: 50, padding: 20 }}>
+              <View cardBody style={{ margin: 1, width: 160, height: 50, padding: 14 }}>
                 <Text style={{ fontSize: 15 }}>
                   Kamu dapat melihat semua penggalangan yang sudah kamu buat disini
                 </Text>
@@ -97,7 +103,7 @@ export default class GLdana extends React.Component {
           </Card>
         </Content>
         <Footer>
-          <FooterTab style={{ backgroundColor: '#469189' }}>
+          <FooterTab style={{ backgroundColor: '#268026' }}>
             <Button full>
               <Text>Footer</Text>
             </Button>

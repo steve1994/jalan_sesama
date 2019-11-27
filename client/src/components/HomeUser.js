@@ -47,9 +47,17 @@ export default class Home extends React.Component {
             <Text style={{ color: "white" }}>
               Senin, 25 November 2019
             </Text>
+            <Row>
             <Text>
               <Title style={{ width: 130 }}>Jalan Sesama</Title>
             </Text>
+            
+            <Right>
+            <Text>
+              <Title style={{ width: 130 }}>Welcome User</Title>
+            </Text>
+            </Right>
+            </Row>
           </Body>
 
         </Header>
@@ -80,8 +88,8 @@ export default class Home extends React.Component {
                 </CardItem>
                 <CardItem style={{ justifyContent: "flex-end" }}>
                   <Button transparent light
-                    onPress={() => this.props.navigation.navigate("LoginRegis")}>
-                    <Image source={{ uri: "https://cdn1.iconfinder.com/data/icons/elevator/154/elevator-user-man-ui-round-login-512.png" }} style={{ width: 70, height: 70 }} />
+                    onPress={() => this.props.navigation.navigate("ProfileUser")}>
+                    <Image source={{ uri: "https://cdn1.iconfinder.com/data/icons/elevator/154/elevator-user-man-ui-round-login-512.png" }} style={{ width: 70, height: 70, borderColor:"green" }} />
                   </Button>
                 </CardItem>
               </Row>
@@ -148,6 +156,7 @@ export default class Home extends React.Component {
       </Container>
     );
   }
+
 }
 const styles = StyleSheet.create({
   container: {
