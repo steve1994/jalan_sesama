@@ -54,7 +54,7 @@ const RootStack = createStackNavigator(
     DetailGL: { screen: DetailGL },
     LoginRegis: { screen: LoginRegis },
     HomeUser: { screen: HomeUser},
-    ProfileUser: { screen: ProfileUser }
+    ProfileUser: { screen: ProfileUser },
 
 
   },

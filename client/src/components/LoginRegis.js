@@ -68,7 +68,7 @@ export default class DTKontrib extends React.Component {
           <Tabs>
             <Tab heading={<TabHeading><Icon name="" /><Text>Login</Text></TabHeading>} style={{ backgroundColor: '#156cb3' }}>
 
-              <FormLogin />
+              <FormLogin navigation={this.props.navigation}/>
               
             </Tab>
 

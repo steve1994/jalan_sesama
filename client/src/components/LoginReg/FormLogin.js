@@ -28,11 +28,11 @@ import {
     Textarea
 } from 'native-base';
 
-class FormLogin extends React.Component {
+export default class FormLogin extends React.Component {
 
     constructor(props) {
-        super(props)
-    }
+        super(props);
+      }
 
     render() {
         return (
@@ -84,5 +84,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default FormLogin;
