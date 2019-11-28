@@ -8,8 +8,6 @@ const request = axios.create({
     timeout: 1000
 })
 
-// LOAD PRODUCTS
-
 export const loadVerificationSuccess = (pantisData,sesamasData) => ({
     type: 'LOAD_VERIFICATION_SUCCESS',
     pantisData,
@@ -28,8 +26,6 @@ export const loadVerification = () => {
             return request.get(`sesamas`)
             .then(function(response) {
                 let sesamasData = response;
-                console.log("pantisdata : ", pantisData);
-                console.log("sesamasdata : ", sesamasData);
                 dispatch(loadVerificationSuccess(pantisData,sesamasData));
             })
         })
@@ -87,6 +83,80 @@ export const putStatus = (type,idPantiOrBantu,status) => {
                 dispatch(putStatusFailure());
             })
         }
+    }
+}
 
+export const loadAnggaranSuccess = (anggaranData) => ({
+    type: 'LOAD_ANGGARAN_SUCCESS',
+    anggaranData
+})
+
+export const loadAnggaranFailure = () => ({
+    type: 'LOAD_ANGGARAN_FAILURE'
+})
+
+export const loadAnggaran = () => {
+    return dispatch => {
+        return request.get(`danas/complete`)
+        .then(function(response) {
+            let anggaranData = response;
+            dispatch(loadAnggaranSuccess(anggaranData));
+        })
+        .catch(function(error) {
+            console.error(error);
+            dispatch(loadAnggaranFailure());
+        })
+    }
+}
+
+export const setNominalSuccess = (anggaranData) => ({
+    type: 'SET_NOMINAL_SUCCESS',
+    anggaranData
+})
+
+export const setNominalFailure = () => ({
+    type: 'SET_NOMINAL_FAILURE'
+})
+
+export const setNominal = (idAnggaran,nominal) => {
+    return dispatch => {
+        return request.put(`danas/setnominal/${idAnggaran}/${nominal}`)
+        .then(function (response) {
+            return request.get(`danas/complete`)
+            .then(function(response) {
+                let anggaranData = response;
+                dispatch(setNominalSuccess(anggaranData));
+            })
+        })
+        .catch(function(error) {
+            console.error(error)
+            dispatch(setNominalFailure());
+        })
+    }
+}
+
+export const putStatusAnggaranSuccess = (anggaranData) => ({
+    type: 'PUT_STATUS_ANGGARAN_SUCCESS',
+    anggaranData
+})
+
+export const putStatusAnggaranFailure = () => ({
+    type: 'PUT_STATUS_ANGGARAN_FAILURE'
+})
+
+export const putStatusAnggaran = (idAnggaran,status) => {
+    return dispatch => {
+        return request.put(`danas/status/${idAnggaran}/${status}`)
+        .then(function(response) {
+            return request.get(`danas/complete`)
+            .then(function(response) {
+                let anggaranData = response;
+                dispatch(putStatusAnggaranSuccess(anggaranData));
+            })
+        })
+        .catch(function(error) {
+            console.error(error);
+            dispatch(putStatusAnggaranFailure());
+        })
     }
 }
