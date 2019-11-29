@@ -235,3 +235,78 @@ export const editPanti = (idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,l
         })
     }
 }
+
+export const loadSesamaSuccess = (dataSesama) => ({
+    type : 'LOAD_SESAMA_SUCCESS',
+    dataSesama
+})
+
+export const loadSesamaFailure = () => ({
+    type : 'LOAD_SESAMA_FAILURE'
+})
+
+export const loadSesama = () => {
+    return dispatch => {
+        return request.get(`sesamas`)
+        .then(function(response) {
+            let dataSesama = response;
+            dispatch(loadSesamaSuccess(dataSesama));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(loadSesamaFailure());
+        })
+    }
+}
+
+export const deleteSesamaSuccess = (dataSesama) => ({
+    type : 'DELETE_SESAMA_SUCCESS',
+    dataSesama
+})
+
+export const deleteSesamaFailure = () => ({
+    type : 'DELETE_SESAMA_FAILURE'
+})
+
+export const deleteSesama = (idSesama) => {
+    return dispatch => {
+        return request.delete(`sesamas/${idSesama}`)
+        .then(function(response) {
+            return request.get(`sesamas`)
+            .then(function(response) {
+                let dataSesama = response;
+                dispatch(deleteSesamaSuccess(dataSesama));
+            })
+        })
+        .catch(function(error) {
+            console.error(error);
+            dispatch(deleteSesamaFailure());
+        })
+    }
+}
+
+export const editSesamaSuccess = (dataSesama) => ({
+    type : 'EDIT_SESAMA_SUCCESS',
+    dataSesama
+})
+
+export const editSesamaFailure = () => ({
+    type : 'EDIT_SESAMA_FAILURE'
+})
+
+export const editSesama = (idSesama,nama,judul,alamat,deskripsi,foto,location) => {
+    return dispatch => {
+        return request.put(`sesamas/${idSesama}`,{nama,judul,alamat,deskripsi,foto,location})
+        .then(function (response) {
+            return request.get(`sesamas`)
+            .then(function(response) {
+                let dataSesama = response;
+                dispatch(editSesamaSuccess(dataSesama));
+            })
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(editSesamaFailure());
+        })
+    }
+}

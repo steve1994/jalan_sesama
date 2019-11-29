@@ -5,6 +5,7 @@ import Inbox from './Inbox';
 import Notification from './Notification';
 import Verification from './Verification';
 import DataPanti from './DataPanti';
+import DataSesama from './DataSesama';
 import ListDonasi from './ListDonasi';
 
 export default class OneWholeMenu extends React.Component {
@@ -41,6 +42,7 @@ export default class OneWholeMenu extends React.Component {
                     <Route path="/notification" component={Notification} />
                     <Route path="/verification" component={Verification} />
                     <Route path="/datapanti" component={DataPanti} />
+                    <Route path="/datasesama" component={DataSesama} />
                     <Route path="/listdonasi" component={ListDonasi} />
                   </Switch>
 

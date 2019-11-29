@@ -44,6 +44,23 @@ router.post('/:idUser', function(req,res) {
     }
 })
 
+router.put('/:idSesama', function(req,res) {
+    let idSesama = req.params.idSesama;
+    let nama = req.body.nama;
+    let judul = req.body.judul;
+    let alamat = req.body.alamat;
+    let deskripsi = req.body.deskripsi;
+    let foto = req.body.foto;
+    let location = req.body.location;
+    Sesama.findOneAndUpdate({_id:idSesama},{nama,judul,alamat,deskripsi,foto,location},function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err});
+        } else {
+            res.status(201).json({status:'success',data:response});
+        }
+    })
+})
+
 function randomString(length) {
    var result           = '';
    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

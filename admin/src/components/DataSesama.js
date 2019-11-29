@@ -1,27 +1,26 @@
 import React from 'react';
-import DataPantiItem from './DataPantiItem';
+import DataSesamaItem from './DataSesamaItem';
 import {connect} from 'react-redux'
-import {loadPanti} from '../actions'
+import {loadSesama} from '../actions'
 
-class DataPanti extends React.Component {
+class DataSesama extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.loadPanti();
+        this.props.loadSesama();
     }
 
     render() {
-        let listPanti = this.props.panti.map((item,index) => {
-            return (<DataPantiItem index={index+1}
+        let listSesama = this.props.sesama.map((item,index) => {
+            return (<DataSesamaItem index={index+1}
                                    origin_id={item.OriginId}
                                    nama={item.Nama}
                                    alamat={item.Alamat}
                                    judul={item.Judul}
                                    deskripsi={item.Deskripsi}
-                                   jumlahOrang={item.JumlahOrang}
                                    foto={item.Photo}
                                    location={item.Location} />)
         })
@@ -29,23 +28,22 @@ class DataPanti extends React.Component {
           <div className="content-container">
             <div className="container-fluid">
               <div className="jumbotron">
-                <h4>PANTI ASUHAN TERDAFTAR</h4>
+                <h4>SESAMA TERDAFTAR</h4>
                 <table className="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Nama Panti</th>
+                      <th scope="col">Nama</th>
                       <th scope="col">Alamat</th>
                       <th scope="col">Judul</th>
                       <th scope="col">Deskripsi</th>
-                      <th scope="col">Jumlah Orang</th>
                       <th scope="col">Foto</th>
                       <th scope="col">Location</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {listPanti}
+                    {listSesama}
                   </tbody>
                 </table>
               </div>
@@ -56,14 +54,14 @@ class DataPanti extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    panti : state.panti
+    sesama : state.sesama
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    loadPanti : () => (dispatch(loadPanti()))
+    loadSesama : () => (dispatch(loadSesama()))
 })
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-) (DataPanti)
+) (DataSesama)

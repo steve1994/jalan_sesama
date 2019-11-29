@@ -9,6 +9,7 @@ export default class Dashboard extends React.Component {
                 <div className="jumbotron">
                     <Link to={'/verification'}><button className="btn btn-primary">Verification</button></Link>&nbsp;
                     <Link to={'/datapanti'}><button className="btn btn-success">Data Panti</button></Link>&nbsp;
+                    <Link to={'/datasesama'}><button className="btn btn-warning">Data Sesama</button></Link>&nbsp;
                     <Link to={'/listdonasi'}><button className="btn btn-info">List Donasi</button></Link>
                 </div>
               </div>
