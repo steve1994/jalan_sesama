@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {deletePanti,editPanti} from '../actions'
+import {deletePanti,editPanti,deleteAnggaranPanti} from '../actions'
 
 class DataPantiItem extends React.Component {
 
@@ -56,6 +56,7 @@ class DataPantiItem extends React.Component {
 
     clickDeleteButton(idPanti) {
         this.props.deletePanti(idPanti);
+        this.props.deleteAnggaranPanti(idPanti);
     }
 
     clickUpdateButton() {
@@ -154,7 +155,8 @@ class DataPantiItem extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     deletePanti : (idPanti) => (dispatch(deletePanti(idPanti))),
-    editPanti : (idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,location) => (dispatch(editPanti(idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,location)))
+    editPanti : (idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,location) => (dispatch(editPanti(idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,location))),
+    deleteAnggaranPanti : (idPanti) => (dispatch(deleteAnggaranPanti(idPanti)))
 })
 
 export default connect(

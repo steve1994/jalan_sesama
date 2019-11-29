@@ -161,6 +161,58 @@ export const putStatusAnggaran = (idAnggaran,status) => {
     }
 }
 
+export const deleteAnggaranPantiSuccess = (anggaranData) => ({
+    type : 'DELETE_ANGGARAN_PANTI_SUCCESS',
+    anggaranData
+})
+
+export const deleteAnggaranPantiFailure = () => ({
+    type : 'DELETE_ANGGARAN_PANTI_FAILURE'
+})
+
+export const deleteAnggaranPanti = (idPanti) => {
+    return dispatch => {
+        return request.delete(`danas/panti/${idPanti}`)
+        .then(function (response) {
+            return request.get(`danas/complete`)
+            .then(function(response) {
+                let anggaranData = response;
+                dispatch(deleteAnggaranPantiSuccess(anggaranData));
+            })
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(deleteAnggaranPantiFailure());
+        })
+    }
+}
+
+export const deleteAnggaranSesamaSuccess = (anggaranData) => ({
+    type : 'DELETE_ANGGARAN_SESAMA_SUCCESS',
+    anggaranData
+})
+
+export const deleteAnggaranSesamaFailure = () => ({
+    type : 'DELETE_ANGGARAN_SESAMA_FAILURE'
+})
+
+export const deleteAnggaranSesama = (idSesama) => {
+    return dispatch => {
+        return request.delete(`danas/sesama/${idSesama}`)
+        .then(function (response) {
+            return request.get(`danas/complete`)
+            .then(function(response) {
+                let anggaranData = response;
+                dispatch(deleteAnggaranSesamaSuccess(anggaranData));
+            })
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(deleteAnggaranSesamaFailure());
+        })
+    }
+}
+
 export const loadPantiSuccess = (dataPanti) => ({
     type : 'LOAD_PANTI_SUCCESS',
     dataPanti

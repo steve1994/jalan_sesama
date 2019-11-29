@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {deleteSesama,editSesama} from '../actions'
+import {deleteSesama,editSesama,deleteAnggaranSesama} from '../actions'
 
 class DataSesamaItem extends React.Component {
 
@@ -51,6 +51,7 @@ class DataSesamaItem extends React.Component {
 
     clickDeleteButton(idSesama) {
         this.props.deleteSesama(idSesama);
+        this.props.deleteAnggaranSesama(idSesama);
     }
 
     clickUpdateButton() {
@@ -140,7 +141,8 @@ class DataSesamaItem extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     deleteSesama : (idSesama) => (dispatch(deleteSesama(idSesama))),
-    editSesama : (idSesama,nama,judul,alamat,deskripsi,foto,location) => (dispatch(editSesama(idSesama,nama,judul,alamat,deskripsi,foto,location)))
+    editSesama : (idSesama,nama,judul,alamat,deskripsi,foto,location) => (dispatch(editSesama(idSesama,nama,judul,alamat,deskripsi,foto,location))),
+    deleteAnggaranSesama : (idSesama) => (dispatch(deleteAnggaranSesama(idSesama)))
 })
 
 export default connect(
