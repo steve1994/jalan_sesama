@@ -160,3 +160,78 @@ export const putStatusAnggaran = (idAnggaran,status) => {
         })
     }
 }
+
+export const loadPantiSuccess = (dataPanti) => ({
+    type : 'LOAD_PANTI_SUCCESS',
+    dataPanti
+})
+
+export const loadPantiFailure = () => ({
+    type : 'LOAD_PANTI_FAILURE'
+})
+
+export const loadPanti = () => {
+    return dispatch => {
+        return request.get(`pantis`)
+        .then(function(response) {
+            let dataPanti = response;
+            dispatch(loadPantiSuccess(dataPanti));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(loadPantiFailure());
+        })
+    }
+}
+
+export const deletePantiSuccess = (dataPanti) => ({
+    type : 'DELETE_PANTI_SUCCESS',
+    dataPanti
+})
+
+export const deletePantiFailure = () => ({
+    type : 'DELETE_PANTI_FAILURE'
+})
+
+export const deletePanti = (idPanti) => {
+    return dispatch => {
+        return request.delete(`pantis/${idPanti}`)
+        .then(function(response) {
+            return request.get(`pantis`)
+            .then(function(response) {
+                let dataPanti = response;
+                dispatch(deletePantiSuccess(dataPanti));
+            })
+        })
+        .catch(function(error) {
+            console.error(error);
+            dispatch(deletePantiFailure());
+        })
+    }
+}
+
+export const editPantiSuccess = (dataPanti) => ({
+    type : 'EDIT_PANTI_SUCCESS',
+    dataPanti
+})
+
+export const editPantiFailure = () => ({
+    type : 'EDIT_PANTI_FAILURE'
+})
+
+export const editPanti = (idPanti,nama,judul,alamat,deskripsi,jumlahOrang,foto,location) => {
+    return dispatch => {
+        return request.put(`pantis/${idPanti}`,{nama,judul,alamat,deskripsi,jumlahOrang,foto,location})
+        .then(function (response) {
+            return request.get(`pantis`)
+            .then(function(response) {
+                let dataPanti = response;
+                dispatch(editPantiSuccess(dataPanti));
+            })
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(editPantiFailure());
+        })
+    }
+}
