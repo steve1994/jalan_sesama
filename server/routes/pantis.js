@@ -67,6 +67,24 @@ router.post('/:idUser', function(req,res) {
     }
 })
 
+router.put('/:idPanti', function(req,res) {
+    let idPanti = req.params.idPanti;
+    let nama = req.body.nama;
+    let judul = req.body.judul;
+    let alamat = req.body.alamat;
+    let deskripsi = req.body.deskripsi;
+    let jumlahOrang = req.body.jumlahOrang;
+    let foto = req.body.foto;
+    let location = req.body.location;
+    Panti.findOneAndUpdate({_id:idPanti},{nama,judul,alamat,deskripsi,jumlahOrang,foto,location},function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err});
+        } else {
+            res.status(201).json({status:'success',data:response});
+        }
+    })
+})
+
 function randomString(length) {
    var result           = '';
    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
