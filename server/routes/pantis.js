@@ -10,7 +10,23 @@ router.get('/:idUser', function(req, res) {
         if (err) {
             res.status(400).json({status:'failed',error:err})
         } else {
+            
             res.status(200).json(response)
+        }
+    })
+});
+
+router.get('/detailPanti/:_id', function(req, res) {
+
+    
+    Panti.findById({_id: req.params._id})
+    .exec(function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            
+            res.status(200).json(response)
+            console.log('PANTIS >', response);
         }
     })
 });
@@ -26,7 +42,13 @@ router.get('/', function(req, res) {
     })
 })
 
+
+//post panti harus pakai (:idUser), sementara dihapus dulu
 router.post('/:idUser', function(req,res) {
+    console.log('params', req.params);
+    console.log('BOdy', req.body);
+    
+    
     let idUser = req.params.idUser;
     let nama = req.body.nama;
     let alamat = req.body.alamat;
@@ -36,7 +58,7 @@ router.post('/:idUser', function(req,res) {
     let location = req.body.location;
     let status = "pending";
     try {
-        const newPanti = new Panti({idUser,nama,alamat,judul,deskripsi,jumlahOrang,location,status});
+        const newPanti = new Panti({idUser,judul,nama,alamat,deskripsi,jumlahOrang,location,status});
         newPanti.save().then(dataCreated => {
             res.status(201).json({status:'success',data:dataCreated})
         })
@@ -56,6 +78,8 @@ function randomString(length) {
 }
 
 router.put('/uploadphoto/:idPanti', function (req,res) {
+    console.log('upload on', req.files);
+    
     let idPanti = req.params.idPanti;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;

@@ -20,8 +20,11 @@ import {
   Row,
   List
 } from 'native-base';
+import { connect } from "react-redux";
+import { loadGlKamu } from "../action/index";
 
-export default class GLdana extends React.Component {
+
+class GLdana extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,7 +33,10 @@ export default class GLdana extends React.Component {
 
   render() {
 
-    const items = ['Daniel Michael Blake Day-Lewis', 'Kiefer William Frederick Dempsey George Rufus Sutherland', 'Isabella Fiorella Elettra Giovanna Rossellini', 'Charles Philip Arthur George Mountbatten-Windsor', 'Johannes Chrysostomus Wolfgangus Theophilus Mozart'];
+    let idUser = 1001; //this a start user id
+    let { showDetail } = this.props;
+       
+        
 
     return (
       <Container>
@@ -88,7 +94,7 @@ export default class GLdana extends React.Component {
 
               <Row>
               <CardItem cardBody style={{ margin: 10 }}>
-                <Button transparent light onPress={() => this.props.navigation.navigate("galangKamu")} style={{ }}>
+                <Button transparent light onPress={() => {showDetail(idUser); this.props.navigation.navigate("galangKamu")}} >
                 <Image source={{ uri: "https://lh3.googleusercontent.com/GVcvDxX3cUWQtMHOM5wgPpxPsVqSAcGNZeRLJ5J14AGGi7R1eKU8lRqJfF9nmCAYM5K8lg=s136" }} style={{ width: 165, height: 120 }} />
                 </Button>
               </CardItem>
@@ -114,3 +120,13 @@ export default class GLdana extends React.Component {
   }
 
 }
+const mapDispatchToProps = dispatch => ({
+  showDetail: idUser => {
+    dispatch(loadGlKamu(idUser))
+  }
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(GLdana)

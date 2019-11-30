@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Users = require('../model/users');
+var path = require('path');
 
 router.get('/', function(req, res) {
     Users.find()
@@ -26,6 +27,8 @@ router.get('/:idUser', function (req,res) {
 })
 
 router.post('/', function (req,res) {
+    console.log('data body ', req.body);
+    
     let nama = req.body.nama;
     let alamat = req.body.alamat;
     let username = req.body.username;
@@ -51,6 +54,9 @@ function randomString(length) {
 }
 
 router.put('/uploadphoto/:idUser', function (req,res) {
+    
+    console.log('data files', req.files);
+    
     let idUser = req.params.idUser;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;

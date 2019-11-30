@@ -119,12 +119,8 @@ export default class Home extends React.Component {
                       <Right>
                         <Row>
                           <Button
-                            onPress={() => this.props.navigation.navigate("DetailGL")} style={{ backgroundColor: '#2b37c2', right: 80, padding:"5%" }}>
+                            onPress={() => this.props.navigation.navigate("DetailGL")} style={{ backgroundColor: '#268026', padding:"5%" }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
-                          </Button>
-                          <Button
-                            onPress={() => this.props.navigation.navigate("Detail")} style={{ backgroundColor: '#268026', padding:"5%" }}>
-                            <Text style={{ fontSize: 12 }}>Donasi</Text>
                           </Button>
                         </Row>
                       </Right>

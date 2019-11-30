@@ -21,16 +21,27 @@ import {
   List
 } from 'native-base';
 
+import ListGalang from '../container/galangKamu/ListGalang';
+
+
 export default class galangKamu extends React.Component {
 
   constructor(props) {
     super(props);
+    // this.state = {
+    //   nama: '',
+    //   status: ''
+    // }
   }
+
+
 
 
   render() {
 
-    const items = ['Daniel Michael Blake Day-Lewis', 'Kiefer William Frederick Dempsey George Rufus Sutherland', 'Isabella Fiorella Elettra Giovanna Rossellini', 'Charles Philip Arthur George Mountbatten-Windsor', 'Johannes Chrysostomus Wolfgangus Theophilus Mozart'];
+    let { galangKamu } = this.props;
+
+    console.log('props', galangKamu);
 
     return (
       <Container>
@@ -61,52 +72,20 @@ export default class galangKamu extends React.Component {
             </Text>
               </Card>
 
-              <List>
-                <ListItem selected>
-                  <Left>
-                    <Text>Panti Asuhan Cinangka Cihideng</Text>
-                  </Left>
+              {this.props.galangKamu.map((items, i) => {
+
+                return (
+                  <ListGalang
+                    navigation={this.props.navigation}
+                    idPanti={items._id}
+                    nama={items.nama}
+                    status={items.status}
+                  />
+
+                )
 
 
-                  <Row style={{ padding: 5, left: 43 }}>
-                    <Text style={{ fontSize: 12 }}>Status:</Text>
-                    <Text style={{ fontSize: 12 }}> Verify</Text>
-                  </Row>
-
-
-                  <Button transparent style={{ width:50,height:30, left: 20 }} onPress={() => this.props.navigation.navigate("DTKontrib")}>
-                    <Icon name='arrow-forward' />
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Left>
-                    <Text>Bantu Rumah Rusak</Text>
-                  </Left>
-                  <Right>
-                    <Row>
-                      <Text style={{ fontSize: 12 }}>Status:</Text>
-                      <Text style={{ fontSize: 12 }}> Check</Text>
-                    </Row>
-                  </Right>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
-                <ListItem>
-                  <Left>
-                    <Text>Bantu Mamah Loren</Text>
-                  </Left>
-                  <Right>
-                    <Row>
-                      <Text style={{ fontSize: 12 }}>Status:</Text>
-                      <Text style={{ fontSize: 12 }}> Check</Text>
-                    </Row>
-                  </Right>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
-              </List>
+              })}
 
             </Card>
           </Card>

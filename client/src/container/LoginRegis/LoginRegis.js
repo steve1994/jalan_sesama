@@ -28,11 +28,11 @@ import {
   Textarea
 } from 'native-base';
 
-import FormLogin from './LoginReg/FormLogin';
-import FormRegis from './LoginReg/FormRegis';
+import FormLogin from '../../components/LoginReg/FormLogin';
+import FormRegis from './formRegis';
 
 
-export default class DTKontrib extends React.Component {
+export default class LoginRegis extends React.Component {
 
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ export default class DTKontrib extends React.Component {
 
             <Tab heading={<TabHeading><Text>Register</Text></TabHeading>}>
 
-              <FormRegis />
+              <FormRegis navigation={this.props.navigation} />
 
             </Tab>
 

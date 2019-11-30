@@ -59,39 +59,32 @@ export default class DTKontrib extends React.Component {
             </Button>
           </Left>
         </Header>
+        <Content style={{ backgroundColor: '#156cb3' }}>
 
-        <Card style={{ height: 195 }}>
+        <Card style={{ height: 215 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
             <Image source={{ uri: "https://cdns.klimg.com/merdeka.com/i/w/news/2016/05/13/706401/670x335/angin-puting-beliung-di-jembrana-rusak-3-atap-rumah.jpeg" }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
             TITLE : Nama Panti Asuhan / Bantu Sesama
             </Text>
+            <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
+            Berikan Bantuan Berupa Donasi
+            </Text>
         </Card>
-        <Content style={{ backgroundColor: '#156cb3' }}>
           <View>
             <Item>
-              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Deskripsi          : </Label>
-              <Card style={{ width: "62%" }}>
-                <Text style={{ color: "Black" }}>
-                  Kerusakan parah akibat hujan lebat merusak atap panti asuhan jingga
-            </Text>
-              </Card>
-            </Item>
-            <Item>
-              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Nilai Donasi     : </Label>
-              <Card style={{ width: "62%" }}>
+              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Nilai Max             : </Label>
+              <Card style={{ width: "52%" }}>
                 <Text style={{ color: "Black" }}>
                   Rp.1.000.000
             </Text>
               </Card>
             </Item>
             <Item>
-              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Hasil Donatur  : </Label>
-              <Card style={{ width: "62%" }}>
-                <Text style={{ color: "Black" }}>
-                  Rp.650.000
-            </Text>
+              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Berikan Donasi  : </Label>
+              <Card style={{ width: "52%" }}>
+                <Input style={{ color: "Black" }}/>
               </Card>
             </Item>
           </View>
@@ -100,7 +93,7 @@ export default class DTKontrib extends React.Component {
             <Right>
               <Row>
                 <Button
-                  onPress={() => this.props.navigation.navigate("beriDonasi")} style={{ backgroundColor: '#268026', padding: "5%" }}>
+                  onPress={() => this.props.navigation.navigate("Detail")} style={{ backgroundColor: '#268026', padding: "5%" }}>
                   <Text style={{ fontSize: 12 }}>Donasi</Text>
                 </Button>
               </Row>
