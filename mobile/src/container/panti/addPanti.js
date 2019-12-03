@@ -218,6 +218,16 @@ class addPanti extends React.Component {
                     </Content>
                   </Item>
 
+                  
+                  <Item>
+                    <Label>location</Label>
+                    <Content>
+                      <Form>
+                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleLocation} />
+                      </Form>
+                    </Content>
+                  </Item>
+
                   <Item>
                     <Label style={{ color: "black", fontSize: 15 }}>Take Pict</Label>
                     <Card style={{ height: 100, left: 70 }}>
@@ -234,15 +244,6 @@ class addPanti extends React.Component {
 
                       </TouchableOpacity>
                     </Card>
-                  </Item>
-                  
-                  <Item>
-                    <Label>location</Label>
-                    <Content>
-                      <Form>
-                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleLocation} />
-                      </Form>
-                    </Content>
                   </Item>
 
                 </Form>
@@ -277,7 +278,7 @@ class addPanti extends React.Component {
 // })
 
 const mapDispatchToProps = (dispatch) => ({
-  postPanti: (judul, nama, alamat, deskripsi, jumlahOrang, fotoPanti, location) => dispatch(postPanti(judul, nama, alamat, deskripsi, jumlahOrang, fotoPanti, location))
+  postPanti: (judul, nama, alamat, deskripsi, jumlahOrang, location , fotoPanti) => dispatch(postPanti(judul, nama, alamat, deskripsi, jumlahOrang, location, fotoPanti ))
 
 
 })

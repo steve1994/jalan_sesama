@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View, TouchableOpacity, StyleSheet, PixelRatio, TextInput } from 'react-native';
-import { connect } from "react-redux";
-import { postSesama } from "../action/index";
+// import { connect } from "react-redux";
+// import { postSesama } from "../action/index";
 import {
   Container,
   Header,
@@ -30,7 +30,7 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 
-class addSesama extends React.Component {
+export default class addSesama extends React.Component {
 
   constructor(props) {
     super(props)
@@ -118,9 +118,11 @@ class addSesama extends React.Component {
       this.state.nama,
       this.state.alamat,
       this.state.deskripsi,
-      this.state.fotoSesama,
       this.state.location,
+      this.state.fotoSesama,
     )
+    this.setState({ judul: '', nama: '',alamat: '',deskripsi: '',location: '',fotoSesama: null});
+    this.props.navigation.navigate('GLdana');
   }
 
 
@@ -252,14 +254,14 @@ class addSesama extends React.Component {
 
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  postSesama: (judul, nama, alamat, deskripsi,location, fotoSesama) => dispatch(postSesama(judul, nama, alamat, deskripsi,location, fotoSesama))
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   postSesama: (judul, nama, alamat, deskripsi,location, fotoSesama) => dispatch(postSesama(judul, nama, alamat, deskripsi,location, fotoSesama))
+// })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(addSesama)
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(addSesama)
 
 const styles = StyleSheet.create({
   inputField: {

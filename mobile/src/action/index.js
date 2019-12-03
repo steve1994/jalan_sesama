@@ -1,15 +1,15 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 
-const API_URL = "http://192.168.1.3:3001/api";
+const API_URL = "http://192.168.100.12:3001/api";
 
-const request = axios.create({
-    baseURL: API_URL,
-    timeout: 1000
-  });
+// const request = axios.create({
+//     baseURL: API_URL,
+//     timeout: 1000
+//   });
 
 
-//ADD NEW PANTI
+//ADD NEW PANTI (folder: container/panti/addPanti.js)
 export const postPantiSuccess = (galangKamu) => ({
     type: 'POST_PANTI_SUCCESS',
     galangKamu
@@ -80,7 +80,7 @@ export const postPanti = (
 }
 
 
-//POST SESAMA
+//POST SESAMA (add data Bantu sesama folder: container/galangKamu/addSesama.js)
 export const postSesama = (
     judul,
     nama,
@@ -92,7 +92,6 @@ export const postSesama = (
     return dispatch => {
         //harap ganti dengan session login
         let idUser = 1001
-        // dispatch(postDataPanti( idUser , nama, alamat, deskripsi, jumlahOrang, location, fotoPanti))
         return fetch(`${API_URL}/sesamas/${idUser}`, {
             method: 'POST',
             headers: {
@@ -139,12 +138,76 @@ export const postSesama = (
 }
 
 
+// loadDetailDTKontrib (container/galangkamu/ListGalang.js)
+export const loadDetailDTKontrib = (detailKontrib) => ({
+    type: 'LOADDETAIL_KONTRIB',
+    detailKontrib
+    
+})
 
-//LOAD galangKamu
+export const loadDetailGL = (idUsing, type) => {
+
+    return dispatch => {
+        
+        if (type === 'panti') {
+            
+            return fetch(`${API_URL}/pantis/detailPanti/${idUsing}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then((response) => response.json())
+            .then((responseDATA) => {
+                let responsePanti = [responseDATA]
+                
+                dispatch(loadDetailDTKontrib(responsePanti))
+                
+            })
+            .catch((error) => {
+                console.error(error);
+                // dispatch(loadGlKamuFailure())
+                
+            })
+            
+            
+            
+        }else {
+            
+            console.log("sesama");
+            
+            return fetch(`${API_URL}/sesamas/detailSesama/${idUsing}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then((response) => response.json())
+            .then((responseDATA) => {
+                let responseSesama = [responseDATA]       
+
+                dispatch(loadDetailDTKontrib(responseSesama))
+                
+            })
+            .catch((error) => {
+                console.error(error);
+                // dispatch(loadGlKamuFailure())
+                
+            })
+            
+        }
+        
+        
+    }
+    
+}
+
+
+//LOAD galangKamu (LIST SEMUA PENGGALANGAN folder: container/galangKamu/galangKamu.js)
 export const loadGlKamuSuccess = (galangKamu) => ({
     type: 'LOAD_GLKAMU_SUCCESS',
     galangKamu
-    
+
 })
 
 export const loadGlKamuFailure = () => ({
@@ -153,8 +216,7 @@ export const loadGlKamuFailure = () => ({
 
 export const loadGlKamu = (idUser) => {
 
-    console.log("index action", idUser);
-    
+
     return dispatch => {
         // idUser Sementara
         return fetch(`${API_URL}/pantis/${idUser}`, {
@@ -163,28 +225,43 @@ export const loadGlKamu = (idUser) => {
                 'Content-Type': 'application/json'
             },
         })
-        
-        .then((response) => response.json())
-        .then((responseJson) => {
 
-            return fetch(`${API_URL}/sesamas/${idUser}`, {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-            })
             .then((response) => response.json())
-            .then((responseSesama) => {
+            .then((responsePanti) => {
 
-                console.log('dataAction Sesama',responseSesama);
-                let concatGalang = [...responseJson,...responseSesama]
-                dispatch(loadGlKamuSuccess(concatGalang))
+                return fetch(`${API_URL}/sesamas/${idUser}`, {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((responseSesama) => {
+                        
+                        let arrPanti = [...responsePanti]
+                        var resultPanti = arrPanti.map(function(addPanti) {
+                            addPanti.type = "panti";
+                            return addPanti;
+                          })
+
+                          let arrSesama = [...responseSesama]
+                          var resultSesama = arrSesama.map(function(addSesama) {
+                              addSesama.type = "sesama";
+                              return addSesama;
+                            })
+
+                        
+
+
+                        let concatGalang = [...resultPanti, ...resultSesama]
+
+                        dispatch(loadGlKamuSuccess(concatGalang))
+                    })
             })
-        })
-        .catch((error) => {
-            console.error(error);
-            dispatch(loadGlKamuFailure())
-            
-        })
+            .catch((error) => {
+                console.error(error);
+                dispatch(loadGlKamuFailure())
+
+            })
     }
 }

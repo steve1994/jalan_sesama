@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { StyleSheet ,Image, View, ScrollView } from 'react-native';
 import {
   Container,
   Header,
@@ -28,10 +28,6 @@ export default class galangKamu extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state = {
-    //   nama: '',
-    //   status: ''
-    // }
   }
 
 
@@ -41,7 +37,7 @@ export default class galangKamu extends React.Component {
 
     let { galangKamu } = this.props;
 
-    console.log('props', galangKamu);
+    // console.log('props', galangKamu);
 
     return (
       <Container>
@@ -65,28 +61,26 @@ export default class galangKamu extends React.Component {
         </Header>
         <Content>
           <Card style={{ backgroundColor: '#156cb3' }}>
-            <Card style={{ height: 480 }}>
+            <Card>
               <Card style={{ backgroundColor: '#156cb3' }}>
                 <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
                   Daftar Kontribusi Kamu Disini
             </Text>
               </Card>
+              <ScrollView>
+                  {galangKamu.map((items, i) => {
+                    return (
+                      <ListGalang
+                        navigation={this.props.navigation}
+                        {...items}
+                      />
 
-              {this.props.galangKamu.map((items, i) => {
-
-                return (
-                  <ListGalang
-                    navigation={this.props.navigation}
-                    idPanti={items._id}
-                    nama={items.nama}
-                    status={items.status}
-                  />
-
-                )
+                    )
 
 
-              })}
 
+                  })}
+              </ScrollView>
             </Card>
           </Card>
         </Content>

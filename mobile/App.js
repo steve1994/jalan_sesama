@@ -19,8 +19,6 @@ import { Provider } from 'react-redux';
 import Home from './src/components/Home';
 import ListPanti from './src/components/ListPanti';
 import GLdana from './src/components/GLdana';
-import addSesama from './src/components/addSesama';
-import DTKontrib from './src/components/DTKontrib';
 import addDonasi from './src/components/addDonasi';
 import DetailGL from './src/components/DetailGL';
 import HomeUser from './src/components/HomeUser';
@@ -28,9 +26,11 @@ import ProfileUser from './src/components/ProfileUser';
 import beriDonasi from './src/components/beriDonasi';
 
 //new add
+import DTKontrib from './src/container/DataKontrib/DTKontrib';
 import addPanti from './src/container/panti/addPanti';
 import LoginRegis from './src/container/LoginRegis/LoginRegis';
 import galangKamu from './src/container/galangKamu/galangKamu';
+import addSesama from './src/container/galangKamu/addSesama';
 
 
 

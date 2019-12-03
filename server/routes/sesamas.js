@@ -15,6 +15,21 @@ router.get('/:idUser', function(req, res) {
     })
 });
 
+router.get('/detailSesama/:_id', function(req, res) {
+
+    
+    Sesama.findById({_id: req.params._id})
+    .exec(function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            
+            res.status(200).json(response)
+            console.log('Sesama >', response);
+        }
+    })
+});
+
 router.get('/', function(req, res) {
     Sesama.find()
     .exec(function (err,response) {
@@ -27,6 +42,10 @@ router.get('/', function(req, res) {
 })
 
 router.post('/:idUser', function(req,res) {
+
+    console.log('data sesama POST', req.body);
+    
+
     let idUser = req.params.idUser;
     let nama = req.body.nama;
     let alamat = req.body.alamat;
@@ -45,6 +64,7 @@ router.post('/:idUser', function(req,res) {
 })
 
 router.put('/:idSesama', function(req,res) {
+
     let idSesama = req.params.idSesama;
     let nama = req.body.nama;
     let judul = req.body.judul;
@@ -52,7 +72,7 @@ router.put('/:idSesama', function(req,res) {
     let deskripsi = req.body.deskripsi;
     let foto = req.body.foto;
     let location = req.body.location;
-    Sesama.findOneAndUpdate({_id:idSesama},{nama,judul,alamat,deskripsi,foto,location},function (err,response) {
+    Sesama.findOneAndUpdate({_id:idSesama},{nama,judul,alamat,deskripsi,foto ,location},function (err,response) {
         if (err) {
             res.status(400).json({status:'failed',error:err});
         } else {
@@ -72,6 +92,9 @@ function randomString(length) {
 }
 
 router.put('/uploadphoto/:idSesama', function (req,res) {
+
+    console.log('data sesama PUT', req.files);
+
     let idSesama = req.params.idSesama;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
