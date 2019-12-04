@@ -1,11 +1,13 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const fs = require('fs');
 
 const server = require('../app');
 const Dana = require('../model/danas');
 
 const should = chai.should();
 chai.use(chaiHttp);
+chai.use(require('chai-string'));
 
 describe('danas', function () {
 
@@ -319,6 +321,60 @@ describe('danas', function () {
                 res.body.data.status.should.equal("approved");
                 res.body.data.nominalSet.should.equal(500000);
                 res.body.data.nominalProcess.should.equal(0);
+                done();
+            })
+        })
+    })
+
+    it('seharusnya dapat mengupload file untuk suatu anggaran panti',function (done) {
+        chai.request(server)
+        .get('/api/danas/panti/idPanti123456')
+        .end(function (err,res) {
+            let idAnggaranPanti = res.body[0]._id;
+            chai.request(server)
+            .put('/api/danas/uploadphoto/'+idAnggaranPanti)
+            .attach('files',fs.readFileSync('./test/test_image/c41.png'),'c41.png')
+            .end(function (err,res) {
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.have.property('status');
+                res.body.should.have.property('data');
+                res.body.status.should.equal('success');
+                res.body.data.idPanti.should.equal('idPanti123456');
+                res.body.data.nama.should.equal("Anggaran Panti");
+                res.body.data.alamat.should.equal("UjungBerung Bandung");
+                res.body.data.judul.should.equal("Satu Dua Tiga");
+                res.body.data.deskripsi.should.equal("Satu Dua Tiga");
+                res.body.data.status.should.equal("approved");
+                res.body.data.nominalSet.should.equal(500000);
+                res.body.data.nominalProcess.should.equal(100000);
+                done();
+            })
+        })
+    })
+
+    it('seharusnya dapat mengupload file untuk suatu anggaran sesama',function (done) {
+        chai.request(server)
+        .get('/api/danas/sesama/idSesama123456')
+        .end(function (err,res) {
+            let idAnggaranSesama = res.body[0]._id;
+            chai.request(server)
+            .put('/api/danas/uploadphoto/'+idAnggaranSesama)
+            .attach('files',fs.readFileSync('./test/test_image/c41.png'),'c41.png')
+            .end(function (err,res) {
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.have.property('status');
+                res.body.should.have.property('data');
+                res.body.status.should.equal('success');
+                res.body.data.idBantu.should.equal('idSesama123456');
+                res.body.data.nama.should.equal("Anggaran Sesama");
+                res.body.data.alamat.should.equal("UjungBerung Bandung");
+                res.body.data.judul.should.equal("Satu Dua Tiga");
+                res.body.data.deskripsi.should.equal("Satu Dua Tiga");
+                res.body.data.status.should.equal("approved");
+                res.body.data.nominalSet.should.equal(500000);
+                res.body.data.nominalProcess.should.equal(100000);
                 done();
             })
         })

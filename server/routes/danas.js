@@ -131,7 +131,7 @@ router.put('/uploadphoto/:idGalangDana', function (req,res) {
       if (err) {
         res.status(400).json({status:'failed',error:err})
       } else {
-        Product.findOneAndUpdate({_id:idGalangDana},{foto:fileName},function (err,response) {
+        Dana.findOneAndUpdate({_id:idGalangDana},{foto:fileName},function (err,response) {
           if (err) {
             res.status(400).json({status:'failed',error:err});
           } else {

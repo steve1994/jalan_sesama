@@ -1,11 +1,13 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const fs = require('fs');
 
 const server = require('../app');
 const Sesama = require('../model/sesamas');
 
 const should = chai.should();
 chai.use(chaiHttp);
+chai.use(require('chai-string'));
 
 describe('sesamas', function () {
 
@@ -143,6 +145,33 @@ describe('sesamas', function () {
         })
     })
 
+    it('seharusnya dapat mengupload file berdasarkan id sesama tertentu', function (done) {
+        chai.request(server)
+        .get('/api/sesamas/idUser123456')
+        .end(function (err,res) {
+            let idSesama = res.body[0]._id;
+            chai.request(server)
+            .put('/api/sesamas/uploadphoto/'+idSesama)
+            .attach('files',fs.readFileSync('./test/test_image/c41.png'),'c41.png')
+            .end(function (err,res) {
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.have.property('status');
+                res.body.should.have.property('data');
+                res.body.status.should.equal('success');
+                res.body.data.idUser.should.equal('idUser123456');
+                res.body.data.nama.should.equal('Nenek Sadiman v2');
+                res.body.data.alamat.should.equal('UjungBerung Bandung v2');
+                res.body.data.judul.should.equal('Satu Dua Tiga v2');
+                res.body.data.deskripsi.should.equal('Satu Dua Tiga v2');
+                res.body.data.foto.should.equal('images.jpg');
+                res.body.data.location.should.equal('(-1.0000,113.0001)');
+                res.body.data.status.should.equal('approved');
+                done();
+            })
+        })
+    })
+
     it('seharusnya dapat menghapus sesama berdasarkan id sesama', function (done) {
         chai.request(server)
         .get('/api/sesamas/idUser123456')
@@ -161,7 +190,7 @@ describe('sesamas', function () {
                 res.body.data.alamat.should.equal('UjungBerung Bandung v2');
                 res.body.data.judul.should.equal('Satu Dua Tiga v2');
                 res.body.data.deskripsi.should.equal('Satu Dua Tiga v2');
-                res.body.data.foto.should.equal('images.jpg');
+                res.body.data.foto.should.endWith('c41.png');
                 res.body.data.location.should.equal('(-1.0000,113.0001)');
                 res.body.data.status.should.equal('approved');
                 done();
