@@ -60,6 +60,7 @@ export const postPanti = (
                 })
                     .then((response) => response.json())
                     .then((responseJson) => {
+                        
                         dispatch(postPantiSuccess(responseJson.data))
 
 
@@ -79,13 +80,168 @@ export const postPanti = (
     }
 }
 
-// POST PENGGGALANG (FOLDER :container/DtKOntrib/addDonasi.js )
+// GET PENGGALANGAN DANA
 
-export const postPenggalangan = (judul,deskripsi, fotoGalang, data) => {
+export const loadDataDonasiSuccess = (DataDonasi) => ({
+    type: "LOAD_DONASI_SUCCESS",
+    DataDonasi
+})
 
-    console.log('ACTION DATA', judul,deskripsi, fotoGalang, data);
+export const loadDataPenggalang = (dataPenggalangan) => {
+
+
+    console.log('ACTION PENGGALANG >', dataPenggalangan );
     
     return dispatch => {
+
+        if (dataPenggalangan[0].type=="panti") {
+            return fetch(`${API_URL}/danas/panti/${dataPenggalangan[0].idUsing}`)
+            .then((response) => response.json())
+            .then((responseDATA) => {
+
+                dispatch(loadDataDonasiSuccess(responseDATA))
+                
+            })
+            .catch((error) => {
+                
+            })
+
+        }else{
+            
+            return fetch(`${API_URL}/danas/sesama/${dataPenggalangan[0].idUsing}`)
+            .then((response) => response.json())
+            .then((responseDATA) => {
+
+                dispatch(loadDataDonasiSuccess(responseDATA))
+
+                
+            })
+            .catch((error) => {
+                
+            })
+
+        }
+        
+
+    }
+
+    
+}
+
+
+// POST PENGGGALANG (FOLDER :container/DtKOntrib/addDonasi.js )
+export const postGALANGSuccess = (penggalangan) => ({
+    type: "PENGGALANGAN_SUCCESS",
+    penggalangan
+})
+
+
+export const postPenggalangan = (idUsing, nama, alamat, type, judul, deskripsi, nominalSet, fotoGalang ) => {
+    
+    return dispatch => {
+
+        if (type === "panti") {
+
+            let idPanti = idUsing;
+            return fetch(`${API_URL}/danas/panti/${idPanti}`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idPanti, nama, alamat, type, judul, deskripsi, nominalSet })
+            })
+            .then((response) => response.json())
+            .then((responseDATA) => {
+                
+                
+                let idGalangDana = responseDATA.data._id
+                let formData = new FormData()
+                formData.append('files', {
+                    type: "image/jpeg",
+                    uri: fotoGalang,
+                    name: 'photo'
+                });
+
+                return fetch(`${API_URL}/danas/uploadphoto/${idGalangDana}`, {
+                    method: 'PUT',
+                    body: formData,
+                })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+
+                        
+                        dispatch(postGALANGSuccess(responseDATA))
+
+
+                    })
+                    .catch((error) => {
+                        console.log('panti action error Put > ', error);
+                        // dispatch(postGALANGFailed())
+
+                    })
+                
+               
+                
+            })
+            .catch((error) => {
+                console.error(error);
+                // dispatch(loadGlKamuFailure())
+                
+            })
+
+        } else {
+
+            let idSesama = idUsing;
+            return fetch(`${API_URL}/danas/sesama/${idSesama}`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idSesama, nama, alamat, type, judul, deskripsi, nominalSet })
+            })
+            .then((response) => response.json())
+            .then((responseDATA) => {
+
+                console.log("respon SESAMA", responseDATA);
+                
+                let idGalangDana = responseDATA.data._id
+                let formData = new FormData()
+                formData.append('files', {
+                    type: "image/jpeg",
+                    uri: fotoGalang,
+                    name: 'photo'
+                });
+
+                return fetch(`${API_URL}/danas/uploadphoto/${idGalangDana}`, {
+                    method: 'PUT',
+                    body: formData,
+                })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+
+                        console.log("response EDIT",responseJson );
+                        
+                        // dispatch(postPantiSuccess(responseJson.data))
+
+
+                    })
+                    .catch((error) => {
+                        console.log('panti action error Put > ', error);
+                        // dispatch(postPantiFailed())
+
+                    })
+               
+                
+            })
+            .catch((error) => {
+                console.error(error);
+                // dispatch(loadGlKamuFailure())
+                
+            })
+
+        }
 
     }
 }
@@ -198,9 +354,13 @@ export const loadDetailGL = (idUsing, type) => {
             })
             .then((response) => response.json())
             .then((responseDATA) => {
-                let responseSesama = [responseDATA]       
+                let arrSesama = [responseDATA]
+                        var resultSesama = arrSesama.map(function(addPanti) {
+                            addPanti.type = "sesama";
+                            return addPanti;
+                          })       
 
-                dispatch(loadDetailDTKontrib(responseSesama))
+                dispatch(loadDetailDTKontrib(resultSesama))
                 
             })
             .catch((error) => {

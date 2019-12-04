@@ -34,6 +34,7 @@ import addSesama from './src/container/galangKamu/addSesama';
 
 
 
+
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const RootStack = createStackNavigator(

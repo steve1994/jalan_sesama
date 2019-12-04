@@ -36,6 +36,26 @@ export default class Donations extends React.Component {
 
   }
 
+  componentDidMount() {
+
+    let { detailKontrib } = this.props
+
+
+    const dataPenggalangan = detailKontrib.map(item => {
+      let idUsing = item._id
+      let type = item.type
+      return { idUsing, type }
+    })
+    
+    
+    this.props.loadDataPenggalang(
+      dataPenggalangan
+    )
+
+
+
+  }
+
 
 
 
@@ -43,7 +63,8 @@ export default class Donations extends React.Component {
 
   render() {
     const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
-    
+
+
 
 
     return (
@@ -59,27 +80,27 @@ export default class Donations extends React.Component {
             </Right>
           </CardItem>
 
-          <List dataArray={items}
+          <List dataArray={this.props.DataDonasi}
             Vertical
             renderRow={(item) =>
               <ListItem >
                 <Card style={{ width: 310 }}>
                   <CardItem style={{}}>
-                    <Text> {item} </Text>
+                    <Text> {item.judul} </Text>
                   </CardItem>
 
                   <View style={styles.container}>
                     <ProgressBarAndroid />
                     <Row>
-                      <Text style={{ fontSize: 12, left: 5 }}>Rp.650.000</Text>
+                      <Text style={{ fontSize: 12, left: 5 }}>Rp. {item.nominalProcess}</Text>
                       <Right>
-                        <Text style={{ fontSize: 12, right: 5 }}>Rp.1.000.000</Text>
+                        <Text style={{ fontSize: 12, right: 5 }}>Rp. {item.nominalSet}</Text>
                       </Right>
                     </Row>
                     <ProgressBarAndroid
                       styleAttr="Horizontal"
                       indeterminate={false}
-                      progress={0.8}
+                      progress={item.nominalProcess / item.nominalSet}
                     />
 
 

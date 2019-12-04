@@ -100,7 +100,7 @@ router.put('/uploadphoto/:idPanti', function (req,res) {
     
     let idPanti = req.params.idPanti;
     let uploadedFile = req.files ? req.files.files : null;
-    let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
+    let fileName = req.files ? (randomString(10) + "_" + req.files.files.name +".jpg") : null;
     if (uploadedFile) {
         uploadedFile.mv(path.join(__dirname,`../public/images/uploaded_image/panti/${fileName}`), function (err) {
             if (err) {

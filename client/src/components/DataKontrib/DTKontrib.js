@@ -1,4 +1,5 @@
 import React from 'react';
+import { API_URL } from '../../helpers/accessImage'
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
 import {
   Container,
@@ -30,7 +31,7 @@ import {
 
 import About from '../../container/DataKontrib/About';
 import Locations from '../../container/DataKontrib/Locations';
-import Donations from './Donations';
+import Donations from '../../container/DataKontrib/Donations';
 
 export default class DTKontrib extends React.Component {
 
@@ -46,6 +47,13 @@ export default class DTKontrib extends React.Component {
 
     let { detailKontrib, showDetail } = this.props
 
+    let componentImage = detailKontrib.map((items, i) => {
+      if (items.type == "panti") {
+        return <Image source={{ uri: `${API_URL}images/uploaded_image/panti/${items.foto}` }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
+      } else {
+        return <Image source={{ uri: `${API_URL}images/uploaded_image/sesama/${items.foto}` }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
+      }
+    })
 
 
 
@@ -73,8 +81,10 @@ export default class DTKontrib extends React.Component {
         </Header>
         <Card style={{ height: 150 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
-            <Image source={{ uri: "http://www.infobdg.com/v2/wp-content/uploads/2019/05/Anak-Anak-Panti-Asuhan.jpg" }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
+
+            {componentImage}
           </CardItem>
+
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
             {detailKontrib.map(items => (items.judul))}
           </Text>
@@ -110,16 +120,12 @@ export default class DTKontrib extends React.Component {
 
           <Tab heading={<TabHeading><Icon name="" /><Text>Donations</Text></TabHeading>} style={{}}>
 
-            {detailKontrib.map((items, i) => {
+           
 
-              return (
-                <Donations
-                navigation={this.props.navigation}
-                  {...items}
-                />
-              )
-
-            })}
+            <Donations
+              navigation={this.props.navigation}
+              
+            />
 
 
           </Tab>

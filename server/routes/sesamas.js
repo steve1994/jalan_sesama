@@ -97,7 +97,7 @@ router.put('/uploadphoto/:idSesama', function (req,res) {
 
     let idSesama = req.params.idSesama;
     let uploadedFile = req.files ? req.files.files : null;
-    let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
+    let fileName = req.files ? (randomString(10) + "_" + req.files.files.name +".jpg") : null;
     if (uploadedFile) {
         uploadedFile.mv(path.join(__dirname,`../public/images/uploaded_image/sesama/${fileName}`), function (err) {
             if (err) {

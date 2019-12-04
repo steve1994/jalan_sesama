@@ -1,21 +1,22 @@
-// import { connect } from "react-redux";
-// import Donations from "../../components/DataKontrib/Donations";
-// import { loadDetailGL } from "../../action/index";
+import { connect } from "react-redux";
+import Donations from "../../components/DataKontrib/Donations";
+import { loadDataPenggalang } from "../../action/index";
 
 
 
-// const mapStateToProps = (state) => ({
-//     detailKontrib: state.store
-// })
+const mapStateToProps = (state) => ({
+    detailKontrib: state.store,
+    DataDonasi: state.Donations
+})
 
 
-// const mapDispatchToProps = (dispatch) => ({
-//     loadDetailGL: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
+const mapDispatchToProps = (dispatch) => ({
+    loadDataPenggalang: (dataPenggalangan) => dispatch(loadDataPenggalang(dataPenggalangan)),
     
-// })
+})
 
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Donations)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Donations)

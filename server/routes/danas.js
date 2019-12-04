@@ -72,7 +72,11 @@ router.get('/complete', function(req, res) {
   })
 })
 
+//POST DONASI PANTI
 router.post('/panti/:idPanti', function(req,res) {
+
+  
+  
   let idPanti = req.params.idPanti;
   let idBantu = null;
   let nama = req.body.nama;
@@ -92,7 +96,11 @@ router.post('/panti/:idPanti', function(req,res) {
   }
 })
 
+
 router.post('/sesama/:idBantuSesama', function(req,res) {
+
+  
+
   let idPanti = null;
   let idBantu = req.params.idBantuSesama;
   let nama = req.body.nama;
@@ -123,15 +131,17 @@ function randomString(length) {
 }
 
 router.put('/uploadphoto/:idGalangDana', function (req,res) {
+  
+  
   let idGalangDana = req.params.idGalangDana;
   let uploadedFile = req.files ? req.files.files : null;
-  let fileName = req.files ? (randomString(10) + "_" + req.files.files.name) : null;
+  let fileName = req.files ? (randomString(10) + "_" + req.files.files.name + ".jpg") : null;
   if (uploadedFile) {
     uploadedFile.mv(path.join(__dirname,`../public/images/uploaded_image/dana/${fileName}`), function (err) {
       if (err) {
         res.status(400).json({status:'failed',error:err})
       } else {
-        Product.findOneAndUpdate({_id:idGalangDana},{foto:fileName},function (err,response) {
+        Dana.findOneAndUpdate({_id:idGalangDana},{foto:fileName},function (err,response) {
           if (err) {
             res.status(400).json({status:'failed',error:err});
           } else {
