@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, View, TouchableOpacity, StyleSheet, PixelRatio, TextInput } from 'react-native';
-// import { connect } from "react-redux";
-// import { postSesama } from "../action/index";
+import { StyleSheet, Image, View, TextInput, TouchableOpacity, PixelRatio } from 'react-native';
+import { connect } from "react-redux";
+import { postPanti } from '../../action/index';
+
 import {
   Container,
   Header,
@@ -22,15 +23,16 @@ import {
   Row,
   List,
   Form,
-  Input,
   Label,
-  Textarea,
-  Picker, 
+  Input,
+  Textarea
+
 } from 'native-base';
+
 import ImagePicker from 'react-native-image-picker';
 
 
-export default class addSesama extends React.Component {
+class addPanti extends React.Component {
 
   constructor(props) {
     super(props)
@@ -39,16 +41,18 @@ export default class addSesama extends React.Component {
       nama: '',
       alamat: '',
       deskripsi: '',
+      jumlahOrang: '',
       location: '',
-      fotoSesama: null
+      fotoPanti: null
+
     };
     this.handleJudul = this.handleJudul.bind(this);
     this.handleNama = this.handleNama.bind(this);
     this.handleAlamat = this.handleAlamat.bind(this);
     this.handleDeskripsi = this.handleDeskripsi.bind(this);
     this.handleLocation = this.handleLocation.bind(this);
-    this.SaveSesama = this.SaveSesama.bind(this);
-
+    this.handleJumlahOrang = this.handleJumlahOrang.bind(this)
+    this.SavePanti = this.SavePanti.bind(this);
   }
 
   handleJudul(value) {
@@ -69,6 +73,10 @@ export default class addSesama extends React.Component {
 
   handleLocation(value) {
     this.setState({ location: value })
+  }
+
+  handleJumlahOrang(value) {
+    this.setState({ jumlahOrang: value })
   }
 
   selectPhotoTapped() {
@@ -105,30 +113,33 @@ export default class addSesama extends React.Component {
         this.setState({
 
           uploadImg: source,
-          fotoSesama: response.uri
+          fotoPanti: response.uri
 
         });
       }
     });
   }
 
-  SaveSesama() {
-    this.props.postSesama(
+  SavePanti() {
+
+    this.props.postPanti(
       this.state.judul,
       this.state.nama,
       this.state.alamat,
       this.state.deskripsi,
+      this.state.jumlahOrang,
       this.state.location,
-      this.state.fotoSesama,
+      this.state.fotoPanti
     )
-    this.setState({ judul: '', nama: '',alamat: '',deskripsi: '',location: '',fotoSesama: null});
+    this.setState({ judul: '', nama: '',alamat: '',deskripsi: '',jumlahOrang: '',location: '',fotoPanti: null});
     this.props.navigation.navigate('GLdana');
+
+
   }
 
 
   render() {
 
-   
 
     return (
       <Container>
@@ -151,20 +162,19 @@ export default class addSesama extends React.Component {
           </Left>
         </Header>
         <Content>
-
           <Card style={{ backgroundColor: '#156cb3' }}>
             <Card>
-                <Card style={{ backgroundColor: '#156cb3' }}>
-                  <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
-                    Tambahkan Data Orang yang Membutuhkan
+              <Card style={{ backgroundColor: '#156cb3' }}>
+                <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
+                  Tambahkan Data Panti Asuhan
                   </Text>
-                </Card>
-
+            </Card>
+              
               <Card>
                 <Form>
-                  
+
                 <Item>
-                    <Label>Judul</Label>
+                    <Label>Judul Panti</Label>
                     <Content>
                       <Form>
                         <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleJudul} />
@@ -191,6 +201,15 @@ export default class addSesama extends React.Component {
                   </Item>
                 
                   <Item>
+                    <Label>Jumlah Penghuni</Label>
+                    <Content>
+                      <Form>
+                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleJumlahOrang} />
+                      </Form>
+                    </Content>
+                  </Item>
+
+                  <Item>
                     <Label>Deskripsi</Label>
                     <Content padder>
                       <Form>
@@ -198,6 +217,7 @@ export default class addSesama extends React.Component {
                       </Form>
                     </Content>
                   </Item>
+
                   
                   <Item>
                     <Label>location</Label>
@@ -216,7 +236,7 @@ export default class addSesama extends React.Component {
 
                         <View style={styles.ImageContainer}>
 
-                          {this.state.fotoSesama === null ? <Text>Select a Photo</Text> :
+                          {this.state.uploadImg === null ? <Text>Select a Photo</Text> :
                             <Image style={styles.ImageContainer} source={this.state.uploadImg} />
                           }
 
@@ -229,9 +249,9 @@ export default class addSesama extends React.Component {
                 </Form>
 
                 <Row>
-                <Button primary style={{
+                  <Button primary style={{
                     padding: '10%', margin: 20, left: 86
-                  }} onPress={this.SaveSesama}>
+                  }} onPress={this.SavePanti}>
                     <Text>Save</Text>
                   </Button>
                 </Row>
@@ -239,7 +259,6 @@ export default class addSesama extends React.Component {
               </Card>
             </Card>
           </Card>
-
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>
@@ -255,13 +274,20 @@ export default class addSesama extends React.Component {
 }
 
 // const mapDispatchToProps = (dispatch) => ({
-//   postSesama: (judul, nama, alamat, deskripsi,location, fotoSesama) => dispatch(postSesama(judul, nama, alamat, deskripsi,location, fotoSesama))
+//   postPanti: (nama, alamat, username, password, filename) => dispatch(postPanti(nama, alamat, username, password, filename))
 // })
 
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(addSesama)
+const mapDispatchToProps = (dispatch) => ({
+  postPanti: (judul, nama, alamat, deskripsi, jumlahOrang, location , fotoPanti) => dispatch(postPanti(judul, nama, alamat, deskripsi, jumlahOrang, location, fotoPanti ))
+
+
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(addPanti)
+
 
 const styles = StyleSheet.create({
   inputField: {

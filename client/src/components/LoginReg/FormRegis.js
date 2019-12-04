@@ -1,6 +1,9 @@
-import React from "react"
+import React from "react";
+import { connect } from "react-redux";
+
 import { ProgressBarAndroid, StyleSheet, Image, View, TextInput, TouchableOpacity, PixelRatio } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+
 
 import {
     Container,
@@ -30,15 +33,15 @@ import {
     Textarea
 } from 'native-base';
 
-class FormRegis extends React.Component {
+export default class FormRegis extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             nama: '',
-            alamat:'',
+            alamat: '',
             username: '',
-            password:'',
+            password: '',
             uploading: null
         };
         this.handleNama = this.handleNama.bind(this);
@@ -69,6 +72,7 @@ class FormRegis extends React.Component {
             quality: 1.0,
             maxWidth: 500,
             maxHeight: 500,
+            mediaType: 'photo',
             storageOptions: {
                 skipBackup: true
             }
@@ -88,7 +92,9 @@ class FormRegis extends React.Component {
             }
             else {
                 let dataRes = response.fileName;
+                
                 let source = { uri: response.uri };
+                console.log('dataRes', source);
 
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -96,7 +102,7 @@ class FormRegis extends React.Component {
                 this.setState({
 
                     uploadImg: source,
-                    filename: dataRes
+                    filename: response.uri
 
                 });
             }
@@ -104,6 +110,7 @@ class FormRegis extends React.Component {
     }
 
     buttonSignup() {
+
         this.props.postRegister(
             this.state.nama,
             this.state.alamat,
@@ -112,7 +119,6 @@ class FormRegis extends React.Component {
             this.state.filename
         );
 
-        
     }
 
     render() {
@@ -126,28 +132,28 @@ class FormRegis extends React.Component {
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     keyboardType='Nama'
-                    style={styles.inputField} onChangeText={this.handleNama}/>
+                    style={styles.inputField} onChangeText={this.handleNama} />
                 <TextInput
                     placeholder='Alamat'
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     keyboardType='Alamat'
-                    style={styles.inputField} onChangeText={this.handleAlamat}/>
+                    style={styles.inputField} onChangeText={this.handleAlamat} />
                 <TextInput
                     placeholder='Username'
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     keyboardType='Username'
-                    style={styles.inputField} onChangeText={this.handleUsername}/>
+                    style={styles.inputField} onChangeText={this.handleUsername} />
                 <TextInput
                     placeholder='password'
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     secureTextEntry={true}
-                    style={styles.inputField} onChangeText={this.handlePassword}/>
+                    style={styles.inputField} onChangeText={this.handlePassword} />
 
                 <Item style={styles.inputField}>
-                        <Label style={{ color: "white", fontSize:17 }}>Take Pict</Label>
+                        <Label style={{ color: "white", fontSize:15 }}>Take Pict</Label>
                     <Card style={{ height:100, left:70 }}>
 
                         <TouchableOpacity  onPress={this.selectPhotoTapped.bind(this)}>
@@ -163,7 +169,11 @@ class FormRegis extends React.Component {
                         </TouchableOpacity>
                     </Card>
                 </Item>
-                <TouchableOpacity>
+
+               
+
+
+                <TouchableOpacity onPress={this.buttonSignup}>
                     <Text style={{ color: 'white', marginTop: 10 }}>Signup</Text>
                 </TouchableOpacity>
             </View>
@@ -207,5 +217,3 @@ const styles = StyleSheet.create({
 
     },
 });
-
-export default FormRegis;

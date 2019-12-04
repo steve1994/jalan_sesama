@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var fileUpload = require('express-fileupload');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,6 +14,13 @@ var danasRouter = require('./routes/danas');
 
 var app = express();
 app.use(cors());
+
+//using session login 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/final-project-db', {useNewUrlParser: true});
