@@ -19,7 +19,7 @@ import { Provider } from 'react-redux';
 import Home from './src/components/Home';
 import ListPanti from './src/components/ListPanti';
 import GLdana from './src/components/GLdana';
-import addDonasi from './src/components/addDonasi';
+import addDonasi from './src/container/DataKontrib/addDonasi';
 import DetailGL from './src/components/DetailGL';
 import HomeUser from './src/components/HomeUser';
 import ProfileUser from './src/components/ProfileUser';
@@ -55,7 +55,7 @@ const RootStack = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Home', headerMode: 'none'
+    initialRouteName: 'GLdana', headerMode: 'none'
   }
 )
 

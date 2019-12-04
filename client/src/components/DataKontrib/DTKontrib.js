@@ -47,6 +47,8 @@ export default class DTKontrib extends React.Component {
     let { detailKontrib, showDetail } = this.props
 
 
+
+
     return (
       <Container>
         <Header style={{ backgroundColor: '#268026' }}>
@@ -70,7 +72,7 @@ export default class DTKontrib extends React.Component {
           </Left>
         </Header>
         <Card style={{ height: 150 }}>
-          <CardItem style={{ backgroundColor: '#156cb3' }}> 
+          <CardItem style={{ backgroundColor: '#156cb3' }}>
             <Image source={{ uri: "http://www.infobdg.com/v2/wp-content/uploads/2019/05/Anak-Anak-Panti-Asuhan.jpg" }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
@@ -108,7 +110,17 @@ export default class DTKontrib extends React.Component {
 
           <Tab heading={<TabHeading><Icon name="" /><Text>Donations</Text></TabHeading>} style={{}}>
 
-            <Donations />
+            {detailKontrib.map((items, i) => {
+
+              return (
+                <Donations
+                navigation={this.props.navigation}
+                  {...items}
+                />
+              )
+
+            })}
+
 
           </Tab>
 

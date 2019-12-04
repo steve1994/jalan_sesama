@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 
-const API_URL = "http://192.168.100.12:3001/api";
+const API_URL = "http://192.168.3.75:3001/api";
 
 // const request = axios.create({
 //     baseURL: API_URL,
@@ -79,6 +79,16 @@ export const postPanti = (
     }
 }
 
+// POST PENGGGALANG (FOLDER :container/DtKOntrib/addDonasi.js )
+
+export const postPenggalangan = (judul,deskripsi, fotoGalang, data) => {
+
+    console.log('ACTION DATA', judul,deskripsi, fotoGalang, data);
+    
+    return dispatch => {
+
+    }
+}
 
 //POST SESAMA (add data Bantu sesama folder: container/galangKamu/addSesama.js)
 export const postSesama = (
@@ -159,9 +169,13 @@ export const loadDetailGL = (idUsing, type) => {
             })
             .then((response) => response.json())
             .then((responseDATA) => {
-                let responsePanti = [responseDATA]
-                
-                dispatch(loadDetailDTKontrib(responsePanti))
+                let arrPanti = [responseDATA]
+                        var resultPanti = arrPanti.map(function(addPanti) {
+                            addPanti.type = "panti";
+                            return addPanti;
+                          })
+                                
+                dispatch(loadDetailDTKontrib(resultPanti))
                 
             })
             .catch((error) => {

@@ -95,7 +95,7 @@ class GLdana extends React.Component {
               <Row>
               <CardItem cardBody style={{ margin: 10 }}>
                 <Button transparent light onPress={() => {showDetail(idUser); this.props.navigation.navigate("galangKamu")}} >
-                <Image source={{ uri: "https://lh3.googleusercontent.com/GVcvDxX3cUWQtMHOM5wgPpxPsVqSAcGNZeRLJ5J14AGGi7R1eKU8lRqJfF9nmCAYM5K8lg=s136" }} style={{ width: 165, height: 120 }} />
+                <Image source={{ uri: "https://4.bp.blogspot.com/-BTP9YpD_eNw/Wbdvr2UstTI/AAAAAAAAMOs/x6qxprsG9t0pq4r1HwqiVqJZTNq5f8OUACLcBGAs/s640/bansoslogo.jpg" }} style={{ width: 165, height: 120 }} />
                 </Button>
               </CardItem>
               <View cardBody style={{ margin: 1, width: 160, height: 50, padding: 14 }}>

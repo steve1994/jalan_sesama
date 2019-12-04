@@ -1,7 +1,5 @@
 import React from 'react';
-import { Image, View, TouchableOpacity, StyleSheet, PixelRatio, TextInput } from 'react-native';
-// import { connect } from "react-redux";
-// import { postSesama } from "../action/index";
+import { Image, View, TouchableOpacity, StyleSheet, PixelRatio } from 'react-native';
 import {
   Container,
   Header,
@@ -22,54 +20,41 @@ import {
   Row,
   List,
   Form,
-  Input,
   Label,
-  Textarea,
-  Picker, 
+  Input,
+  Textarea
 } from 'native-base';
+
 import ImagePicker from 'react-native-image-picker';
 
 
-export default class addSesama extends React.Component {
 
+
+
+export default class addDonasi extends React.Component {
+  
   constructor(props) {
-    super(props)
+    super(props);
+    
     this.state = {
       judul: '',
-      nama: '',
-      alamat: '',
       deskripsi: '',
-      location: '',
-      fotoSesama: null
-    };
-    this.handleJudul = this.handleJudul.bind(this);
-    this.handleNama = this.handleNama.bind(this);
-    this.handleAlamat = this.handleAlamat.bind(this);
-    this.handleDeskripsi = this.handleDeskripsi.bind(this);
-    this.handleLocation = this.handleLocation.bind(this);
-    this.SaveSesama = this.SaveSesama.bind(this);
+      fotoGalang: null
 
+    }
+    this.handleJudul = this.handleJudul.bind(this);
+    this.handleDeskripsi = this.handleDeskripsi.bind(this);
+    this.savePenggalangan = this.savePenggalangan.bind(this);
   }
 
   handleJudul(value) {
     this.setState({ judul: value })
   }
 
-  handleNama(value) {
-    this.setState({ nama: value })
-  }
-
-  handleAlamat(value) {
-    this.setState({ alamat: value })
-  }
-
   handleDeskripsi(value) {
     this.setState({ deskripsi: value })
   }
 
-  handleLocation(value) {
-    this.setState({ location: value })
-  }
 
   selectPhotoTapped() {
     const options = {
@@ -105,30 +90,49 @@ export default class addSesama extends React.Component {
         this.setState({
 
           uploadImg: source,
-          fotoSesama: response.uri
+          fotoGalang: response.uri
 
         });
       }
     });
   }
 
-  SaveSesama() {
-    this.props.postSesama(
+
+  savePenggalangan() {
+
+    let { detailKontrib } = this.props
+
+    let using = detailKontrib.map(item => {
+      let id = item._id;
+      let judul = item.judul;
+
+        return {id,judul};
+      })
+    
+    // console.log('in save', using);
+
+
+
+
+    this.props.postPenggalangan(
       this.state.judul,
-      this.state.nama,
-      this.state.alamat,
       this.state.deskripsi,
-      this.state.location,
-      this.state.fotoSesama,
+      this.state.fotoGalang,
+      using
+
+
     )
-    this.setState({ judul: '', nama: '',alamat: '',deskripsi: '',location: '',fotoSesama: null});
-    this.props.navigation.navigate('GLdana');
+
   }
+
 
 
   render() {
 
-   
+    // console.log('this kontrib', detailKontrib);
+
+
+
 
     return (
       <Container>
@@ -144,70 +148,31 @@ export default class addSesama extends React.Component {
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("Home")} >
+              onPress={() => this.props.navigation.navigate("DTKontrib")} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>
           </Left>
         </Header>
         <Content>
-
           <Card style={{ backgroundColor: '#156cb3' }}>
             <Card>
-                <Card style={{ backgroundColor: '#156cb3' }}>
-                  <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
-                    Tambahkan Data Orang yang Membutuhkan
+              <Card style={{ backgroundColor: '#156cb3' }}>
+                <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
+                  Tambahkan Data Penggalang Baru
                   </Text>
-                </Card>
+              </Card>
 
               <Card>
                 <Form>
-                  
-                <Item>
-                    <Label>Judul</Label>
-                    <Content>
-                      <Form>
-                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleJudul} />
-                      </Form>
-                    </Content>
+                  <Item floatingLabel>
+                    <Label>Judul Penggalangan</Label>
+                    <Input onChangeText={this.handleJudul} />
                   </Item>
-
-                  <Item>
-                    <Label>Nama</Label>
-                    <Content>
-                      <Form>
-                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleNama} />
-                      </Form>
-                    </Content>
-                  </Item>
-
-                  <Item>
-                    <Label>Alamat</Label>
-                    <Content>
-                      <Form>
-                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleAlamat} />
-                      </Form>
-                    </Content>
-                  </Item>
-                
-                  <Item>
+                  <Item floatingLabel>
                     <Label>Deskripsi</Label>
-                    <Content padder>
-                      <Form>
-                        <Textarea rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleDeskripsi} />
-                      </Form>
-                    </Content>
+                    <Input onChangeText={this.handleDeskripsi} />
                   </Item>
-                  
-                  <Item>
-                    <Label>location</Label>
-                    <Content>
-                      <Form>
-                        <TextInput rowSpan={5} bordered placeholder="Textarea" onChangeText={this.handleLocation} />
-                      </Form>
-                    </Content>
-                  </Item>
-
                   <Item>
                     <Label style={{ color: "black", fontSize: 15 }}>Take Pict</Label>
                     <Card style={{ height: 100, left: 70 }}>
@@ -216,7 +181,7 @@ export default class addSesama extends React.Component {
 
                         <View style={styles.ImageContainer}>
 
-                          {this.state.fotoSesama === null ? <Text>Select a Photo</Text> :
+                          {this.state.fotoGalang === null ? <Text>Select a Photo</Text> :
                             <Image style={styles.ImageContainer} source={this.state.uploadImg} />
                           }
 
@@ -229,9 +194,9 @@ export default class addSesama extends React.Component {
                 </Form>
 
                 <Row>
-                <Button primary style={{
+                  <Button primary style={{
                     padding: '10%', margin: 20, left: 86
-                  }} onPress={this.SaveSesama}>
+                  }} onPress={this.savePenggalangan}>
                     <Text>Save</Text>
                   </Button>
                 </Row>
@@ -239,7 +204,6 @@ export default class addSesama extends React.Component {
               </Card>
             </Card>
           </Card>
-
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>
@@ -253,15 +217,6 @@ export default class addSesama extends React.Component {
   }
 
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   postSesama: (judul, nama, alamat, deskripsi,location, fotoSesama) => dispatch(postSesama(judul, nama, alamat, deskripsi,location, fotoSesama))
-// })
-
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(addSesama)
 
 const styles = StyleSheet.create({
   inputField: {
