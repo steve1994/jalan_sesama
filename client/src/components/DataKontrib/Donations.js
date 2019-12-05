@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
+import { ProgressBarAndroid, StyleSheet, Image, View , TouchableOpacity} from 'react-native';
 import {
   Container,
   Header,
@@ -33,7 +33,7 @@ export default class Donations extends React.Component {
   constructor(props) {
     super(props)
 
-
+    this.loadDetail = this.loadDetail.bind(this)
   }
 
   componentDidMount() {
@@ -46,8 +46,8 @@ export default class Donations extends React.Component {
       let type = item.type
       return { idUsing, type }
     })
-    
-    
+
+
     this.props.loadDataPenggalang(
       dataPenggalangan
     )
@@ -56,13 +56,76 @@ export default class Donations extends React.Component {
 
   }
 
+  loadDetail() {
+
+
+    let { DataDonasi } = this.props
+
+    const loadDataDetail = DataDonasi.map(item => {
+      let idUsing = item._id
+      let type = item.type
+      return { idUsing, type }
+    })
+
+
+    this.props.loadDetailDonasi(
+      loadDataDetail
+    )
+
+    this.props.navigation.navigate("DetailGL")
+  }
+
+
+
 
 
 
 
 
   render() {
-    const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
+    let { showDetail } = this.props
+
+
+    let statusProps = this.props.DataDonasi.map((items) => {
+      if (items.status == "pending") {
+        // return console.log("PENDING");
+
+      } else if (items.status == "reject") {
+
+        return console.log("REJECT");
+
+      } else {
+        return console.log("approve");
+
+      }
+    })
+
+
+    // let nominal = this.props.DataDonasi.map((items) => {
+    //   let Division = 100 / items.nominalSet
+    //   if (Division === "Infinity") {
+    //     console.log("DATA INVINITE");
+    //     return <ProgressBarAndroid
+    //       styleAttr="Horizontal"
+    //       indeterminate={false}
+    //       progress={items.nominalProcess / items.nominalSet}
+    //     />
+
+
+    //   } else {
+
+    // console.log("DIVISION", Division,items.judul);
+    // return <ProgressBarAndroid
+    // styleAttr="Horizontal"
+    // indeterminate={false}
+    // progress={0.0}
+    // />
+    // }
+    // })
+
+    // console.log("status", nominal);
+
+
 
 
 
@@ -85,10 +148,19 @@ export default class Donations extends React.Component {
             renderRow={(item) =>
               <ListItem >
                 <Card style={{ width: 310 }}>
-                  <CardItem style={{}}>
-                    <Text> {item.judul} </Text>
-                  </CardItem>
-
+                  <Card>
+                    <Row>
+                      <CardItem style={{ width: "65%" }}>
+                        <Text>{item.judul}</Text>
+                      </CardItem>
+                      <CardItem style={{ right: 20 }}>
+                        <Text> Status : </Text>
+                      </CardItem>
+                    </Row>
+                  </Card>
+                  <Right>
+                    <Text style={{ left: 90 }}> {item.status} </Text>
+                  </Right>
                   <View style={styles.container}>
                     <ProgressBarAndroid />
                     <Row>
@@ -97,6 +169,7 @@ export default class Donations extends React.Component {
                         <Text style={{ fontSize: 12, right: 5 }}>Rp. {item.nominalSet}</Text>
                       </Right>
                     </Row>
+
                     <ProgressBarAndroid
                       styleAttr="Horizontal"
                       indeterminate={false}
@@ -104,22 +177,23 @@ export default class Donations extends React.Component {
                     />
 
 
+
                     <CardItem style={{ justifyContent: "flex-end" }}>
                       <Right>
                         <Row>
                           <Button
-                            onPress={() => this.props.navigation.navigate("DetailGL")} style={{ backgroundColor: '#2b37c2', right: 140 }}>
+                            onPress={() => {showDetail(item._id,item.type); this.props.navigation.navigate('DetailGL')}}
+                            style={{ backgroundColor: '#2b37c2', right: 140 }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>
                           <Button
-                            onPress={() => this.props.navigation.navigate("Detail")} style={{ backgroundColor: '#268026' }}>
+                            onPress={this.loadDetail} style={{ backgroundColor: '#268026' }}>
                             <Text style={{ fontSize: 12 }}>Done</Text>
                           </Button>
                         </Row>
                       </Right>
                     </CardItem>
-
-
+                   
 
                   </View>
                 </Card>

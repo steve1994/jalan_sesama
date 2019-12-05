@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
+import { API_URL } from '../helpers/accessImage';
 import {
   Container,
   Header,
@@ -28,7 +29,7 @@ import {
   Textarea
 } from 'native-base';
 
-export default class DTKontrib extends React.Component {
+export default class DetailGL extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,7 +38,11 @@ export default class DTKontrib extends React.Component {
 
   render() {
 
-    const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
+    let { responseDetail } = this.props
+    
+    let componentImage = responseDetail.map((items, i) => {
+      return<Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+    })
 
     return (
       <Container>
@@ -62,10 +67,10 @@ export default class DTKontrib extends React.Component {
 
         <Card style={{ height: 195 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
-            <Image source={{ uri: "https://cdns.klimg.com/merdeka.com/i/w/news/2016/05/13/706401/670x335/angin-puting-beliung-di-jembrana-rusak-3-atap-rumah.jpeg" }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+            { componentImage }
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
-            TITLE : Nama Panti Asuhan / Bantu Sesama
+          { responseDetail[0].judul }
             </Text>
         </Card>
         <Content style={{ backgroundColor: '#156cb3' }}>
@@ -74,7 +79,7 @@ export default class DTKontrib extends React.Component {
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Deskripsi          : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                  Kerusakan parah akibat hujan lebat merusak atap panti asuhan jingga
+                { responseDetail[0].deskripsi }
             </Text>
               </Card>
             </Item>
@@ -82,7 +87,7 @@ export default class DTKontrib extends React.Component {
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Nilai Donasi     : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                  Rp.1.000.000
+                { responseDetail[0].nominalSet }
             </Text>
               </Card>
             </Item>
@@ -90,7 +95,15 @@ export default class DTKontrib extends React.Component {
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Hasil Donatur  : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                  Rp.650.000
+                { responseDetail[0].nominalProcess }
+            </Text>
+              </Card>
+            </Item>
+            <Item>
+              <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Status               : </Label>
+              <Card style={{ width: "62%" }}>
+                <Text style={{ color: "Black" }}>
+                { responseDetail[0].status }
             </Text>
               </Card>
             </Item>

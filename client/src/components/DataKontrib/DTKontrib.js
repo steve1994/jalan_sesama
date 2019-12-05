@@ -39,6 +39,8 @@ export default class DTKontrib extends React.Component {
     super(props);
   }
 
+  
+
 
 
 
@@ -46,6 +48,7 @@ export default class DTKontrib extends React.Component {
 
 
     let { detailKontrib, showDetail } = this.props
+
 
     let componentImage = detailKontrib.map((items, i) => {
       if (items.type == "panti") {
@@ -120,11 +123,9 @@ export default class DTKontrib extends React.Component {
 
           <Tab heading={<TabHeading><Icon name="" /><Text>Donations</Text></TabHeading>} style={{}}>
 
-           
 
             <Donations
               navigation={this.props.navigation}
-              
             />
 
 

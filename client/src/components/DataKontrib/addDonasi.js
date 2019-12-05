@@ -127,9 +127,20 @@ export default class addDonasi extends React.Component {
         this.state.deskripsi,
         this.state.nominalSet,
         this.state.fotoGalang,
-      ))
-      this.setState({ judul: '', deskripsi:'', nominalSet:'', fotoGalang: null});
-      this.props.navigation.navigate('DTKontrib');
+      )
+    )
+    
+    const dataPenggalangan = detailKontrib.map(item => {
+      let idUsing = item._id
+      let type = item.type
+      return { idUsing, type }
+    })
+    this.props.loadDataPenggalang(
+      dataPenggalangan,
+      this.props.navigation.navigate("DTKontrib")
+    )
+    
+    this.setState({ judul: '', deskripsi: '', nominalSet: '', fotoGalang: null });
 
   }
 

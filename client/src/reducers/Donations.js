@@ -10,6 +10,9 @@ const Donations = function (state = [], action) {
         case 'PENGGALANGAN_SUCCESS':
             return [...action.penggalangan.penggalangan]
 
+        case 'PUT_NOMINAL_SUCCESS':
+            return [...action.responseNominal]
+
         default:
             return state
 

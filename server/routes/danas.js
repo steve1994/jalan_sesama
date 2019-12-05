@@ -18,6 +18,8 @@ router.get('/panti/:idPanti', function(req, res) {
 });
 
 router.get('/sesama/:idBantuSesama', function(req, res) {
+  console.log("SERVER", req.params);
+  
   let idBantuSesama = req.params.idBantuSesama;
   Dana.find({idBantu:idBantuSesama})
   .exec(function (err,response) {
@@ -25,6 +27,42 @@ router.get('/sesama/:idBantuSesama', function(req, res) {
       res.status(400).json({status:'failed',error:err})
     } else {
       res.status(200).json(response)
+      console.log("RESPON", response);
+      
+    }
+  })
+})
+
+//find for detailPenggalangan Sesama
+router.get('/sesamaDetail/:idBantuSesama', function(req, res) {
+  console.log("SERVER", req.params);
+  
+  let idBantuSesama = req.params.idBantuSesama;
+  Dana.find({_id:idBantuSesama})
+  .exec(function (err,response) {
+    if (err) {
+      res.status(400).json({status:'failed',error:err})
+    } else {
+      res.status(200).json(response)
+      console.log("RESPON", response);
+      
+    }
+  })
+})
+
+//find for detailPenggalangan Panti
+router.get('/pantiDetail/:idBantuSesama', function(req, res) {
+  console.log("SERVER", req.params);
+  
+  let idBantuSesama = req.params.idBantuSesama;
+  Dana.find({_id:idBantuSesama})
+  .exec(function (err,response) {
+    if (err) {
+      res.status(400).json({status:'failed',error:err})
+    } else {
+      res.status(200).json(response)
+      console.log("RESPON", response);
+      
     }
   })
 })
@@ -181,6 +219,9 @@ router.put('/setnominal/:idGalangDana/:nominal', function (req,res) {
 
 router.put('/addnominal/:idGalangDana/:nominal', function (req,res) {
   let idGalangDana = req.params.idGalangDana;
+
+  console.log("Data Params > ", req.params.nominal);
+  
   let nominal = parseInt(req.params.nominal);
   Dana.find({_id:idGalangDana})
   .exec(function(err,response) {

@@ -20,10 +20,9 @@ import Home from './src/components/Home';
 import ListPanti from './src/components/ListPanti';
 import GLdana from './src/components/GLdana';
 import addDonasi from './src/container/DataKontrib/addDonasi';
-import DetailGL from './src/components/DetailGL';
 import HomeUser from './src/components/HomeUser';
 import ProfileUser from './src/components/ProfileUser';
-import beriDonasi from './src/components/beriDonasi';
+import Donations from './src/container/DataKontrib/Donations'
 
 //new add
 import DTKontrib from './src/container/DataKontrib/DTKontrib';
@@ -31,6 +30,8 @@ import addPanti from './src/container/panti/addPanti';
 import LoginRegis from './src/container/LoginRegis/LoginRegis';
 import galangKamu from './src/container/galangKamu/galangKamu';
 import addSesama from './src/container/galangKamu/addSesama';
+import DetailGL from './src/container/galangKamu/DetailGL';
+import beriDonasi from './src/container/galangKamu/beriDonasi';
 
 
 
@@ -52,6 +53,7 @@ const RootStack = createStackNavigator(
     HomeUser: { screen: HomeUser},
     ProfileUser: { screen: ProfileUser },
     beriDonasi: { screen: beriDonasi },
+    Donations: { screen: Donations },
 
 
   },
