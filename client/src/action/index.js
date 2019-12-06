@@ -108,7 +108,7 @@ export const putNominalDonasi = (idGalangDana, nominal) => {
             })
             .catch((error) => {
 
-                console.log("ACT ERROR", error);
+                console.log("ACT ERROR PUT NOMINAL", error);
                 
             })
 
@@ -126,6 +126,8 @@ export const loadDetailDonasiSuccess = (responseDetail) => ({
 
 export const loadDetailDonasi = (_id,type) => {
 
+    console.log("DATA LOAD",_id,type);
+    
     
     return dispatch => {
 
@@ -205,6 +207,9 @@ export const loadDataPenggalang = (dataPenggalangan) => {
                 })
                 .catch((error) => {
 
+                    console.log("error loadDataPenggalang > ", error);
+                    
+
                 })
 
         } else {
@@ -224,6 +229,8 @@ export const loadDataPenggalang = (dataPenggalangan) => {
 
                 })
                 .catch((error) => {
+                    console.log("error loadDataPenggalang > ", error);
+
 
                 })
 

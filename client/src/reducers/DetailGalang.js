@@ -1,12 +1,12 @@
 const DetailGalang = function (state = [], action) {
 
-    console.log("Reduce", action.responseDetail);
+    console.log("Reduce DetailGalang", action.responseDetail);
     
 
     switch (action.type) {
 
         case 'LOAD_DETAIL_DONASI':
-                return [...action.responseDetail]
+            return [...action.responseDetail]
         default:
             return state
 

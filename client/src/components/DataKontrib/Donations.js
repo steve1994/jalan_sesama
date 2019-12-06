@@ -59,20 +59,22 @@ export default class Donations extends React.Component {
   loadDetail() {
 
 
-    let { DataDonasi } = this.props
+    // let { DataDonasi } = this.props
 
-    const loadDataDetail = DataDonasi.map(item => {
-      let idUsing = item._id
-      let type = item.type
-      return { idUsing, type }
-    })
+    // {DataDonasi.map(item => {
+    //   return(
+    //   this.props.loadDetailDonasi(
+        
+    //     item._id,
+    //     item.type,
+
+    //     )
+    //     )
+    //   })}
+      
+      this.props.navigation.navigate("DetailGL")
 
 
-    this.props.loadDetailDonasi(
-      loadDataDetail
-    )
-
-    this.props.navigation.navigate("DetailGL")
   }
 
 
@@ -85,7 +87,8 @@ export default class Donations extends React.Component {
   render() {
     let { showDetail } = this.props
 
-
+    
+    
     let statusProps = this.props.DataDonasi.map((items) => {
       if (items.status == "pending") {
         // return console.log("PENDING");
@@ -100,30 +103,6 @@ export default class Donations extends React.Component {
       }
     })
 
-
-    // let nominal = this.props.DataDonasi.map((items) => {
-    //   let Division = 100 / items.nominalSet
-    //   if (Division === "Infinity") {
-    //     console.log("DATA INVINITE");
-    //     return <ProgressBarAndroid
-    //       styleAttr="Horizontal"
-    //       indeterminate={false}
-    //       progress={items.nominalProcess / items.nominalSet}
-    //     />
-
-
-    //   } else {
-
-    // console.log("DIVISION", Division,items.judul);
-    // return <ProgressBarAndroid
-    // styleAttr="Horizontal"
-    // indeterminate={false}
-    // progress={0.0}
-    // />
-    // }
-    // })
-
-    // console.log("status", nominal);
 
 
 
@@ -181,11 +160,13 @@ export default class Donations extends React.Component {
                     <CardItem style={{ justifyContent: "flex-end" }}>
                       <Right>
                         <Row>
+
                           <Button
-                            onPress={() => {showDetail(item._id,item.type); this.props.navigation.navigate('DetailGL')}}
+                            onPress={() => {this.props.navigation.navigate("DetailGL");{showDetail(item._id, item.type)}}}
                             style={{ backgroundColor: '#2b37c2', right: 140 }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>
+
                           <Button
                             onPress={this.loadDetail} style={{ backgroundColor: '#268026' }}>
                             <Text style={{ fontSize: 12 }}>Done</Text>

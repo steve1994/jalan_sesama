@@ -35,14 +35,38 @@ export default class DetailGL extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+
+    let { detailKontrib } = this.props
+    console.log("DataRES kontib", detailKontrib);
+
+    // let { detailKontrib } = this.props
+
+
+    // const dataPenggalangan = detailKontrib.map(item => {
+    //   let idUsing = item._id
+    //   let type = item.type
+    //   return { idUsing, type }
+    // })
+
+
+    // this.props.loadDataPenggalang(
+    //   dataPenggalangan
+    // )
+  }
+
+
+
 
   render() {
 
-    let { responseDetail } = this.props
-    
-    let componentImage = responseDetail.map((items, i) => {
-      return<Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
-    })
+    // let { responseDetail } = this.props
+    // console.log("DataRES", responseDetail);
+
+
+    // let componentImage = responseDetail.map((items, i) => {
+    //   return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+    // })
 
     return (
       <Container>
@@ -65,13 +89,13 @@ export default class DetailGL extends React.Component {
           </Left>
         </Header>
 
-        <Card style={{ height: 195 }}>
+        {/* <Card style={{ height: 195 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
-            { componentImage }
+            {componentImage}
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
-          { responseDetail[0].judul }
-            </Text>
+            {responseDetail[0].judul}
+          </Text>
         </Card>
         <Content style={{ backgroundColor: '#156cb3' }}>
           <View>
@@ -79,32 +103,32 @@ export default class DetailGL extends React.Component {
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Deskripsi          : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                { responseDetail[0].deskripsi }
-            </Text>
+                  {responseDetail[0].deskripsi}
+                </Text>
               </Card>
             </Item>
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Nilai Donasi     : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                { responseDetail[0].nominalSet }
-            </Text>
+                  {responseDetail[0].nominalSet}
+                </Text>
               </Card>
             </Item>
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Hasil Donatur  : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                { responseDetail[0].nominalProcess }
-            </Text>
+                  {responseDetail[0].nominalProcess}
+                </Text>
               </Card>
             </Item>
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Status               : </Label>
               <Card style={{ width: "62%" }}>
                 <Text style={{ color: "Black" }}>
-                { responseDetail[0].status }
-            </Text>
+                  {responseDetail[0].status}
+                </Text>
               </Card>
             </Item>
           </View>
@@ -120,7 +144,7 @@ export default class DetailGL extends React.Component {
             </Right>
           </CardItem>
 
-        </Content>
+        </Content> */}
 
         <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>

@@ -49,7 +49,8 @@ export default class DTKontrib extends React.Component {
 
     let { detailKontrib, showDetail } = this.props
 
-
+    console.log("KOMP TEST> ", detailKontrib);
+    
     let componentImage = detailKontrib.map((items, i) => {
       if (items.type == "panti") {
         return <Image source={{ uri: `${API_URL}images/uploaded_image/panti/${items.foto}` }} style={{ width: 320, height: 100, justifyContent: 'center' }} />

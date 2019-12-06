@@ -1,6 +1,7 @@
 const store = function (state = [], action) {
 
-    // console.log('data Reduc', action);
+
+    console.log("Reduce Store", action.detailKontrib);
 
 
     switch (action.type) {
@@ -16,9 +17,11 @@ const store = function (state = [], action) {
         case 'LOADDETAIL_KONTRIB':
             return [...action.detailKontrib]
 
-       
         
-        
+
+
+
+
 
 
         default:

@@ -46,17 +46,28 @@ export default class beriDonasi extends React.Component {
 
   putDataNominal() {
     let { responseDetail, detailKontrib } = this.props
+    console.log("Komponen", detailKontrib);
+
     let idGalangDana = responseDetail[0]._id
 
     this.props.putNominal(
       idGalangDana,
       this.state.nominal
     )
-    
+
     const dataPenggalangan = detailKontrib.map(item => {
-      let idUsing = item._id
-      let type = item.type
-      return { idUsing, type }
+      if (item.type == "panti"){
+
+        let idUsing = item.idPanti
+        let type = item.type
+        return { idUsing, type }
+
+      }else{
+        let idUsing = item.idBantu
+        let type = item.type
+        return { idUsing, type }
+      }
+
     })
     this.props.loadDataPenggalang(
       dataPenggalangan,
@@ -66,14 +77,14 @@ export default class beriDonasi extends React.Component {
 
 
   render() {
-    
+
     let { responseDetail } = this.props
-    
+
     let componentImage = responseDetail.map((items, i) => {
       return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
     })
 
-    
+
 
     return (
       <Container>
@@ -97,30 +108,31 @@ export default class beriDonasi extends React.Component {
         </Header>
         <Content style={{ backgroundColor: '#156cb3' }}>
 
-        <Card style={{ height: 215 }}>
-          <CardItem style={{ backgroundColor: '#156cb3' }}>
-            { componentImage }
-          </CardItem>
-          <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
-            { responseDetail[0].judul }
+          <Card style={{ height: 215 }}>
+            <CardItem style={{ backgroundColor: '#156cb3' }}>
+              {componentImage}
+            </CardItem>
+            <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
+              {responseDetail[0].judul}
             </Text>
-            <Text style={{ color: "Black", backgroundColor:"cyan", textAlign: "center", fontWeight: "bold" }}>
-            Berikan Bantuan Berupa Donasi
+            <Text style={{ color: "Black", backgroundColor: "cyan", textAlign: "center", fontWeight: "bold" }}>
+              Berikan Bantuan Berupa Donasi
             </Text>
-        </Card>
+          </Card>
           <View>
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Nilai Max             : </Label>
               <Card style={{ width: "52%" }}>
                 <Text style={{ color: "Black" }}>
-                  Rp.1.000.000
-            </Text>
+                  {responseDetail[0].nominalSet}
+
+                </Text>
               </Card>
             </Item>
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Berikan Donasi  : </Label>
               <Card style={{ width: "52%" }}>
-                <Input style={{ color: "Black" }} onChangeText={this.handleNominal}/>
+                <Input style={{ color: "Black" }} onChangeText={this.handleNominal} />
               </Card>
             </Item>
           </View>

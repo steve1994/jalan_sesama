@@ -27,7 +27,7 @@ router.get('/sesama/:idBantuSesama', function(req, res) {
       res.status(400).json({status:'failed',error:err})
     } else {
       res.status(200).json(response)
-      console.log("RESPON", response);
+      console.log("RESPON GET SESAMA", response);
       
     }
   })
@@ -44,7 +44,7 @@ router.get('/sesamaDetail/:idBantuSesama', function(req, res) {
       res.status(400).json({status:'failed',error:err})
     } else {
       res.status(200).json(response)
-      console.log("RESPON", response);
+      console.log("RESPON DETAIL PENGGALANG PANTI", response);
       
     }
   })
@@ -61,7 +61,7 @@ router.get('/pantiDetail/:idBantuSesama', function(req, res) {
       res.status(400).json({status:'failed',error:err})
     } else {
       res.status(200).json(response)
-      console.log("RESPON", response);
+      console.log("RESPON DETAIL PENGGALANG SESAMA", response);
       
     }
   })

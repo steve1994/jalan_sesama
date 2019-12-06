@@ -1,6 +1,7 @@
 const Donations = function (state = [], action) {
 
 
+    console.log("Reduce Donations", action.responseNominal);
 
     switch (action.type) {
 
