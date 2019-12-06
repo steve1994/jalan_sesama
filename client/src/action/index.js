@@ -140,7 +140,7 @@ export const loadDetailDonasi = (_id,type) => {
                     
                     let arrSesama = [...responseDATA]
                     var resultPanti = arrSesama.map(function (addSesama) {
-                        addSesama.type = "sesama";
+                        addSesama.type = "panti";
                         return addSesama;
                     })
 
@@ -186,6 +186,8 @@ export const loadDataDonasiSuccess = (DataDonasi) => ({
 
 export const loadDataPenggalang = (dataPenggalangan) => {
 
+    console.log("ACT DATA PENGGALAN > ",dataPenggalangan );
+    
 
     // console.log('ACTION PENGGALANG >', dataPenggalangan );
 

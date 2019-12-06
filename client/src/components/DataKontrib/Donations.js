@@ -168,7 +168,8 @@ export default class Donations extends React.Component {
                           </Button>
 
                           <Button
-                            onPress={this.loadDetail} style={{ backgroundColor: '#268026' }}>
+                            onPress={() => {showDetail(item._id, item.type)}}
+                            style={{ backgroundColor: '#268026' }}>
                             <Text style={{ fontSize: 12 }}>Done</Text>
                           </Button>
                         </Row>

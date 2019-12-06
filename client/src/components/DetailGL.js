@@ -60,13 +60,13 @@ export default class DetailGL extends React.Component {
 
   render() {
 
-    // let { responseDetail } = this.props
-    // console.log("DataRES", responseDetail);
+    let { responseDetail } = this.props
+    console.log("DataRES", responseDetail);
 
 
-    // let componentImage = responseDetail.map((items, i) => {
-    //   return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
-    // })
+    let componentImage = responseDetail.map((items, i) => {
+      return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+    })
 
     return (
       <Container>
@@ -89,7 +89,7 @@ export default class DetailGL extends React.Component {
           </Left>
         </Header>
 
-        {/* <Card style={{ height: 195 }}>
+        <Card style={{ height: 195 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
             {componentImage}
           </CardItem>
@@ -144,7 +144,7 @@ export default class DetailGL extends React.Component {
             </Right>
           </CardItem>
 
-        </Content> */}
+        </Content>
 
         <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>

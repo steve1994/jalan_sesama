@@ -9,14 +9,14 @@ import { loadDetailGL } from "../../action/index";
 
 
 const mapStateToProps = (state) => ({
-    responseDetail: state.store,
+    responseDetail: state.DetailGalang,
     detailKontrib: state.store
 })
 
 const mapDispatchToProps = (dispatch) => ({
     dataLoad: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
     putNominal: (idGalangDana, nominal) => dispatch(putNominalDonasi(idGalangDana, nominal)),
-    loadDataPenggalang: (dataPenggalangan) => dispatch(loadDataPenggalang(dataPenggalangan)),
+    loadDataPenggalang: (idUsing, type) => dispatch(loadDataPenggalang(idUsing, type)),
 })
 
 export default connect(

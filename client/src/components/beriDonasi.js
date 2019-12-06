@@ -45,17 +45,19 @@ export default class beriDonasi extends React.Component {
   }
 
   putDataNominal() {
-    let { responseDetail, detailKontrib } = this.props
-    console.log("Komponen", detailKontrib);
-
+    let { responseDetail } = this.props
+    
+    
     let idGalangDana = responseDetail[0]._id
+    
+
 
     this.props.putNominal(
       idGalangDana,
       this.state.nominal
     )
 
-    const dataPenggalangan = detailKontrib.map(item => {
+    const dataPenggalangan = responseDetail.map(item => {
       if (item.type == "panti"){
 
         let idUsing = item.idPanti
@@ -69,6 +71,10 @@ export default class beriDonasi extends React.Component {
       }
 
     })
+
+    
+    console.log("dataGALANG", dataPenggalangan);
+    
     this.props.loadDataPenggalang(
       dataPenggalangan,
       this.props.navigation.navigate("DTKontrib")
