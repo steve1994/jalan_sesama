@@ -128,7 +128,7 @@ export default class Home extends React.Component {
                       <Right>
                         <Row>
                           <Button
-                            onPress={() => {this.props.navigation.navigate("DetailGL");{showDetail(item._id, item.type)}}} 
+                            onPress={() => {this.props.navigation.navigate("DetailGLBeranda");{showDetail(item._id, item.type)}}} 
                             style={{ backgroundColor: '#268026', padding: "5%" }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>

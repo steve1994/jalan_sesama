@@ -29,7 +29,7 @@ import {
   Textarea
 } from 'native-base';
 
-import About from '../../../container/HomeUmum//KontribPanti/About';
+import About from '../../../container/HomeUmum/KontribPanti/About';
 import Locations from '../../../container/HomeUmum/KontribPanti/Locations';
 import Donations from '../../../container/HomeUmum/KontribPanti/Donations';
 

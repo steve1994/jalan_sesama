@@ -35,6 +35,8 @@ import DetailGL from './src/container/galangKamu/DetailGL';
 import beriDonasi from './src/container/galangKamu/beriDonasi';
 import DetailGLUmum from './src/container/HomeUmum/DetailGLUmum/DetailGLUmum';
 import beriDonasiPanti from './src/container/HomeUmum/DetailGLUmum/beriDonasi';
+import beriDonasiBeranda from './src/container/HomeUmum/DetailGLBeranda/beriDonasiBeranda';
+import DetailGLBeranda from './src/container/HomeUmum/DetailGLBeranda/DetailGLBeranda'
 
 
 
@@ -60,6 +62,8 @@ const RootStack = createStackNavigator(
     KontribHome : {screen: KontribHome},
     DetailGLUmum: {screen: DetailGLUmum },
     beriDonasiPanti: {screen: beriDonasiPanti},
+    beriDonasiBeranda: {screen: beriDonasiBeranda},
+    DetailGLBeranda: {screen: DetailGLBeranda},
 
 
   },
