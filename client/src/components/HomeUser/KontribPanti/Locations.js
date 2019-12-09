@@ -46,7 +46,7 @@ export default class Locations extends React.Component {
     let { location } = this.props
 
     return (
-      <CardItem style={{ backgroundColor: '#156cb3', height:"100%" }}>
+      <CardItem style={{ backgroundColor: '#156cb3' }}>
         
         <Row>
 

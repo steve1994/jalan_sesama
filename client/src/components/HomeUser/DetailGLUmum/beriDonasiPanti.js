@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
-import { API_URL } from '../helpers/accessImage';
+import { API_URL } from '../../../helpers/accessImage';
 import {
   Container,
   Header,
@@ -29,7 +29,7 @@ import {
   Textarea
 } from 'native-base';
 
-export default class beriDonasi extends React.Component {
+export default class beriDonasiPanti extends React.Component {
 
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ export default class beriDonasi extends React.Component {
 
     this.props.loadDataPenggalang(
       dataPenggalangan,
-      this.props.navigation.navigate("DTKontrib")
+      this.props.navigation.navigate("KontribHome")
     )
   }
 
@@ -82,7 +82,8 @@ export default class beriDonasi extends React.Component {
   render() {
 
     let { responseDetail } = this.props
-
+    console.log("BeriDonasiPanti", responseDetail)
+    
     let componentImage = responseDetail.map((items, i) => {
       return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
     })

@@ -16,8 +16,6 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 
-import Home from './src/components/Home';
-import ListPanti from './src/components/ListPanti';
 import GLdana from './src/components/GLdana';
 import addDonasi from './src/container/DataKontrib/addDonasi';
 import HomeUser from './src/components/HomeUser';
@@ -25,13 +23,18 @@ import ProfileUser from './src/components/ProfileUser';
 import Donations from './src/container/DataKontrib/Donations'
 
 //new add
+import KontribHome from './src/container/HomeUmum/KontribPanti/KontribHome';
+import ListPanti from './src/container/HomeUmum/DataPanti/ListPanti';
+import Home from './src/container/HomeUmum/Home';
 import DTKontrib from './src/container/DataKontrib/DTKontrib';
 import addPanti from './src/container/panti/addPanti';
 import LoginRegis from './src/container/LoginRegis/LoginRegis';
 import galangKamu from './src/container/galangKamu/galangKamu';
-import addSesama from './src/container/galangKamu/addSesama';
+import addSesama from './src/container/panti/addSesama';
 import DetailGL from './src/container/galangKamu/DetailGL';
 import beriDonasi from './src/container/galangKamu/beriDonasi';
+import DetailGLUmum from './src/container/HomeUmum/DetailGLUmum/DetailGLUmum';
+import beriDonasiPanti from './src/container/HomeUmum/DetailGLUmum/beriDonasi';
 
 
 
@@ -54,11 +57,14 @@ const RootStack = createStackNavigator(
     ProfileUser: { screen: ProfileUser },
     beriDonasi: { screen: beriDonasi },
     Donations: { screen: Donations },
+    KontribHome : {screen: KontribHome},
+    DetailGLUmum: {screen: DetailGLUmum },
+    beriDonasiPanti: {screen: beriDonasiPanti},
 
 
   },
   {
-    initialRouteName: 'GLdana', headerMode: 'none'
+    initialRouteName: 'Home', headerMode: 'none'
   }
 )
 

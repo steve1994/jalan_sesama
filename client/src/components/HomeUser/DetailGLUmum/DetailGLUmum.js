@@ -1,6 +1,5 @@
 import React from 'react';
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
-import { API_URL } from '../helpers/accessImage';
 import {
   Container,
   Header,
@@ -28,36 +27,15 @@ import {
   Input,
   Textarea
 } from 'native-base';
-import DetailGLItem from '../container/galangKamu/DetailGLItem'
+import DetailGLItem from '../../../container/HomeUmum/DetailGLUmum/DetailGLItem';
 
-export default class DetailGL extends React.Component {
+export default class DetailGLUmum extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-
-    let { detailKontrib } = this.props
-    console.log("DataRES kontib", detailKontrib);
-
-    // let { detailKontrib } = this.props
-
-
-    // const dataPenggalangan = detailKontrib.map(item => {
-    //   let idUsing = item._id
-    //   let type = item.type
-    //   return { idUsing, type }
-    // })
-
-
-    // this.props.loadDataPenggalang(
-    //   dataPenggalangan
-    // )
-  }
-
-
-
+  
 
   render() {
 
@@ -72,12 +50,12 @@ export default class DetailGL extends React.Component {
               Senin, 25 November 2019
             </Text>
             <Text>
-              <Title style={{ width: 130 }}>Jalan Sesama</Title>
+              <Title style={{ width: 130 }}>GL UMUM</Title>
             </Text>
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("DTKontrib")} >
+              onPress={() => this.props.navigation.navigate("KontribHome")} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>

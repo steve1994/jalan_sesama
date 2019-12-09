@@ -1,7 +1,7 @@
 const Donations = function (state = [], action) {
 
 
-    console.log("Reduce Donations", action.responseNominal);
+    console.log("Reduce Donations", action.loadAllDataDonations);
 
     switch (action.type) {
 
@@ -13,6 +13,9 @@ const Donations = function (state = [], action) {
 
         case 'PUT_NOMINAL_SUCCESS':
             return [...action.responseNominal]
+
+        case 'LOAD_ALLDATA_SUCCESS':
+            return [...action.loadAllDataDonations]
 
         default:
             return state

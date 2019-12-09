@@ -26,7 +26,7 @@ import {
     Label,
     Input,
     Textarea
-} from 'native-base';
+  } from 'native-base';
 
 export default class About extends React.Component {
 
@@ -42,7 +42,9 @@ export default class About extends React.Component {
 
 
     render() {
-        const { nama, alamat, jumlahOrang, deskripsi, type } = this.props
+        const { nama, alamat, jumlahOrang, deskripsi } = this.props
+        
+
 
         return (
             <View>
@@ -52,7 +54,7 @@ export default class About extends React.Component {
                         <View cardBody style={{ width: 270 }}>
                             <Text style={{ fontSize: 15, color: "black" }}>
                                 {nama}
-                            </Text>
+                    </Text>
                         </View>
                     </Item>
                 </Form>
@@ -62,34 +64,27 @@ export default class About extends React.Component {
                         <View cardBody style={{ width: 270 }}>
                             <Text style={{ fontSize: 15, color: "black" }}>
                                 {alamat}
-                            </Text>
+          </Text>
                         </View>
                     </Item>
                 </Form>
-
-                {type == "panti" ?
-                    <Form>
-                        <Item>
-                            <Label style={{ color: "white", margin: 9 }}>Jumlah Penghuni</Label>
-                            <View cardBody style={{ width: 270 }}>
-                                <Text style={{ fontSize: 15, color: "black" }}>
-
-                                    {jumlahOrang} Orang
-                         </Text>
-                            </View>
-                        </Item>
-                    </Form>
-                    :
-                    <Form />
-                }
-                
+                <Form>
+                    <Item>
+                        <Label style={{ color: "white", margin: 9 }}>Jumlah Penghuni</Label>
+                        <View cardBody style={{ width: 270 }}>
+                            <Text style={{ fontSize: 15, color: "black" }}>
+                                {jumlahOrang} Orang
+          </Text>
+                        </View>
+                    </Item>
+                </Form>
                 <Form>
                     <Item>
                         <Label style={{ color: "white", margin: 9 }}>Deskripsi</Label>
                         <View cardBody style={{ width: 270 }}>
                             <Text style={{ fontSize: 15, color: "black" }}>
                                 {deskripsi}
-                            </Text>
+          </Text>
                         </View>
                     </Item>
                 </Form>

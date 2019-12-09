@@ -111,7 +111,7 @@ export default class Donations extends React.Component {
 
     return (
       <Card style={{ backgroundColor: '#156cb3' }}>
-        <Card style={{ height: 278, backgroundColor: '#156cb3' }} >
+        <Card style={{ height: 315, backgroundColor: '#156cb3' }} >
           <CardItem style={{ justifyContent: "flex-end", height: 48, }}>
             <Text style={{ fontWeight: "bold" }}>List Penggalangan Dana</Text>
             <Right>
@@ -121,7 +121,7 @@ export default class Donations extends React.Component {
               </Button>
             </Right>
           </CardItem>
-
+          
           <List dataArray={this.props.DataDonasi}
             Vertical
             renderRow={(item) =>

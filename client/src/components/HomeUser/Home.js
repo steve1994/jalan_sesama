@@ -27,6 +27,8 @@ import {
   Input,
   Textarea
 } from 'native-base';
+import { API_URL } from '../../helpers/accessImage';
+
 
 export default class Home extends React.Component {
 
@@ -34,10 +36,18 @@ export default class Home extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+
+    this.props.loadAllDonations()
+  }
+
 
   render() {
-
-    const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
+    
+    let { showDetail } = this.props;
+    
+    
+   
 
     return (
       <Container>
@@ -88,30 +98,29 @@ export default class Home extends React.Component {
             </Right>
 
           </Card>
-          <List dataArray={items}
+          <List dataArray={this.props.loadAllDataDonations}
             Vertical
             renderRow={(item) =>
               <ListItem >
                 <Card style={{ width: 310 }}>
                   <CardItem style={{}}>
-                    <Text> {item} </Text>
+                    <Text> {item.judul} </Text>
                   </CardItem>
                   <CardItem cardBody>
-                    <Image source={{ uri: "http://www.infobdg.com/v2/wp-content/uploads/2019/05/Anak-Anak-Panti-Asuhan.jpg" }} style={{ width: 309, height: 200 }} />
+                  <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 309, height: 200 }} />
                   </CardItem>
-
                   <View style={styles.container}>
                     <ProgressBarAndroid />
                     <Row>
-                      <Text style={{ fontSize: 12, left: 5 }}>Rp.650.000</Text>
+            <Text style={{ fontSize: 12, left: 5 }}>{item.nominalProcess}</Text>
                       <Right>
-                        <Text style={{ fontSize: 12, right: 5 }}>Rp.1.000.000</Text>
+            <Text style={{ fontSize: 12, right: 5 }}>{item.nominalSet}</Text>
                       </Right>
                     </Row>
                     <ProgressBarAndroid
                       styleAttr="Horizontal"
                       indeterminate={false}
-                      progress={0.8}
+                      progress={item.nominalProcess/item.nominalSet}
                     />
 
 
@@ -119,7 +128,8 @@ export default class Home extends React.Component {
                       <Right>
                         <Row>
                           <Button
-                            onPress={() => this.props.navigation.navigate("DetailGL")} style={{ backgroundColor: '#268026', padding:"5%" }}>
+                            onPress={() => {this.props.navigation.navigate("DetailGL");{showDetail(item._id, item.type)}}} 
+                            style={{ backgroundColor: '#268026', padding: "5%" }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>
                         </Row>

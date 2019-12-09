@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL } from '../../helpers/accessImage'
+import { API_URL } from '../../../helpers/';
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
 import {
   Container,
@@ -29,17 +29,23 @@ import {
   Textarea
 } from 'native-base';
 
-import About from '../../container/DataKontrib/About';
-import Locations from '../../container/DataKontrib/Locations';
-import Donations from '../../container/DataKontrib/Donations';
+import About from '../../../container/HomeUmum//KontribPanti/About';
+import Locations from '../../../container/HomeUmum/KontribPanti/Locations';
+import Donations from '../../../container/HomeUmum/KontribPanti/Donations';
 
-export default class DTKontrib extends React.Component {
+export default class KontribHome extends React.Component {
 
   constructor(props) {
     super(props);
+    this.backListPanti = this.backListPanti.bind(this)
   }
 
-  
+  backListPanti() {
+    this.props.loadAllPanti()
+    this.props.navigation.navigate("ListPanti")
+  }
+
+
 
 
 
@@ -50,12 +56,12 @@ export default class DTKontrib extends React.Component {
     let { detailKontrib, showDetail } = this.props
 
     console.log("KOMP TEST> ", detailKontrib);
-    
+
     let componentImage = detailKontrib.map((items, i) => {
       if (items.type == "panti") {
-        return <Image source={{ uri: `${API_URL}images/uploaded_image/panti/${items.foto}` }} style={{ width: 320, height: 130, justifyContent: 'center' }} />
+        return <Image source={{ uri: `${API_URL}images/uploaded_image/panti/${items.foto}` }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
       } else {
-        return <Image source={{ uri: `${API_URL}images/uploaded_image/sesama/${items.foto}` }} style={{ width: 320, height: 130, justifyContent: 'center' }} />
+        return <Image source={{ uri: `${API_URL}images/uploaded_image/sesama/${items.foto}` }} style={{ width: 320, height: 100, justifyContent: 'center' }} />
       }
     })
 
@@ -70,20 +76,20 @@ export default class DTKontrib extends React.Component {
               Senin, 25 November 2019
             </Text>
             <Text>
-              <Title style={{ width: 130 }}>Jalan Sesama</Title>
+              <Title style={{ width: 130 }}>Kontrib Sesama</Title>
             </Text>
           </Body>
           <Left style={{ right: 12 }}>
 
             <Button iconLeft light
-              onPress={() => { detailKontrib.map(items => showDetail(items.idUser), this.props.navigation.navigate("galangKamu")) }} >
+              onPress={this.backListPanti} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>
 
           </Left>
         </Header>
-        <Card style={{ height: 179 }}>
+        <Card style={{ height: 150 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
 
             {componentImage}
@@ -122,7 +128,7 @@ export default class DTKontrib extends React.Component {
 
           </Tab>
 
-          <Tab heading={<TabHeading><Icon name="" /><Text>Donations</Text></TabHeading>} style={{}}>
+          <Tab heading={<TabHeading><Icon name="" /><Text>Donations</Text></TabHeading>}>
 
 
             <Donations
@@ -133,13 +139,13 @@ export default class DTKontrib extends React.Component {
           </Tab>
 
         </Tabs>
-        {/* <Footer>
+        <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>
             <Button full>
               <Text>Footer</Text>
             </Button>
           </FooterTab>
-        </Footer> */}
+        </Footer>
       </Container>
     );
   }

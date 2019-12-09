@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 
-const API_URL = "http://192.168.100.12:3001/api";
+const API_URL = "http://192.168.43.82:3001/api";
 
 // const request = axios.create({
 //     baseURL: API_URL,
@@ -80,15 +80,83 @@ export const postPanti = (
     }
 }
 
+
+//load all data panti
+export const loadAllPantiSuccess = (responseAllPanti) => ({
+    type: "LOAD_ALLPANTI_SUCCESS",
+    responseAllPanti
+})
+export const loadAllPanti = () => {
+
+    console.log("load data");
+
+    return dispatch => {
+        return fetch(`${API_URL}/pantis`, {
+            method: 'GET',
+            headers: {
+                Accept: 'applications/json',
+                'Content-Type': 'applications'
+            },
+        })
+            .then((response) => response.json())
+            .then((responseLoad) => {
+                let arrSesama = responseLoad
+                var resultPanti = arrSesama.map(function (addSesama) {
+                    addSesama.type = "panti";
+                    return addSesama;
+                })
+                dispatch(loadAllPantiSuccess(resultPanti))
+
+            })
+            .catch((error) => {
+                console.log("LOAD all Panti Err", error);
+
+            })
+    }
+}
+
+
+//load semua data donasi 
+export const loadAllDataSuccess = (loadAllDataDonations) => ({
+    type: "LOAD_ALLDATA_SUCCESS",
+    loadAllDataDonations
+})
+
+export const loadAllDonations = () => {
+
+    return dispatch => {
+        return fetch(`${API_URL}/danas`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'applications'
+            },
+
+
+        })
+            .then((response) => response.json())
+            .then((responseLoad) => {
+                dispatch(loadAllDataSuccess(responseLoad))
+
+            })
+            .catch((error) => {
+
+                console.log("GET ERROR", error);
+
+            })
+    }
+
+}
+
 //PUT BERIKAN DONASI
 export const putNominalDonasiSuccess = (responseNominal) => ({
-    type:"PUT_NOMINAL_SUCCESS",
+    type: "PUT_NOMINAL_SUCCESS",
     responseNominal
 })
 
 export const putNominalDonasi = (idGalangDana, nominal) => {
 
-    
+
     return dispatch => {
 
         return fetch(`${API_URL}/danas/addnominal/${idGalangDana}/${nominal}`, {
@@ -102,14 +170,14 @@ export const putNominalDonasi = (idGalangDana, nominal) => {
             .then((response) => response.json())
             .then((responseData) => {
 
-               dispatch(putNominalDonasiSuccess(responseData))
-                
+                dispatch(putNominalDonasiSuccess(responseData))
+
 
             })
             .catch((error) => {
 
                 console.log("ACT ERROR PUT NOMINAL", error);
-                
+
             })
 
     }
@@ -124,11 +192,11 @@ export const loadDetailDonasiSuccess = (responseDetail) => ({
 
 
 
-export const loadDetailDonasi = (_id,type) => {
+export const loadDetailDonasi = (_id, type) => {
 
-    console.log("DATA LOAD",_id,type);
-    
-    
+    console.log("DATA LOAD", _id, type);
+
+
     return dispatch => {
 
         if (type == "panti") {
@@ -137,7 +205,7 @@ export const loadDetailDonasi = (_id,type) => {
             return fetch(`${API_URL}/danas/pantiDetail/${idBantuSesama}`)
                 .then((response) => response.json())
                 .then((responseDATA) => {
-                    
+
                     let arrSesama = [...responseDATA]
                     var resultPanti = arrSesama.map(function (addSesama) {
                         addSesama.type = "panti";
@@ -149,16 +217,16 @@ export const loadDetailDonasi = (_id,type) => {
                 })
                 .catch((error) => {
                     console.log("data DETAIL ", error);
-                    
+
                 })
-            
-        }else{
+
+        } else {
 
             let idBantuSesama = _id
             return fetch(`${API_URL}/danas/sesamaDetail/${idBantuSesama}`)
                 .then((response) => response.json())
                 .then((responseDATA) => {
-                    
+
                     let arrSesama = [...responseDATA]
                     var resultPanti = arrSesama.map(function (addSesama) {
                         addSesama.type = "sesama";
@@ -170,7 +238,7 @@ export const loadDetailDonasi = (_id,type) => {
                 })
                 .catch((error) => {
                     console.log("data DETAIL ", error);
-                    
+
                 })
         }
     }
@@ -186,10 +254,8 @@ export const loadDataDonasiSuccess = (DataDonasi) => ({
 
 export const loadDataPenggalang = (dataPenggalangan) => {
 
-    console.log("ACT DATA PENGGALAN > ",dataPenggalangan );
-    
+    // console.log("ACT DATA PENGGALAN > ", dataPenggalangan);
 
-    // console.log('ACTION PENGGALANG >', dataPenggalangan );
 
     return dispatch => {
 
@@ -197,7 +263,7 @@ export const loadDataPenggalang = (dataPenggalangan) => {
             return fetch(`${API_URL}/danas/panti/${dataPenggalangan[0].idUsing}`)
                 .then((response) => response.json())
                 .then((responseDATA) => {
-                    
+
                     let arrPanti = [...responseDATA]
                     var resultPanti = arrPanti.map(function (addPanti) {
                         addPanti.type = "panti";
@@ -210,7 +276,7 @@ export const loadDataPenggalang = (dataPenggalangan) => {
                 .catch((error) => {
 
                     console.log("error loadDataPenggalang > ", error);
-                    
+
 
                 })
 
@@ -286,9 +352,7 @@ export const postPenggalangan = (idUsing, nama, alamat, type, judul, deskripsi, 
                         .then((response) => response.json())
                         .then((responseJson) => {
 
-
                             dispatch(loadDataPenggalang(responseDATA))
-
 
                         })
                         .catch((error) => {
@@ -431,7 +495,7 @@ export const loadDetailGL = (idUsing, type) => {
 
     return dispatch => {
 
-        if (type === 'panti') {
+        if (type == 'panti') {
 
             return fetch(`${API_URL}/pantis/detailPanti/${idUsing}`, {
                 headers: {

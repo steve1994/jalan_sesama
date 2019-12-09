@@ -38,6 +38,8 @@ router.get('/', function(req, res) {
             res.status(400).json({status:'failed',error:err})
         } else {
             res.status(200).json(response)
+            console.log("LOAD", response);
+            
         }
     })
 })
