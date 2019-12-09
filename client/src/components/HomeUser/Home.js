@@ -43,11 +43,11 @@ export default class Home extends React.Component {
 
 
   render() {
-    
+
     let { showDetail } = this.props;
-    
-    
-   
+
+
+
 
     return (
       <Container>
@@ -63,15 +63,17 @@ export default class Home extends React.Component {
           </Body>
 
         </Header>
-        <Content>
-          <Card style={{ height: 230 }}>
-            <CardItem style={{ backgroundColor: '#156cb3' }}>
-              <Image source={{ uri: "https://vignette.wikia.nocookie.net/muppet/images/9/96/JalanSesamaLogo.jpg/revision/latest/scale-to-width-down/300?cb=20100802202901" }} style={{ width: 320, height: 180, justifyContent: 'center' }} />
-            </CardItem>
-            <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
-              Membantu Sesama Kita
+        
+        <Card style={{ height: 165 }}>
+          <CardItem style={{ backgroundColor: '#156cb3' }}>
+            <Image source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ4KlGgaSUmj-YVQ8w0OpUKTBKbTr7i1q6BHfJ2KrfhGaAYk4Xv" }} style={{ width: 320, height: 120, justifyContent: 'center' }} />
+          </CardItem>
+          <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
+            Membantu Sesama Kita
             </Text>
-          </Card>
+        </Card>
+        
+        <Content>
           <Card>
 
             <Right>
@@ -107,20 +109,20 @@ export default class Home extends React.Component {
                     <Text> {item.judul} </Text>
                   </CardItem>
                   <CardItem cardBody>
-                  <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 309, height: 200 }} />
+                    <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 309, height: 150 }} />
                   </CardItem>
                   <View style={styles.container}>
                     <ProgressBarAndroid />
                     <Row>
-            <Text style={{ fontSize: 12, left: 5 }}>{item.nominalProcess}</Text>
+                      <Text style={{ fontSize: 12, left: 5 }}>{item.nominalProcess}</Text>
                       <Right>
-            <Text style={{ fontSize: 12, right: 5 }}>{item.nominalSet}</Text>
+                        <Text style={{ fontSize: 12, right: 5 }}>{item.nominalSet}</Text>
                       </Right>
                     </Row>
                     <ProgressBarAndroid
                       styleAttr="Horizontal"
                       indeterminate={false}
-                      progress={item.nominalProcess/item.nominalSet}
+                      progress={item.nominalProcess / item.nominalSet}
                     />
 
 
@@ -128,7 +130,7 @@ export default class Home extends React.Component {
                       <Right>
                         <Row>
                           <Button
-                            onPress={() => {this.props.navigation.navigate("DetailGLBeranda");{showDetail(item._id, item.type)}}} 
+                            onPress={() => { this.props.navigation.navigate("DetailGLBeranda"); { showDetail(item._id, item.type) } }}
                             style={{ backgroundColor: '#268026', padding: "5%" }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>
@@ -144,13 +146,13 @@ export default class Home extends React.Component {
             }>
           </List>
         </Content>
-        <Footer>
+        {/* <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>
             <Button full>
               <Text>Footer</Text>
             </Button>
           </FooterTab>
-        </Footer>
+        </Footer> */}
       </Container>
     );
   }
