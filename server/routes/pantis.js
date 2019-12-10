@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const Panti = require('../model/pantis');
+const Notification = require('../model/notification');
 
 router.get('/:idUser', function(req, res) {
     let idUser = req.params.idUser;
@@ -10,7 +11,7 @@ router.get('/:idUser', function(req, res) {
         if (err) {
             res.status(400).json({status:'failed',error:err})
         } else {
-            
+
             res.status(200).json(response)
         }
     })
@@ -18,13 +19,13 @@ router.get('/:idUser', function(req, res) {
 
 router.get('/detailPanti/:_id', function(req, res) {
 
-    
+
     Panti.findById({_id: req.params._id})
     .exec(function (err,response) {
         if (err) {
             res.status(400).json({status:'failed',error:err})
         } else {
-            
+
             res.status(200).json(response)
             console.log('PANTIS >', response);
         }
@@ -49,8 +50,8 @@ router.get('/', function(req, res) {
 router.post('/:idUser', function(req,res) {
     console.log('params', req.params);
     console.log('BOdy', req.body);
-    
-    
+
+
     let idUser = req.params.idUser;
     let nama = req.body.nama;
     let alamat = req.body.alamat;
@@ -62,7 +63,13 @@ router.post('/:idUser', function(req,res) {
     try {
         const newPanti = new Panti({idUser,judul,nama,alamat,deskripsi,jumlahOrang,location,status});
         newPanti.save().then(dataCreated => {
-            res.status(201).json({status:'success',data:dataCreated})
+            let dataPanti = dataCreated;
+            let notification_name = `Panti dengan nama ${nama} menunggu approval dari admin`;
+            let type = 'panti';
+            const newNotification = new Notification({created_at:new Date(),notification_name,type,origin_id:dataPanti._id});
+            newNotification.save().then(dataCreated => {
+                res.status(201).json({status:'success',data:dataPanti});
+            })
         })
     } catch (error) {
         res.status(400).json({status:'failed',error});
@@ -99,7 +106,7 @@ function randomString(length) {
 
 router.put('/uploadphoto/:idPanti', function (req,res) {
     console.log('upload on', req.files);
-    
+
     let idPanti = req.params.idPanti;
     let uploadedFile = req.files ? req.files.files : null;
     let fileName = req.files ? (randomString(10) + "_" + req.files.files.name +".jpg") : null;
@@ -129,7 +136,14 @@ router.put('/status/:idPanti/:status', function (req,res) {
         if (err) {
             res.status(400).json({status:'failed',error:err});
         } else {
-            res.status(201).json({status:'success',data:response});
+            let realResponse = response;
+            Notification.findOneAndDelete({origin_id:idPanti},function (err,response) {
+                if (err) {
+                    res.status(400).json({status:'failed',error:err});
+                } else {
+                    res.status(201).json({status:'success',data:realResponse});
+                }
+            })
         }
     })
 })

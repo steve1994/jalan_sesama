@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const Sesama = require('../model/sesamas');
+const Notification = require('../model/notification');
 
 router.get('/:idUser', function(req, res) {
     let idUser = req.params.idUser;
@@ -17,13 +18,13 @@ router.get('/:idUser', function(req, res) {
 
 router.get('/detailSesama/:_id', function(req, res) {
 
-    
+
     Sesama.findById({_id: req.params._id})
     .exec(function (err,response) {
         if (err) {
             res.status(400).json({status:'failed',error:err})
         } else {
-            
+
             res.status(200).json(response)
             console.log('Sesama >', response);
         }
@@ -44,7 +45,7 @@ router.get('/', function(req, res) {
 router.post('/:idUser', function(req,res) {
 
     console.log('data sesama POST', req.body);
-    
+
 
     let idUser = req.params.idUser;
     let nama = req.body.nama;
@@ -56,7 +57,13 @@ router.post('/:idUser', function(req,res) {
     try {
         const newSesama = new Sesama({idUser,nama,alamat,judul,deskripsi,location,status});
         newSesama.save().then(dataCreated => {
-            res.status(201).json({status:'success',data:dataCreated})
+            let dataSesama = dataCreated;
+            let notification_name = `Sesama dengan nama ${nama} menunggu approval dari admin`;
+            let type = 'sesama';
+            const newNotification = new Notification({created_at:new Date(),notification_name,type,origin_id:dataSesama._id});
+            newNotification.save().then(dataCreated => {
+                res.status(201).json({status:'success',data:dataSesama})
+            })
         })
     } catch (error) {
         res.status(400).json({status:'failed',error});
@@ -124,7 +131,14 @@ router.put('/status/:idSesama/:status', function (req,res) {
         if (err) {
             res.status(400).json({status:'failed',error:err});
         } else {
-            res.status(201).json({status:'success',data:response});
+            let realResponse = response;
+            Notification.findOneAndDelete({origin_id:idSesama},function (err,response) {
+                if (err) {
+                    res.status(400).json({status:'failed',error:err});
+                } else {
+                    res.status(201).json({status:'success',data:realResponse});
+                }
+            })
         }
     })
 })
