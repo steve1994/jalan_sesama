@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var pantisRouter = require('./routes/pantis');
 var sesamasRouter = require('./routes/sesamas');
 var danasRouter = require('./routes/danas');
+var notificationsRouter = require('./routes/notifications');
 
 var app = express();
 app.use(cors());
@@ -37,5 +38,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/pantis',pantisRouter);
 app.use('/api/sesamas',sesamasRouter);
 app.use('/api/danas',danasRouter);
+app.use('/api/notifications',notificationsRouter);
 
 module.exports = app;

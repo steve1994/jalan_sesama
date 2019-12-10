@@ -1,7 +1,7 @@
 import axios from 'axios';
 var path = require('path');
 
-const API_URL = 'http://192.168.1.3:3001/api/'
+const API_URL = 'http://localhost:3001/api/'
 
 const request = axios.create({
     baseURL: API_URL,
@@ -359,6 +359,28 @@ export const editSesama = (idSesama,nama,judul,alamat,deskripsi,foto,location) =
         .catch(function (error) {
             console.error(error);
             dispatch(editSesamaFailure());
+        })
+    }
+}
+
+export const loadNotificationSuccess = (dataNotification) => ({
+    type : 'LOAD_NOTIFICATION_SUCCESS',
+    dataNotification,
+})
+
+export const loadNotificationFailure = () => ({
+    type : 'LOAD_NOTIFICATION_FAILURE'
+})
+
+export const loadNotification = () => {
+    return dispatch => {
+        return request.get(`notifications`)
+        .then(function (response) {
+            dispatch(loadNotificationSuccess(response));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(loadNotificationFailure());
         })
     }
 }

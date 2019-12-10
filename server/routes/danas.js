@@ -4,6 +4,7 @@ var path = require('path');
 const Dana = require('../model/danas');
 const Panti = require('../model/pantis');
 const Sesama = require('../model/sesamas');
+const Notification = require('../model/notification');
 
 router.get('/panti/:idPanti', function(req, res) {
   let idPanti = req.params.idPanti;
@@ -85,7 +86,13 @@ router.post('/panti/:idPanti', function(req,res) {
   try {
     const newAnggaranPanti = new Dana({idPanti,idBantu,nama,alamat,judul,deskripsi,status,nominalSet,nominalProcess});
     newAnggaranPanti.save().then(dataCreated => {
-      res.status(201).json({status:'success',data:dataCreated})
+      let dataAnggaranPanti = dataCreated;
+      let notification_name = `Anggaran dengan nama ${nama} menunggu approval dari admin`;
+      let type = 'anggaran';
+      const newNotification = new Notification({created_at:new Date(),notification_name,type,origin_id:dataAnggaranPanti._id});
+      newNotification.save().then(dataCreated => {
+          res.status(201).json({status:'success',data:dataAnggaranPanti})
+      })
     })
   } catch (error) {
     res.status(400).json({status:'failed',error});
@@ -105,7 +112,13 @@ router.post('/sesama/:idBantuSesama', function(req,res) {
   try {
     const newAnggaranBantuSesama = new Dana({idPanti,idBantu,nama,alamat,judul,deskripsi,status,nominalSet,nominalProcess});
     newAnggaranBantuSesama.save().then(dataCreated => {
-      res.status(201).json({status:'success',data:dataCreated});
+      let dataAnggaranSesama = dataCreated;
+      let notification_name = `Anggaran dengan nama ${nama} menunggu approval dari admin`;
+      let type = 'anggaran';
+      const newNotification = new Notification({created_at:new Date(),notification_name,type,origin_id:dataAnggaranSesama._id});
+      newNotification.save().then(dataCreated => {
+          res.status(201).json({status:'success',data:dataAnggaranSesama});
+      })
     })
   } catch (error) {
     res.status(400).json({status:'failed',error});
@@ -152,7 +165,14 @@ router.put('/status/:idGalangDana/:status', function (req,res) {
     if (err) {
       res.status(400).json({status:'failed',error:err});
     } else {
-      res.status(201).json({status:'success',data:response});
+      let realResponse = response;
+      Notification.findOneAndDelete({origin_id:idGalangDana},function (err,response) {
+          if (err) {
+              res.status(400).json({status:'failed',error:err});
+          } else {
+              res.status(201).json({status:'success',data:realResponse});
+          }
+      })
     }
   })
 })
