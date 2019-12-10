@@ -58,7 +58,8 @@ export default class Home extends React.Component {
 
     let { showDetail, responseLogin } = this.props;
 
-
+    console.log("HOME RES", responseLogin);
+    
 
 
     return (

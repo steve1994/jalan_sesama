@@ -21,6 +21,7 @@ export const postPantiFailed = (idUser) => ({
 })
 
 export const postPanti = (
+    idUser,
     judul,
     nama,
     alamat,
@@ -31,8 +32,7 @@ export const postPanti = (
 
 
     return dispatch => {
-        //harap ganti dengan session login
-        let idUser = 1001
+        
         // dispatch(postDataPanti( idUser , nama, alamat, deskripsi, jumlahOrang, location, fotoPanti))
         return fetch(`${API_URL}/pantis/${idUser}`, {
             method: 'POST',
@@ -430,16 +430,18 @@ export const postPenggalangan = (idUsing, nama, alamat, type, judul, deskripsi, 
 
 //POST SESAMA (add data Bantu sesama folder: container/galangKamu/addSesama.js)
 export const postSesama = (
+    idUser,
     judul,
     nama,
     alamat,
     deskripsi,
     location,
     fotoSesama) => {
+    console.log("idACT", idUser);
+    
 
     return dispatch => {
-        //harap ganti dengan session login
-        let idUser = 1001
+        
         return fetch(`${API_URL}/sesamas/${idUser}`, {
             method: 'POST',
             headers: {

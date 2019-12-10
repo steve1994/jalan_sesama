@@ -16,9 +16,11 @@ const store = function (state = [], action) {
 
         case 'LOADDETAIL_KONTRIB':
             return [...action.detailKontrib]
-            
+
         case 'LOAD_ALLPANTI_SUCCESS':
             return action.responseAllPanti
+
+        
 
 
 
