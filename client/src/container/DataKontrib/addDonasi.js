@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import AddDonasi from "../../components/DataKontrib/addDonasi";
 import { loadDetailGL } from "../../action/index";
 import { postPenggalangan } from "../../action/index";
+import { loadDataPenggalang } from "../../action/index";
 
 
 
@@ -11,8 +12,9 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-    loadDetailGL: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
-    postPenggalangan: (judul,deskripsi, fotoGalang, using) => dispatch(postPenggalangan(judul,deskripsi, fotoGalang, using))
+    dataLoad: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
+    postPenggalangan: (idUsing, nama, alamat, type, judul,deskripsi, nominalSet, fotoGalang) => dispatch(postPenggalangan(idUsing, nama, alamat, type, judul, deskripsi, nominalSet, fotoGalang)),
+    loadDataPenggalang: (dataPenggalangan) => dispatch(loadDataPenggalang(dataPenggalangan)),
      
 })
 

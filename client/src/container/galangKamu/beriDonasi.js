@@ -1,25 +1,22 @@
 import { connect } from "react-redux";
-import Donations from "../../components/DataKontrib/Donations";
+import { putNominalDonasi } from "../../action/index";
+import beriDonasi from "../../components/beriDonasi";
 import { loadDataPenggalang } from "../../action/index";
-import { loadDetailDonasi } from "../../action/index";
 
 
 
 
 const mapStateToProps = (state) => ({
-    detailKontrib: state.store,
-    DataDonasi: state.Donations
+    responseDetail: state.DetailGalang,
+    detailKontrib: state.store
 })
-
 
 const mapDispatchToProps = (dispatch) => ({
+    putNominal: (idGalangDana, nominal) => dispatch(putNominalDonasi(idGalangDana, nominal)),
     loadDataPenggalang: (dataPenggalangan) => dispatch(loadDataPenggalang(dataPenggalangan)),
-    
-    showDetail: (_id,type) => dispatch(loadDetailDonasi(_id,type))    
 })
-
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Donations)
+)(beriDonasi)

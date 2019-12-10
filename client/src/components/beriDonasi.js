@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
+import { API_URL } from '../helpers/accessImage';
 import {
   Container,
   Header,
@@ -28,16 +29,51 @@ import {
   Textarea
 } from 'native-base';
 
-export default class DTKontrib extends React.Component {
+export default class beriDonasi extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      nominal: ''
+    }
+    this.handleNominal = this.handleNominal.bind(this);
+    this.putDataNominal = this.putDataNominal.bind(this);
+  }
+
+  handleNominal(value) {
+    this.setState({ nominal: value })
+  }
+
+  putDataNominal() {
+    let { responseDetail, detailKontrib } = this.props
+    let idGalangDana = responseDetail[0]._id
+
+    this.props.putNominal(
+      idGalangDana,
+      this.state.nominal
+    )
+    
+    const dataPenggalangan = detailKontrib.map(item => {
+      let idUsing = item._id
+      let type = item.type
+      return { idUsing, type }
+    })
+    this.props.loadDataPenggalang(
+      dataPenggalangan,
+      this.props.navigation.navigate("DTKontrib")
+    )
   }
 
 
   render() {
+    
+    let { responseDetail } = this.props
+    
+    let componentImage = responseDetail.map((items, i) => {
+      return <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${items.foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+    })
 
-    const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
+    
 
     return (
       <Container>
@@ -63,12 +99,12 @@ export default class DTKontrib extends React.Component {
 
         <Card style={{ height: 215 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
-            <Image source={{ uri: "https://cdns.klimg.com/merdeka.com/i/w/news/2016/05/13/706401/670x335/angin-puting-beliung-di-jembrana-rusak-3-atap-rumah.jpeg" }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+            { componentImage }
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
-            TITLE : Nama Panti Asuhan / Bantu Sesama
+            { responseDetail[0].judul }
             </Text>
-            <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
+            <Text style={{ color: "Black", backgroundColor:"cyan", textAlign: "center", fontWeight: "bold" }}>
             Berikan Bantuan Berupa Donasi
             </Text>
         </Card>
@@ -84,7 +120,7 @@ export default class DTKontrib extends React.Component {
             <Item>
               <Label style={{ color: "white", fontWeight: "bold", left: 5 }}>Berikan Donasi  : </Label>
               <Card style={{ width: "52%" }}>
-                <Input style={{ color: "Black" }}/>
+                <Input style={{ color: "Black" }} onChangeText={this.handleNominal}/>
               </Card>
             </Item>
           </View>
@@ -93,7 +129,7 @@ export default class DTKontrib extends React.Component {
             <Right>
               <Row>
                 <Button
-                  onPress={() => this.props.navigation.navigate("Detail")} style={{ backgroundColor: '#268026', padding: "5%" }}>
+                  onPress={this.putDataNominal} style={{ backgroundColor: '#268026', padding: "5%" }}>
                   <Text style={{ fontSize: 12 }}>Donasi</Text>
                 </Button>
               </Row>

@@ -5,16 +5,17 @@ import { loadGlKamu } from "../../action/index";
 
 
 
+
 const mapStateToProps = (state) => ({
-    detailKontrib: state.store
+    detailKontrib: state.store,
 })
 
 
 const mapDispatchToProps = (dispatch) => ({
-    loadDetailGL: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
+    dataLoad: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
     showDetail: idUser => {
         dispatch(loadGlKamu(idUser))
-    }
+    },
 })
 
 

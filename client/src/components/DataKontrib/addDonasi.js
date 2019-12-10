@@ -32,18 +32,20 @@ import ImagePicker from 'react-native-image-picker';
 
 
 export default class addDonasi extends React.Component {
-  
+
   constructor(props) {
     super(props);
-    
+
     this.state = {
       judul: '',
       deskripsi: '',
+      nominalSet: '',
       fotoGalang: null
 
     }
     this.handleJudul = this.handleJudul.bind(this);
     this.handleDeskripsi = this.handleDeskripsi.bind(this);
+    this.handleNominal = this.handleNominal.bind(this);
     this.savePenggalangan = this.savePenggalangan.bind(this);
   }
 
@@ -53,6 +55,10 @@ export default class addDonasi extends React.Component {
 
   handleDeskripsi(value) {
     this.setState({ deskripsi: value })
+  }
+
+  handleNominal(value) {
+    this.setState({ nominalSet: value })
   }
 
 
@@ -103,36 +109,44 @@ export default class addDonasi extends React.Component {
     let { detailKontrib } = this.props
 
     let using = detailKontrib.map(item => {
-      let id = item._id;
-      let judul = item.judul;
+      let idUsing = item._id;
+      let nama = item.nama;
+      let alamat = item.alamat;
+      let type = item.type;
 
-        return {id,judul};
-      })
-    
-    // console.log('in save', using);
+      return { idUsing, nama, alamat, type };
+    })
 
-
-
-
-    this.props.postPenggalangan(
-      this.state.judul,
-      this.state.deskripsi,
-      this.state.fotoGalang,
-      using
-
-
+    using.map(item =>
+      this.props.postPenggalangan(
+        item.idUsing,
+        item.nama,
+        item.alamat,
+        item.type,
+        this.state.judul,
+        this.state.deskripsi,
+        this.state.nominalSet,
+        this.state.fotoGalang,
+      )
     )
+    
+    const dataPenggalangan = detailKontrib.map(item => {
+      let idUsing = item._id
+      let type = item.type
+      return { idUsing, type }
+    })
+    this.props.loadDataPenggalang(
+      dataPenggalangan,
+      this.props.navigation.navigate("DTKontrib")
+    )
+    
+    this.setState({ judul: '', deskripsi: '', nominalSet: '', fotoGalang: null });
 
   }
 
 
 
   render() {
-
-    // console.log('this kontrib', detailKontrib);
-
-
-
 
     return (
       <Container>
@@ -172,6 +186,10 @@ export default class addDonasi extends React.Component {
                   <Item floatingLabel>
                     <Label>Deskripsi</Label>
                     <Input onChangeText={this.handleDeskripsi} />
+                  </Item>
+                  <Item floatingLabel>
+                    <Label>Masukan Jumlah Nominal</Label>
+                    <Input onChangeText={this.handleNominal} />
                   </Item>
                   <Item>
                     <Label style={{ color: "black", fontSize: 15 }}>Take Pict</Label>
