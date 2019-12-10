@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import beriDonasiBeranda from "../../../components/HomeUser/DetailGLBeranda/beriDonasiBeranda";
-import { putNominalDonasi, loadDataPenggalang, loadDetailGL } from "../../../action/index";
+import { putNominalDonasi, loadDetailGL, loadAllDonations } from "../../../action/index";
 
 
 
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     dataLoad: (idUsing, type) => dispatch(loadDetailGL(idUsing, type)),
     putNominal: (idGalangDana, nominal) => dispatch(putNominalDonasi(idGalangDana, nominal)),
-    loadDataPenggalang: (idUsing, type) => dispatch(loadDataPenggalang(idUsing, type)),
+    loadAllDonations: () => dispatch(loadAllDonations()),
 })
 
 export default connect(

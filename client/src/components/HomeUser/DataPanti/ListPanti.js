@@ -28,11 +28,18 @@ export default class ListPanti extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleBack = this.handleBack.bind(this);
   }
 
   componentDidMount() {
 
     this.props.loadAllPanti()
+  }
+
+  handleBack() {
+    this.props.loadAllDonations(
+      this.props.navigation.navigate("Home")
+    )
   }
 
 
@@ -58,7 +65,7 @@ export default class ListPanti extends React.Component {
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("Home")} >
+              onPress={this.handleBack} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>

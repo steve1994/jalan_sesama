@@ -28,8 +28,8 @@ import {
   Textarea
 } from 'native-base';
 
-import FormLogin from '../../components/LoginReg/FormLogin';
-import FormRegis from './formRegis';
+import FormLogin from './FormLogin';
+import FormRegis from './FormRegis';
 
 
 export default class LoginRegis extends React.Component {

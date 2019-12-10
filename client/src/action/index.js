@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 
-const API_URL = "http://192.168.43.82:3001/api";
+const API_URL = "http://192.168.3.75:3001/api";
 
 // const request = axios.create({
 //     baseURL: API_URL,
@@ -183,6 +183,8 @@ export const putNominalDonasi = (idGalangDana, nominal) => {
     }
 
 }
+
+
 
 //LOAD DETAIL DONASI(Folder : component/datakontrib/Donations.js)
 export const loadDetailDonasiSuccess = (responseDetail) => ({

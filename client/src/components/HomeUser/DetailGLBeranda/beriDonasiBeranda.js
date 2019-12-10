@@ -57,23 +57,8 @@ export default class beriDonasiBeranda extends React.Component {
       this.state.nominal
     )
 
-    const dataPenggalangan = responseDetail.map(item => {
-      if (item.type == "panti"){
 
-        let idUsing = item.idPanti
-        let type = item.type
-        return { idUsing, type }
-
-      }else{
-        let idUsing = item.idBantu
-        let type = item.type
-        return { idUsing, type }
-      }
-
-    })
-
-    this.props.loadDataPenggalang(
-      dataPenggalangan,
+    this.props.loadAllDonations(
       this.props.navigation.navigate("Home")
     )
   }

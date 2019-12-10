@@ -34,10 +34,13 @@ export default class Home extends React.Component {
     super(props);
   }
 
+  
+
 
   render() {
-
-    const items = ['Perbaikan atap bocor', 'Membeli perlengkapan lansia', 'Anak kecil sakit', 'Perlu kursi roda', 'Bawa kakek rusman belanja'];
+    // let { resProfileSuccess } = this.props
+    console.log("Komp", this.props.resProfileSuccess);
+    
 
     return (
       <Container>

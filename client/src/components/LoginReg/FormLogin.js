@@ -32,7 +32,33 @@ export default class FormLogin extends React.Component {
 
     constructor(props) {
         super(props);
-      }
+        this.state = {
+            username: '',
+            password: ''
+        }
+        this.handleUsername = this.handleUsername.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+
+    }
+
+    handleUsername(value) {
+        this.setState({ username: value })
+    }
+
+    handlePassword(value) {
+        this.setState({ password: value })
+    }
+
+    handleLogin() {
+        this.props.loginProcess(
+            this.state.username,
+            this.state.password,
+
+        )
+
+        this.props.navigation.navigate("Home")
+    }
 
     render() {
         return (
@@ -45,14 +71,16 @@ export default class FormLogin extends React.Component {
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     keyboardType='username'
-                    style={styles.inputField} />
+                    style={styles.inputField} 
+                    onChangeText={this.handleUsername}/>
                 <TextInput
                     placeholder='password'
                     underlineColorAndroid='white'
                     placeholderTextColor='white'
                     secureTextEntry={true}
-                    style={styles.inputField} />
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("HomeUser")}>
+                    style={styles.inputField} 
+                    onChangeText={this.handlePassword}/>
+                <TouchableOpacity onPress={this.handleLogin}>
                     <Text style={{ color: 'white', marginTop: 10 }}>Login</Text>
                 </TouchableOpacity>
             </View>

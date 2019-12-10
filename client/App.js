@@ -19,7 +19,7 @@ import { Provider } from 'react-redux';
 import GLdana from './src/components/GLdana';
 import addDonasi from './src/container/DataKontrib/addDonasi';
 import HomeUser from './src/components/HomeUser';
-import ProfileUser from './src/components/ProfileUser';
+import ProfileUser from './src/container/LoginRegis/ProfileUser';
 import Donations from './src/container/DataKontrib/Donations'
 
 //new add

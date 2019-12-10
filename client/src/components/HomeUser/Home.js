@@ -34,6 +34,8 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.handleProfile = this.handleProfile.bind(this)
   }
 
   componentDidMount() {
@@ -41,10 +43,20 @@ export default class Home extends React.Component {
     this.props.loadAllDonations()
   }
 
+  handleProfile() {
+    let { responseLogin } = this.props
+    let idUser = responseLogin[0].idUser
+    this.props.postProfile(
+      idUser,
+    )
+    this.props.navigation.navigate("ProfileUser")
+
+  }
+
 
   render() {
 
-    let { showDetail } = this.props;
+    let { showDetail, responseLogin } = this.props;
 
 
 
@@ -63,7 +75,7 @@ export default class Home extends React.Component {
           </Body>
 
         </Header>
-        
+
         <Card style={{ height: 165 }}>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
             <Image source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ4KlGgaSUmj-YVQ8w0OpUKTBKbTr7i1q6BHfJ2KrfhGaAYk4Xv" }} style={{ width: 320, height: 120, justifyContent: 'center' }} />
@@ -72,7 +84,7 @@ export default class Home extends React.Component {
             Membantu Sesama Kita
             </Text>
         </Card>
-        
+
         <Content>
           <Card>
 
@@ -90,12 +102,22 @@ export default class Home extends React.Component {
                     <Image source={{ uri: "https://infaqberkah.id/wp-content/uploads/2018/10/Kencleng-Berkah-Icon-e1539674712818.png" }} style={{ width: 70, height: 70 }} />
                   </Button>
                 </CardItem>
-                <CardItem style={{ justifyContent: "flex-end" }}>
-                  <Button transparent light
-                    onPress={() => this.props.navigation.navigate("LoginRegis")}>
-                    <Image source={{ uri: "https://cdn1.iconfinder.com/data/icons/elevator/154/elevator-user-man-ui-round-login-512.png" }} style={{ width: 70, height: 70 }} />
-                  </Button>
-                </CardItem>
+
+                {responseLogin.length > 0 ?
+                  <CardItem style={{ justifyContent: "flex-end" }}>
+                    <Button primary
+                      onPress={this.handleProfile}>
+                      <Image source={{ uri: "https://cdn1.iconfinder.com/data/icons/elevator/154/elevator-user-man-ui-round-login-512.png" }} style={{ width: 70, height: 70 }} />
+                    </Button>
+                  </CardItem>
+                  :
+                  <CardItem style={{ justifyContent: "flex-end" }}>
+                    <Button transparent light
+                      onPress={() => this.props.navigation.navigate("LoginRegis")}>
+                      <Image source={{ uri: "https://cdn1.iconfinder.com/data/icons/elevator/154/elevator-user-man-ui-round-login-512.png" }} style={{ width: 70, height: 70 }} />
+                    </Button>
+                  </CardItem>
+                }
               </Row>
             </Right>
 

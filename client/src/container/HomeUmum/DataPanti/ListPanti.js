@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ListPanti from "../../../components/HomeUser/DataPanti/ListPanti";
-import { loadAllPanti } from "../../../action";
+import { loadAllPanti, loadAllDonations } from "../../../action";
 
 
 const mapStateToProps = (state) => ({
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
   loadAllPanti: () => dispatch(loadAllPanti()),
+  loadAllDonations: () => dispatch(loadAllDonations()),
   
 })
   

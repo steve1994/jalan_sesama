@@ -21,13 +21,23 @@ import {
   List
 } from 'native-base';
 import { connect } from "react-redux";
-import { loadGlKamu } from "../action/index";
+import { loadGlKamu, loadAllDonations } from "../action/index";
 
 
 class GLdana extends React.Component {
 
   constructor(props) {
     super(props);
+    this.hanldeBack = this.hanldeBack.bind(this)
+
+  }
+
+  hanldeBack(){
+
+    this.props.loadAllDonations(
+      this.props.navigation.navigate("Home")
+    )
+
   }
 
 
@@ -52,7 +62,7 @@ class GLdana extends React.Component {
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("Home")} >
+              onPress={this.hanldeBack} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>
@@ -123,7 +133,8 @@ class GLdana extends React.Component {
 const mapDispatchToProps = dispatch => ({
   showDetail: idUser => {
     dispatch(loadGlKamu(idUser))
-  }
+  },
+  loadAllDonations: () => dispatch(loadAllDonations()),
 })
 
 export default connect(
