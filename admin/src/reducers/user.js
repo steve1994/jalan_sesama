@@ -1,7 +1,6 @@
 const user = (state = {}, action) => {
     switch(action.type) {
         case 'POST_REGISTER_USER_SUCCESS':
-            return action.dataUser;
         case 'POST_LOGIN_USER_SUCCESS':
             return action.dataUser;
         case 'POST_REGISTER_USER_FAILURE':

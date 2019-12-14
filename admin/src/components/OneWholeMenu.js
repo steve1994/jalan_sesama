@@ -67,8 +67,12 @@ export default class OneWholeMenu extends React.Component {
                     <Route path="/listdonasi">
                         {localStorage.getItem("user") ? <ListDonasi /> : <Redirect to="/login" />}
                     </Route>
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+                    <Route path="/login">
+                        {localStorage.getItem("user") ? <Redirect to='/' /> : <Login />}
+                    </Route>
+                    <Route path="/register">
+                        {localStorage.getItem("user") ? <Redirect to='/' /> : <Register />}
+                    </Route>
                   </Switch>
 
                 </div>
