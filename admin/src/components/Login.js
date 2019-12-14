@@ -1,13 +1,16 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux'
+import {postLoginUser} from '../actions'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {username:'',password:''};
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.clickSignInButton = this.clickSignInButton.bind(this);
     }
 
     handleUsername(event) {
@@ -16,6 +19,11 @@ export default class Login extends React.Component {
 
     handlePassword(event) {
         this.setState({password:event.target.value})
+    }
+
+    clickSignInButton() {
+        this.props.postLoginUser(this.state.username,this.state.password);
+        this.props.history.push('/');
     }
 
     render() {
@@ -41,7 +49,7 @@ export default class Login extends React.Component {
                   </div>
 
                   <div className="container-login100-form-btn m-t-20">
-                    <button className="login100-form-btn">
+                    <button className="login100-form-btn" onClick={this.clickSignInButton}>
                       Sign in
                     </button>
                   </div>
@@ -51,9 +59,7 @@ export default class Login extends React.Component {
                       Create an account?
                     </span>
 
-                    <a className="txt2 hov1">
-                      <Link to="/register">Register</Link>
-                    </a>
+                    <Link className="txt2 hov1" to="/register">Register</Link>
                   </div>
 
                 </form>
@@ -63,3 +69,12 @@ export default class Login extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    postLoginUser : (username,password) => (dispatch(postLoginUser(username,password)))
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+) (Login)

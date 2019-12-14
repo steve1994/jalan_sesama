@@ -1,7 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux'
+import {postRegisterUser} from '../actions'
 
-export default class Register extends React.Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,6 +12,7 @@ export default class Register extends React.Component {
         this.handleAlamat = this.handleAlamat.bind(this);
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.clickRegisterButton = this.clickRegisterButton.bind(this);
     }
 
     handleNama(event) {
@@ -26,6 +29,14 @@ export default class Register extends React.Component {
 
     handlePassword(event) {
         this.setState({password:event.target.value});
+    }
+
+    clickRegisterButton() {
+        this.props.postRegisterUser(this.state.nama,
+                                    this.state.alamat,
+                                    this.state.username,
+                                    this.state.password);
+        this.props.history.push('/login');
     }
 
     render() {
@@ -63,7 +74,7 @@ export default class Register extends React.Component {
                   </div>
 
                   <div className="container-login100-form-btn m-t-20">
-                    <button className="login100-form-btn">
+                    <button className="login100-form-btn" onClick={this.clickRegisterButton}>
                       Register
                     </button>
                   </div>
@@ -84,3 +95,12 @@ export default class Register extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+     postRegisterUser : (nama,alamat,username,password) => (dispatch(postRegisterUser(nama,alamat,username,password)))
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+) (Register)

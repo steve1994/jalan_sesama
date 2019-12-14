@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Users = require('../model/users');
 var path = require('path');
+var localStorage = require('localStorage');
 
 router.get('/', function (req, res) {
     Users.find()
@@ -53,9 +54,9 @@ router.get('/login/:username/:password', function (req, res) {
 })
 
 //processlogin admin page
-router.get('/login_admin/:username/:password', function (req,res) {
-    let username = req.params.username;
-    let password = req.params.password;
+router.post('/login_admin', function (req,res) {
+    let username = req.body.username;
+    let password = req.body.password;
     Users.find({username})
     .exec(function (err,response) {
         if (err) {
@@ -66,7 +67,7 @@ router.get('/login_admin/:username/:password', function (req,res) {
             } else {
                 if (response[0].isAdmin) {
                     if (response[0].password == password) {
-                        res.status(200).json({status:'success',data:response})
+                        res.status(201).json({status:'success',data:response})
                     } else {
                         res.status(400).json({status:'failed',error:'wrong username and/or password'});
                     }

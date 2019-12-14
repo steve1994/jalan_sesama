@@ -384,3 +384,48 @@ export const loadNotification = () => {
         })
     }
 }
+
+export const postRegisterSuccess = (dataUser) => ({
+    type: 'POST_REGISTER_USER_SUCCESS',
+    dataUser
+})
+
+export const postRegisterFailure = () => ({
+    type: 'POST_REGISTER_USER_FAILURE'
+})
+
+export const postRegisterUser = (nama, alamat, username, password) => {
+    return dispatch => {
+        return request.post('users/admin',{nama,alamat,username,password})
+        .then(function (response) {
+            dispatch(postRegisterSuccess(response.data));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(postRegisterFailure());
+        })
+    }
+}
+
+export const postLoginSuccess = (dataUser) => ({
+    type: 'POST_LOGIN_USER_SUCCESS',
+    dataUser
+})
+
+export const postLoginFailure = () => ({
+    type: 'POST_LOGIN_USER_FAILURE'
+})
+
+export const postLoginUser = (username,password) => {
+    return dispatch => {
+        return request.post(`users/login_admin`,{username,password})
+        .then(function (response) {
+            localStorage.setItem("user",JSON.stringify(response.data));
+            dispatch(postLoginSuccess(response.data));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(postLoginFailure());
+        })
+    }
+}
