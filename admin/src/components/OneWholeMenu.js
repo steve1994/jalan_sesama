@@ -12,6 +12,16 @@ import Register from './Register';
 
 export default class OneWholeMenu extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.clickSignOutButton = this.clickSignOutButton.bind(this);
+    }
+
+    clickSignOutButton() {
+        localStorage.removeItem("user");
+        window.location.replace('/');
+    }
+
     render() {
         let sideMenuComponent;
         if (localStorage.getItem("user")) {
@@ -34,6 +44,9 @@ export default class OneWholeMenu extends React.Component {
                                       <Link to={'/inbox'}>
                                         <i className="fa fa-cog" aria-hidden="true"></i> Inbox
                                       </Link>
+                                    </li>
+                                    <li>
+                                      <button className="btn btn-danger" onClick={this.clickSignOutButton}>Sign Out</button>
                                     </li>
                                   </ul>
                                 </div>

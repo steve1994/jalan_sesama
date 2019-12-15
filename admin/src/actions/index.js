@@ -420,8 +420,10 @@ export const postLoginUser = (username,password) => {
     return dispatch => {
         return request.post(`users/login_admin`,{username,password})
         .then(function (response) {
-            localStorage.setItem("user",JSON.stringify(response.data));
-            dispatch(postLoginSuccess(response.data));
+            let userData = response.data.data;
+            delete userData['password'];
+            localStorage.setItem("user",JSON.stringify(userData));
+            dispatch(postLoginSuccess(userData));
         })
         .catch(function (error) {
             console.error(error);
