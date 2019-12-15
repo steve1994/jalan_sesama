@@ -118,6 +118,8 @@ export default class FormRegis extends React.Component {
             this.state.password,
             this.state.filename
         );
+        this.setState({ nama: '', alamat: '', username:'', password:'', filename:''})
+        this.props.navigation.navigate("LoginRegis")
 
     }
 

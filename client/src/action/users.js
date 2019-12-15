@@ -5,7 +5,7 @@ const API_URL = "http://192.168.3.75:3001/api";
 
 //POST PROFILE
 export const loadProfileSuccess = (resProfileSuccess) => ({
-    type: "LOADPROFILE_SUCCES",
+    type: "LOADPROFILE_SUCCESS",
     resProfileSuccess
 })
 export const loadProfileFailure = (resProfileFailure) => ({
@@ -24,19 +24,33 @@ export const postProfile = (idUser) => {
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => response.json())
-        .then((responseData) => {
+            .then((response) => response.json())
+            .then((responseData) => {
 
-            dispatch(loadProfileSuccess(responseData.data))
-        })
-        .catch((error) => {
+                dispatch(loadProfileSuccess(responseData.data))
+            })
+            .catch((error) => {
 
-            dispatch((loadProfileFailure(error)))
+                dispatch((loadProfileFailure(error)))
 
-        })
+            })
 
     }
-    
+
+}
+
+//LogoutSession
+
+export const processLogoutSuccess = () => ({
+    type: "PROCESS_LOGOUT"
+})
+
+export const processLogout = () => {
+
+
+    return dispatch => {   
+        dispatch(processLogoutSuccess())
+    }
 }
 
 //loginprocess
@@ -69,19 +83,19 @@ export const loginProcess = (username, password) => {
                     addIdUser.idUser = responseData.data[0]._id;
                     return addIdUser;
                 })
-                
+
                 dispatch(loginProcessSuccess(resultLogin))
 
             })
             .catch((error) => {
 
-                
-                
+
+
 
                 dispatch(loginProcessFailure(error))
-                
-                
-                
+
+
+
             })
 
     }

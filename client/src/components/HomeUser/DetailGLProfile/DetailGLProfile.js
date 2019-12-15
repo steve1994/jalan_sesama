@@ -27,21 +27,19 @@ import {
   Input,
   Textarea
 } from 'native-base';
-import UserItem from '../container/LoginRegis/UserItem';
+import DetailGLItem from '../../../container/HomeUmum/DetailGLProfile/DetailGLItem';
 
-export default class ProfileUser extends React.Component {
+export default class DetailGLProfile extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
-
-
+  
 
   render() {
-    let { resProfileSuccess } = this.props
-    console.log("Komp", this.props.resProfileSuccess);
 
+    let { responseDetail } = this.props
 
     return (
       <Container>
@@ -52,23 +50,27 @@ export default class ProfileUser extends React.Component {
               Senin, 25 November 2019
             </Text>
             <Text>
-              <Title style={{ width: 130 }}>Jalan Sesama</Title>
+              <Title style={{ width: 130 }}>GL UMUM</Title>
             </Text>
           </Body>
-
+          <Left style={{ right: 12 }}>
+            <Button iconLeft light
+              onPress={() => this.props.navigation.navigate("Home")} >
+              <Icon name='arrow-back' />
+              <Text>Back</Text>
+            </Button>
+          </Left>
         </Header>
-        <Content>
+        {responseDetail.map((item, i) => {
+          return(
 
-        {resProfileSuccess.map((items) => {
-         return (
-           <UserItem
-           navigation = {this.props.navigation} 
-           {...items}
-           />
-         )
+            <DetailGLItem 
+            navigation={this.props.navigation}
+            {...item}
+            />
+
+          )
         })}
-
-        </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: '#268026' }}>
             <Button full>
@@ -81,6 +83,7 @@ export default class ProfileUser extends React.Component {
   }
 
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

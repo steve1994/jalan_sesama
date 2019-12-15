@@ -37,6 +37,13 @@ import DetailGLUmum from './src/container/HomeUmum/DetailGLUmum/DetailGLUmum';
 import beriDonasiPanti from './src/container/HomeUmum/DetailGLUmum/beriDonasi';
 import beriDonasiBeranda from './src/container/HomeUmum/DetailGLBeranda/beriDonasiBeranda';
 import DetailGLBeranda from './src/container/HomeUmum/DetailGLBeranda/DetailGLBeranda'
+import beriDonasiProfile from './src/container/HomeUmum/DetailGLProfile/beriDonasiProfile';
+import DetailGLProfile from './src/container/HomeUmum/DetailGLProfile/DetailGLProfile';
+import galangKamuProfile from './src/container/HomeUmum/DetailGLProfile/galangKamuProfile';
+import GLdanaProfile from './src/container/HomeUmum/DetailGLProfile/GLdanaProfile';
+import addSesamaProfile from './src/container/HomeUmum/DetailGLProfile/addSesamaProfile';
+import addPantiProfile from './src/container/HomeUmum/DetailGLProfile/addPantiProfile';
+
 
 
 
@@ -64,8 +71,12 @@ const RootStack = createStackNavigator(
     beriDonasiPanti: {screen: beriDonasiPanti},
     beriDonasiBeranda: {screen: beriDonasiBeranda},
     DetailGLBeranda: {screen: DetailGLBeranda},
-
-
+    beriDonasiProfile: {screen: beriDonasiProfile},
+    DetailGLProfile: {screen: DetailGLProfile},
+    galangKamuProfile: {screen: galangKamuProfile},
+    GLdanaProfile: {screen: GLdanaProfile},
+    addSesamaProfile: {screen:addSesamaProfile},
+    addPantiProfile: {screen: addPantiProfile},
   },
   {
     initialRouteName: 'Home', headerMode: 'none'
