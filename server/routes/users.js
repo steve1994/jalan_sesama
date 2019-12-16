@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Users = require('../model/users');
 var path = require('path');
+var localStorage = require('localStorage');
 
 router.get('/', function (req, res) {
     Users.find()
@@ -52,6 +53,32 @@ router.get('/login/:username/:password', function (req, res) {
         })
 })
 
+//processlogin admin page
+router.post('/login_admin', function (req,res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    Users.find({username})
+    .exec(function (err,response) {
+        if (err) {
+            res.status(400).json({status:'failed',error:err})
+        } else {
+            if (response.length == 0) {
+                res.status(400).json({status:'failed',error:'wrong username and/or password'});
+            } else {
+                if (response[0].isAdmin) {
+                    if (response[0].password == password) {
+                        res.status(201).json({status:'success',data:response})
+                    } else {
+                        res.status(400).json({status:'failed',error:'wrong username and/or password'});
+                    }
+                } else {
+                    res.status(400).json({status:'failed',error:'user do not have admin privilege'});
+                }
+            }
+        }
+    })
+})
+
 router.post('/', function (req, res) {
     console.log('data body ', req.body);
 
@@ -66,6 +93,22 @@ router.post('/', function (req, res) {
         })
     } catch (error) {
         res.status(400).json({ status: 'failed', error });
+    }
+})
+
+router.post('/admin', function (req,res) {
+    let nama = req.body.nama;
+    let alamat = req.body.alamat;
+    let username = req.body.username;
+    let password = req.body.password;
+    let isAdmin = true;
+    try {
+        const newUsers = new Users({nama, alamat, username, password, isAdmin});
+        newUsers.save().then(dataCreated => {
+            res.status(201).json({status:'success', data:dataCreated});
+        })
+    } catch (error) {
+        res.status(400).json({status:'failed', error});
     }
 })
 

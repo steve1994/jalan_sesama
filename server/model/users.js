@@ -6,7 +6,8 @@ var userSchema = new Schema({
     alamat: String,
     username: String,
     password: String,
-    foto: String
+    foto: String,
+    isAdmin: Boolean
 })
 
 module.exports = mongoose.model('userSchema',userSchema);
