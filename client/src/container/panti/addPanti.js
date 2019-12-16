@@ -121,8 +121,11 @@ class addPanti extends React.Component {
   }
 
   SavePanti() {
+    let { responseLogin } = this.props
+    let idUser = responseLogin[0]._id
 
     this.props.postPanti(
+      idUser,
       this.state.judul,
       this.state.nama,
       this.state.alamat,
@@ -273,18 +276,18 @@ class addPanti extends React.Component {
 
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   postPanti: (nama, alamat, username, password, filename) => dispatch(postPanti(nama, alamat, username, password, filename))
-// })
+const mapStateToProps = (state) => ({
+  responseLogin: state.LoginReg
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  postPanti: (judul, nama, alamat, deskripsi, jumlahOrang, location , fotoPanti) => dispatch(postPanti(judul, nama, alamat, deskripsi, jumlahOrang, location, fotoPanti ))
+  postPanti: (idUser, judul, nama, alamat, deskripsi, jumlahOrang, location , fotoPanti) => dispatch(postPanti(idUser,judul, nama, alamat, deskripsi, jumlahOrang, location, fotoPanti ))
 
 
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(addPanti)
 

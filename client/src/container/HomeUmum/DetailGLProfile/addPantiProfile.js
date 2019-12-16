@@ -134,7 +134,7 @@ class addPantiProfile extends React.Component {
       this.state.location,
       this.state.fotoPanti
     )
-    this.setState({ idUser, judul: '', nama: '',alamat: '',deskripsi: '',jumlahOrang: '',location: '',fotoPanti: null});
+    this.setState({ judul: '', nama: '',alamat: '',deskripsi: '',jumlahOrang: '',location: '',fotoPanti: null});
     this.props.navigation.navigate('GLdanaProfile');
 
 

@@ -1,14 +1,14 @@
 const store = function (state = [], action) {
 
 
-    console.log("Reduce Store", action.detailKontrib);
+    console.log("Reduce Store", action.galangKamu);
 
 
     switch (action.type) {
 
-        case "POST_PANTI_SUCCESS":
-            return [...action.galangKamu]
-        case 'POST_PANTI_FAILED':
+        // case "POST_PANTI_SUCCESS":
+        //     return [...action.galangKamu]
+        // case 'POST_PANTI_FAILED':
 
         case 'LOAD_GLKAMU_SUCCESS':
             return [...action.galangKamu]

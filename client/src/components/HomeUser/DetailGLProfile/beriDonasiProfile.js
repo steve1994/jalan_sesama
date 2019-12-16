@@ -59,7 +59,7 @@ export default class beriDonasiProfile extends React.Component {
 
 
     this.props.loadAllDonations(
-      this.props.navigation.navigate("Home")
+      this.props.navigation.navigate("KontribProfile")
     )
   }
 
@@ -88,7 +88,7 @@ export default class beriDonasiProfile extends React.Component {
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("DetailGLBeranda")} >
+              onPress={() => this.props.navigation.navigate("DetailGLProfile")} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>

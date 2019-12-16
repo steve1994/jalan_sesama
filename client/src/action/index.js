@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 
-const API_URL = "http://192.168.3.75:3001/api";
+const API_URL = "http://192.168.100.12:3001/api";
 
 // const request = axios.create({
 //     baseURL: API_URL,
@@ -10,15 +10,15 @@ const API_URL = "http://192.168.3.75:3001/api";
 
 
 //ADD NEW PANTI (folder: container/panti/addPanti.js)
-export const postPantiSuccess = (galangKamu) => ({
-    type: 'POST_PANTI_SUCCESS',
-    galangKamu
-})
+// export const postPantiSuccess = (galangKamu) => ({
+//     type: 'POST_PANTI_SUCCESS',
+//     galangKamu
+// })
 
-export const postPantiFailed = (idUser) => ({
-    type: 'POST_PANTI_FAILED',
-    idUser
-})
+// export const postPantiFailed = (idUser) => ({
+//     type: 'POST_PANTI_FAILED',
+//     idUser
+// })
 
 export const postPanti = (
     idUser,
@@ -29,6 +29,8 @@ export const postPanti = (
     jumlahOrang,
     location,
     fotoPanti) => {
+
+
 
 
     return dispatch => {
@@ -60,21 +62,22 @@ export const postPanti = (
                 })
                     .then((response) => response.json())
                     .then((responseJson) => {
-
-                        dispatch(postPantiSuccess(responseJson.data))
+                        
+                        
+                        // dispatch(postPantiSuccess(responseJson.data))
 
 
                     })
                     .catch((error) => {
                         console.log('panti action error Put > ', error);
-                        dispatch(postPantiFailed())
+                        // dispatch(postPantiFailed(error))
 
                     })
 
             })
             .catch((error) => {
                 console.log('error act panti', error);
-                dispatch(postPantiFailed())
+                dispatch(postPantiFailed(error))
 
             })
     }

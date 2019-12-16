@@ -43,8 +43,8 @@ class GLdana extends React.Component {
 
   render() {
 
-    let idUser = 1001; //this a start user id
-    let { showDetail } = this.props;
+    let { showDetail, resProfileSuccess } = this.props;
+    let idUser = resProfileSuccess[0]._id; //this a start user id
        
         
 
@@ -130,6 +130,11 @@ class GLdana extends React.Component {
   }
 
 }
+
+const mapStateToProps = (state) => ({
+  resProfileSuccess: state.users
+})
+
 const mapDispatchToProps = dispatch => ({
   showDetail: idUser => {
     dispatch(loadGlKamu(idUser))
@@ -138,6 +143,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(GLdana)

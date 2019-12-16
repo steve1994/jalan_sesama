@@ -43,6 +43,8 @@ import galangKamuProfile from './src/container/HomeUmum/DetailGLProfile/galangKa
 import GLdanaProfile from './src/container/HomeUmum/DetailGLProfile/GLdanaProfile';
 import addSesamaProfile from './src/container/HomeUmum/DetailGLProfile/addSesamaProfile';
 import addPantiProfile from './src/container/HomeUmum/DetailGLProfile/addPantiProfile';
+import KontribProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/KontribProfile';
+import addDonasiProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/addDonasiProfile';
 
 
 
@@ -77,6 +79,8 @@ const RootStack = createStackNavigator(
     GLdanaProfile: {screen: GLdanaProfile},
     addSesamaProfile: {screen:addSesamaProfile},
     addPantiProfile: {screen: addPantiProfile},
+    KontribProfile: {screen: KontribProfile},
+    addDonasiProfile: {screen: addDonasiProfile}
   },
   {
     initialRouteName: 'Home', headerMode: 'none'

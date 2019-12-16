@@ -55,7 +55,7 @@ export default class DetailGLProfile extends React.Component {
           </Body>
           <Left style={{ right: 12 }}>
             <Button iconLeft light
-              onPress={() => this.props.navigation.navigate("Home")} >
+              onPress={() => this.props.navigation.navigate("KontribProfile")} >
               <Icon name='arrow-back' />
               <Text>Back</Text>
             </Button>

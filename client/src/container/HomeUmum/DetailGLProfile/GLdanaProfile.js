@@ -45,7 +45,6 @@ class GLdanaProfile extends React.Component {
 
     let { showDetail, resProfileSuccess } = this.props;
     let idUser = resProfileSuccess[0]._id; //this a start user id
-    console.log("props > ", resProfileSuccess[0]._id);
 
 
 

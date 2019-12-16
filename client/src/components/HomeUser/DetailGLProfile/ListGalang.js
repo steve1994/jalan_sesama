@@ -36,7 +36,7 @@ export default class ListGalang extends React.Component {
             idUsing,
             type,
 
-            this.props.navigation.navigate("DTKontrib")
+            this.props.navigation.navigate("KontribProfile")
         )
     }
 
