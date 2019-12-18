@@ -17,7 +17,8 @@ export default class OneWholeMenu extends React.Component {
         this.clickSignOutButton = this.clickSignOutButton.bind(this);
     }
 
-    clickSignOutButton() {
+    clickSignOutButton(e) {
+        e.preventDefault()
         localStorage.removeItem("user");
         window.location.replace('/');
     }

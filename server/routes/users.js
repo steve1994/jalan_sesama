@@ -54,9 +54,10 @@ router.get('/login/:username/:password', function (req, res) {
 })
 
 //processlogin admin page
-router.post('/login_admin', function (req,res) {
+router.post('/login_admin/', function (req,res) {
     let username = req.body.username;
     let password = req.body.password;
+    
     Users.find({username})
     .exec(function (err,response) {
         if (err) {
@@ -68,6 +69,8 @@ router.post('/login_admin', function (req,res) {
                 if (response[0].isAdmin) {
                     if (response[0].password == password) {
                         res.status(201).json({status:'success',data:response})
+                        console.log("login SUCCESS", response);
+                        
                     } else {
                         res.status(400).json({status:'failed',error:'wrong username and/or password'});
                     }
