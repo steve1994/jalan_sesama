@@ -43,8 +43,10 @@ class GLdana extends React.Component {
 
   render() {
 
-    let { showDetail, resProfileSuccess } = this.props;
-    let idUser = resProfileSuccess[0]._id; //this a start user id
+    let { showDetail, responseLogin } = this.props;
+    
+    // let idUser = resProfileSuresponseLoginccess[0]._id; //this a start user id
+    let idUser = responseLogin[0]._id; //this a start user id
        
         
 
@@ -132,7 +134,8 @@ class GLdana extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  resProfileSuccess: state.users
+  // resProfileSuccess: state.users
+  responseLogin: state.LoginReg
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -30,6 +30,8 @@ export default class galangKamu extends React.Component {
     super(props);
   }
 
+  
+
 
 
 
@@ -60,12 +62,12 @@ export default class galangKamu extends React.Component {
           </Left>
         </Header>
         <Content>
-          <Card style={{ backgroundColor: '#156cb3' }}>
-            <Card>
+          <Card style={{ backgroundColor: '#156cb3', height: 490 }}>
+            <Card style={{ height: 480 }}>
               <Card style={{ backgroundColor: '#156cb3' }}>
                 <Text style={{ color: "white", textAlign: "center", fontWeight: "bold", margin: 20 }}>
                   Daftar Kontribusi Kamu Disini
-            </Text>
+                </Text>
               </Card>
               <ScrollView>
                   {galangKamu.map((items, i) => {

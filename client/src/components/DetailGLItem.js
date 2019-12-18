@@ -41,7 +41,6 @@ export default class DetailGLItem extends React.Component {
   render() {
 
     let { foto, judul, deskripsi, nominalSet, nominalProcess, status } = this.props
-    console.log("ITEM DATA > ", foto, judul, deskripsi, nominalSet, nominalProcess, status);
 
 
     return (

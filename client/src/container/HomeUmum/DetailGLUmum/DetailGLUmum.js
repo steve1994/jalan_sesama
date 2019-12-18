@@ -6,7 +6,7 @@ import { loadDetailDonasi } from "../../../action/index";
 
 
 const mapStateToProps = (state) => ({
-    responseDetail: state.DetailGalang
+    responseDetail: state.DetailGalang,
 })
 
 const mapDispatchToProps = (dispatch) => ({  

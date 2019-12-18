@@ -39,7 +39,9 @@ export default class DetailGLUmum extends React.Component {
 
   render() {
 
-    let { responseDetail } = this.props
+    let { responseDetail} = this.props
+    
+    
 
     return (
       <Container>

@@ -113,7 +113,10 @@ export default class addSesama extends React.Component {
   }
 
   SaveSesama() {
+    let { responseLogin } = this.props
+    let idUser = responseLogin[0]._id
     this.props.postSesama(
+      idUser,
       this.state.judul,
       this.state.nama,
       this.state.alamat,

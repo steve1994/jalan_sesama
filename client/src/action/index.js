@@ -1,25 +1,46 @@
-// import axios from 'axios';
+const API_URL = "http://192.168.1.25:3001/api";
 
 
-const API_URL = "http://192.168.100.12:3001/api";
+export const deleteSuccess = (deleteDATASuccess) => ({
+    type: "DELETE_DATA_GALANG",
+    deleteDATASuccess
+})
 
-// const request = axios.create({
-//     baseURL: API_URL,
-//     timeout: 1000
-//   });
+export const deleteReject = (_id, type ) => {
+
+    return dispatch => {
+
+        if (type == "panti" ){
+            return fetch(`${API_URL}/pantis/${_id}`, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => response.json())
+            .then((responseDelete) => {
+                dispatch(deleteSuccess(responseDelete))
+            })
+        }else{
+
+            return fetch(`${API_URL}/sesamas/${_id}`, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => response.json())
+            .then((responseDelete) => {
+                dispatch(deleteSuccess(responseDelete))
+            })
+        }
+    }   
+}
 
 
-//ADD NEW PANTI (folder: container/panti/addPanti.js)
-// export const postPantiSuccess = (galangKamu) => ({
-//     type: 'POST_PANTI_SUCCESS',
-//     galangKamu
-// })
-
-// export const postPantiFailed = (idUser) => ({
-//     type: 'POST_PANTI_FAILED',
-//     idUser
-// })
-
+// export post panti
 export const postPanti = (
     idUser,
     judul,
@@ -357,7 +378,7 @@ export const postPenggalangan = (idUsing, nama, alamat, type, judul, deskripsi, 
                         .then((response) => response.json())
                         .then((responseJson) => {
 
-                            dispatch(loadDataPenggalang(responseDATA))
+                            dispatch(postGALANGSuccess(responseJson))
 
                         })
                         .catch((error) => {
@@ -407,7 +428,7 @@ export const postPenggalangan = (idUsing, nama, alamat, type, judul, deskripsi, 
                         .then((responseJson) => {
 
                             console.log("response EDIT", responseJson);
-                            dispatch(postGALANGSuccess(responseDATA))
+                            dispatch(postGALANGSuccess(responseJson))
 
 
 

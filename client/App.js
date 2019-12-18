@@ -45,6 +45,7 @@ import addSesamaProfile from './src/container/HomeUmum/DetailGLProfile/addSesama
 import addPantiProfile from './src/container/HomeUmum/DetailGLProfile/addPantiProfile';
 import KontribProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/KontribProfile';
 import addDonasiProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/addDonasiProfile';
+import Done from './src/container/galangKamu/Done';
 
 
 
@@ -80,7 +81,8 @@ const RootStack = createStackNavigator(
     addSesamaProfile: {screen:addSesamaProfile},
     addPantiProfile: {screen: addPantiProfile},
     KontribProfile: {screen: KontribProfile},
-    addDonasiProfile: {screen: addDonasiProfile}
+    addDonasiProfile: {screen: addDonasiProfile},
+    Done: {screen: Done}
   },
   {
     initialRouteName: 'Home', headerMode: 'none'

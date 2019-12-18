@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
+import { ProgressBarAndroid, StyleSheet, Image, View, Alert } from 'react-native';
 import { API_URL } from '../../../helpers/accessImage';
 import {
   Container,
@@ -33,6 +33,13 @@ export default class DetailGLItem extends React.Component {
 
   constructor(props) {
     super(props);
+    this.showAlert = this.showAlert.bind(this)
+  }
+
+  showAlert = () => {
+    Alert.alert(
+      'You need to LOGIN'
+    )
   }
 
 
@@ -40,15 +47,16 @@ export default class DetailGLItem extends React.Component {
 
   render() {
 
-    let { foto, judul, deskripsi, nominalSet, nominalProcess, status } = this.props
+    let { foto, judul, deskripsi, nominalSet, nominalProcess, status, responseLogin } = this.props
 
+    console.log("DT", responseLogin);
 
     return (
 
       <Card style={{ height: 498 }}>
         <Card>
           <CardItem style={{ backgroundColor: '#156cb3' }}>
-          <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
+            <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${foto}` }} style={{ width: 320, height: 150, justifyContent: 'center' }} />
           </CardItem>
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
             {judul}
@@ -92,10 +100,21 @@ export default class DetailGLItem extends React.Component {
 
           <CardItem style={{ justifyContent: "flex-end", marginTop: 60 }}>
             <Right>
-              <Button
-                onPress={() => this.props.navigation.navigate("beriDonasiBeranda")} style={{ backgroundColor: '#268026', padding: "5%" }}>
-                <Text style={{ fontSize: 12 }}>Donasi</Text>
-              </Button>
+
+              {responseLogin.length > 0 ?
+                <Button
+                  onPress={() => this.props.navigation.navigate("beriDonasiBeranda")} style={{ backgroundColor: '#268026', padding: "5%" }}>
+                  <Text style={{ fontSize: 12 }}>Donasi</Text>
+                </Button>
+                :
+                <Button
+                  onPress={this.showAlert} style={{ backgroundColor: '#268026', padding: "5%" }}>
+                  <Text style={{ fontSize: 12 }}>Donasi</Text>
+                </Button>
+
+
+              }
+
             </Right>
           </CardItem>
 

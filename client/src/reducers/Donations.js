@@ -17,6 +17,9 @@ const Donations = function (state = [], action) {
         case 'LOAD_ALLDATA_SUCCESS':
             return [...action.loadAllDataDonations]
 
+        case 'DELETE_DATA_GALANG':
+            return [...action.deleteDATASuccess]
+
         default:
             return state
 

@@ -40,6 +40,7 @@ export default class DetailGLBeranda extends React.Component {
   render() {
 
     let { responseDetail } = this.props
+    
 
     return (
       <Container>

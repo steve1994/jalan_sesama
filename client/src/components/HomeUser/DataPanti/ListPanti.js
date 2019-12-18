@@ -81,14 +81,19 @@ export default class ListPanti extends React.Component {
               </Card>
               <ScrollView style={{ backgroundColor: '#156cb3' }}>
                 {responseAllPanti.map((items, i) => {
-                  return (
+                  
+                  if (items.status == "approved") {
 
-                    <ListItemPanti
-                      navigation={this.props.navigation}
-                      {...items}
-                    />
-
-                  )
+                    return (
+                      
+                      <ListItemPanti
+                        navigation={this.props.navigation}
+                        {...items}
+                      />
+  
+                    )
+                  }
+                  
 
                 })}
               </ScrollView>

@@ -160,7 +160,7 @@ export default class UserItem extends React.Component {
                   alignItems: 'center',
                   margin: 5
                 }}
-                danger onPress={() => this.props.navigation.navigate("HomeUser")}>
+                danger onPress={() => this.props.navigation.navigate("Home")}>
                 <Text style={{ color: "white", textAlign: "left", fontWeight: "bold" }}>
                   Back
             </Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBarAndroid, StyleSheet, Image, View } from 'react-native';
+import { ProgressBarAndroid, StyleSheet, Image, View, TouchableOpacity, Alert, } from 'react-native';
 import {
   Container,
   Header,
@@ -27,6 +27,8 @@ import {
   Input,
   Textarea
 } from 'native-base';
+
+
 import { API_URL } from '../../helpers/accessImage';
 
 
@@ -34,13 +36,24 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+     
+    }
 
     this.handleProfile = this.handleProfile.bind(this)
+    this.showAlert = this.showAlert.bind(this)
   }
+
 
   componentDidMount() {
 
     this.props.loadAllDonations()
+  }
+
+  showAlert = () => {
+    Alert.alert(
+      'You need to LOGIN'
+    )
   }
 
   handleProfile() {
@@ -58,21 +71,17 @@ export default class Home extends React.Component {
 
     let { showDetail, responseLogin } = this.props;
 
-    console.log("HOME RES", responseLogin);
-    
-
-
     return (
       <Container>
         <Header style={{ backgroundColor: '#268026' }}>
-
           <Body>
             <Text style={{ color: "white" }}>
               Senin, 25 November 2019
             </Text>
             <Text>
-              <Title style={{ width: 130 }}>Jalan Sesama</Title>
+              <Title style={{ width: 130 }}>Home</Title>
             </Text>
+            
           </Body>
 
         </Header>
@@ -84,11 +93,12 @@ export default class Home extends React.Component {
           <Text style={{ color: "Black", textAlign: "center", fontWeight: "bold" }}>
             Membantu Sesama Kita
             </Text>
+
+
         </Card>
 
         <Content>
           <Card>
-
             <Right>
               <Row>
                 <CardItem style={{ justifyContent: "flex-end" }}>
@@ -97,12 +107,23 @@ export default class Home extends React.Component {
                     <Image source={{ uri: "https://i0.wp.com/www.rumahsinggahpeduli.org/wp-content/uploads/2016/12/Rumah-Singgah-Icon.jpg?fit=201%2C205&ssl=1" }} style={{ width: 70, height: 70 }} />
                   </Button>
                 </CardItem>
-                <CardItem style={{ justifyContent: "flex-end" }}>
-                  <Button transparent light
-                    onPress={() => this.props.navigation.navigate("GLdana")}>
-                    <Image source={{ uri: "https://infaqberkah.id/wp-content/uploads/2018/10/Kencleng-Berkah-Icon-e1539674712818.png" }} style={{ width: 70, height: 70 }} />
-                  </Button>
-                </CardItem>
+
+                {responseLogin.length > 0 ?
+                  <CardItem style={{ justifyContent: "flex-end" }}>
+                    <Button transparent light
+                      onPress={() => this.props.navigation.navigate("GLdana")} >
+                      <Image source={{ uri: "https://infaqberkah.id/wp-content/uploads/2018/10/Kencleng-Berkah-Icon-e1539674712818.png" }} style={{ width: 70, height: 70 }} />
+                    </Button>
+                  </CardItem>
+                  :
+                  <CardItem style={{ justifyContent: "flex-end" }}>
+                    <Button transparent light
+                      onPress={this.showAlert} style={styles.button}>
+                      <Image source={{ uri: "https://infaqberkah.id/wp-content/uploads/2018/10/Kencleng-Berkah-Icon-e1539674712818.png" }} style={{ width: 70, height: 70 }} />
+                    </Button>
+                  </CardItem>
+                }
+
 
                 {responseLogin.length > 0 ?
                   <CardItem style={{ justifyContent: "flex-end" }}>
@@ -119,6 +140,7 @@ export default class Home extends React.Component {
                     </Button>
                   </CardItem>
                 }
+
               </Row>
             </Right>
 
@@ -127,12 +149,12 @@ export default class Home extends React.Component {
             Vertical
             renderRow={(item) =>
               <ListItem >
-                <Card style={{ width: 310 }}>
+                <Card style={{ width: 320 }}>
                   <CardItem style={{}}>
                     <Text> {item.judul} </Text>
                   </CardItem>
                   <CardItem cardBody>
-                    <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 309, height: 150 }} />
+                    <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 319, height: 150 }} />
                   </CardItem>
                   <View style={styles.container}>
                     <ProgressBarAndroid />
@@ -152,11 +174,15 @@ export default class Home extends React.Component {
                     <CardItem style={{ justifyContent: "flex-end" }}>
                       <Right>
                         <Row>
+
+
+
                           <Button
                             onPress={() => { this.props.navigation.navigate("DetailGLBeranda"); { showDetail(item._id, item.type) } }}
                             style={{ backgroundColor: '#268026', padding: "5%" }}>
                             <Text style={{ fontSize: 12 }}>Detail</Text>
                           </Button>
+
                         </Row>
                       </Right>
                     </CardItem>
@@ -184,4 +210,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
 });
