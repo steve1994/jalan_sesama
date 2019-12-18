@@ -21,6 +21,7 @@ class Login extends React.Component {
     this.setState({ password: event.target.value })
   }
 
+<<<<<<< HEAD
   clickSignInButton(e) {
     e.preventDefault()
     this.props.postLoginUser(this.state.username, this.state.password);
@@ -28,6 +29,12 @@ class Login extends React.Component {
     // this.props.history.push('/');
     // window.location.replace('/')
   }
+=======
+    clickSignInButton(e) {
+        e.preventDefault();
+        this.props.postLoginUser(this.state.username,this.state.password);
+    }
+>>>>>>> cdcc33ac06fe35a5d93f3aefaa4c4e2205c8bc9d
 
   render() {
     return (

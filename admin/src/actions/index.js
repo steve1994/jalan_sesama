@@ -418,19 +418,18 @@ export const postLoginFailure = () => ({
 
 export const postLoginUser = (username, password) => {
     return dispatch => {
-        return request.post(`users/login_admin`, { username, password })
-            .then(function (response) {
-                let userData = response.data.data;
-                console.log("user DATA", userData);
-
-                // delete userData['password'];
-                localStorage.setItem("user", JSON.stringify(userData));
-                dispatch(postLoginSuccess(userData));
-            })
-            .catch(function (error) {
-                console.error(error);
-                dispatch(postLoginFailure());
-            })
+        return request.post(`users/login_admin`,{username,password})
+        .then(function (response) {
+            let userData = response.data.data;
+            delete userData['password'];
+            localStorage.setItem("user",JSON.stringify(userData));
+            window.location.href = "/";
+            dispatch(postLoginSuccess(userData));
+        })
+        .catch(function (error) {
+            console.error(error);
+            dispatch(postLoginFailure());
+        })
     }
 }
 
