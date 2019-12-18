@@ -423,6 +423,7 @@ export const postLoginUser = (username,password) => {
             let userData = response.data.data;
             delete userData['password'];
             localStorage.setItem("user",JSON.stringify(userData));
+            window.location.href = "/";
             dispatch(postLoginSuccess(userData));
         })
         .catch(function (error) {

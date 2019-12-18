@@ -21,9 +21,9 @@ class Login extends React.Component {
         this.setState({password:event.target.value})
     }
 
-    clickSignInButton() {
+    clickSignInButton(e) {
+        e.preventDefault();
         this.props.postLoginUser(this.state.username,this.state.password);
-        this.props.history.push('/');
     }
 
     render() {
