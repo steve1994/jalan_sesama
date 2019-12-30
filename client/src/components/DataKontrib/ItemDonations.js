@@ -82,18 +82,23 @@ export default class ItemDonations extends React.Component {
                         <CardItem style={{ justifyContent: "flex-end" }}>
                             <Right>
                                 <Row>
-                                   
+
                                     <Button
                                         onPress={() => { this.props.navigation.navigate("DetailGL"); { showDetail(_id, type) } }}
                                         style={{ backgroundColor: '#2b37c2', right: 140 }}>
                                         <Text style={{ fontSize: 12 }}>Detail</Text>
                                     </Button>
-
-                                    <Button
-                                        onPress={() => { this.props.navigation.navigate("Done"); { showDetail(_id, type) } }}
-                                        style={{ backgroundColor: '#268026' }}>
-                                        <Text style={{ fontSize: 12 }}>Done</Text>
-                                    </Button>
+                                    {status == "pending" ?
+                                        <Button>
+                                            
+                                        </Button>
+                                        :
+                                        <Button
+                                            onPress={() => { this.props.navigation.navigate("Done"); { showDetail(_id, type) } }}
+                                            style={{ backgroundColor: '#268026' }}>
+                                            <Text style={{ fontSize: 12 }}>Done</Text>
+                                        </Button>
+                                    }
                                 </Row>
                             </Right>
                         </CardItem>

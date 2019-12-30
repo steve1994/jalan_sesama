@@ -37,7 +37,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     
+
     }
 
     this.handleProfile = this.handleProfile.bind(this)
@@ -81,7 +81,7 @@ export default class Home extends React.Component {
             <Text>
               <Title style={{ width: 130 }}>Home</Title>
             </Text>
-            
+
           </Body>
 
         </Header>
@@ -149,48 +149,54 @@ export default class Home extends React.Component {
             Vertical
             renderRow={(item) =>
               <ListItem >
-                <Card style={{ width: 320 }}>
-                  <CardItem style={{}}>
-                    <Text> {item.judul} </Text>
-                  </CardItem>
-                  <CardItem cardBody>
-                    <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 319, height: 150 }} />
-                  </CardItem>
-                  <View style={styles.container}>
-                    <ProgressBarAndroid />
-                    <Row>
-                      <Text style={{ fontSize: 12, left: 5 }}>{item.nominalProcess}</Text>
-                      <Right>
-                        <Text style={{ fontSize: 12, right: 5 }}>{item.nominalSet}</Text>
-                      </Right>
-                    </Row>
-                    <ProgressBarAndroid
-                      styleAttr="Horizontal"
-                      indeterminate={false}
-                      progress={item.nominalProcess / item.nominalSet}
-                    />
+                {item.status == "pending" ? 
+                <View/>
+                :
 
 
-                    <CardItem style={{ justifyContent: "flex-end" }}>
-                      <Right>
-                        <Row>
-
-
-
-                          <Button
-                            onPress={() => { this.props.navigation.navigate("DetailGLBeranda"); { showDetail(item._id, item.type) } }}
-                            style={{ backgroundColor: '#268026', padding: "5%" }}>
-                            <Text style={{ fontSize: 12 }}>Detail</Text>
-                          </Button>
-
-                        </Row>
-                      </Right>
+                  <Card style={{ width: 320 }}>
+                    <CardItem style={{}}>
+                      <Text> {item.judul} </Text>
                     </CardItem>
+                    <CardItem cardBody>
+                      <Image source={{ uri: `${API_URL}images/uploaded_image/dana/${item.foto}` }} style={{ width: 319, height: 150 }} />
+                    </CardItem>
+                    <View style={styles.container}>
+                      <ProgressBarAndroid />
+                      <Row>
+                        <Text style={{ fontSize: 12, left: 5 }}>{item.nominalProcess}</Text>
+                        <Right>
+                          <Text style={{ fontSize: 12, right: 5 }}>{item.nominalSet}</Text>
+                        </Right>
+                      </Row>
+                      <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.nominalProcess / item.nominalSet}
+                      />
+
+
+                      <CardItem style={{ justifyContent: "flex-end" }}>
+                        <Right>
+                          <Row>
 
 
 
-                  </View>
-                </Card>
+                            <Button
+                              onPress={() => { this.props.navigation.navigate("DetailGLBeranda"); { showDetail(item._id, item.type) } }}
+                              style={{ backgroundColor: '#268026', padding: "5%" }}>
+                              <Text style={{ fontSize: 12 }}>Detail</Text>
+                            </Button>
+
+                          </Row>
+                        </Right>
+                      </CardItem>
+
+
+
+                    </View>
+                  </Card>
+                }
               </ListItem>
             }>
           </List>

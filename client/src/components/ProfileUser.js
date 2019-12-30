@@ -40,7 +40,6 @@ export default class ProfileUser extends React.Component {
 
   render() {
     let { resProfileSuccess } = this.props
-    console.log("Komp", this.props.resProfileSuccess);
 
 
     return (

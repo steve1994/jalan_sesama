@@ -257,15 +257,6 @@ export default class addSesama extends React.Component {
 
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   postSesama: (judul, nama, alamat, deskripsi,location, fotoSesama) => dispatch(postSesama(judul, nama, alamat, deskripsi,location, fotoSesama))
-// })
-
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(addSesama)
-
 const styles = StyleSheet.create({
   inputField: {
     width: 280,

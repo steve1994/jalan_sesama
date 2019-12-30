@@ -46,6 +46,7 @@ import addPantiProfile from './src/container/HomeUmum/DetailGLProfile/addPantiPr
 import KontribProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/KontribProfile';
 import addDonasiProfile from './src/container/HomeUmum/DetailGLProfile/KontribProfile/addDonasiProfile';
 import Done from './src/container/galangKamu/Done';
+import ChatMessage from './src/container/Message/ChatMessage';
 
 
 
@@ -82,7 +83,9 @@ const RootStack = createStackNavigator(
     addPantiProfile: {screen: addPantiProfile},
     KontribProfile: {screen: KontribProfile},
     addDonasiProfile: {screen: addDonasiProfile},
-    Done: {screen: Done}
+    Done: {screen: Done},
+    ChatMessage: { screen: ChatMessage },
+    
   },
   {
     initialRouteName: 'Home', headerMode: 'none'

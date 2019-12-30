@@ -1,16 +1,79 @@
-const API_URL = "http://192.168.1.25:3001/api";
+const API_URL = "http://192.168.100.12:3001/api";
 
+//DeleteChat
+export const deleteChatSuccess = (successDeleteChat) => ({
+    type:'DELETE_CHAT_SUCCESS',
+    successDeleteChat
+})
+export const deleteChatError = (errorDeleteChat) => ({
+    type:'DELETE_CHAT_ERROR',
+    errorDeleteChat
+})
+export const deleteChat = (idUser) => {
+    return dispatch => {
+        return fetch(`${API_URL}/chats/${idUser}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((responseDelete) => {
 
+                dispatch(deleteChatSuccess(responseDelete))
+
+            })
+            .catch((error) => {
+                dispatch(deleteChatError(error))
+            })
+    }
+}
+
+//PostChat
+export const postChatSuccess = (chatPostSuccess) => ({
+    type: 'POST_CHAT_SUCCESS',
+    chatPostSuccess
+})
+export const errorPostChat = (errorPostChat) => ({
+    type: 'POST_CHAT_ERROR',
+    errorPostChat
+})
+
+export const postChats = (idUser, userName, message) => {
+
+    return dispatch => {
+        return fetch(`${API_URL}/chats`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idUser, userName, message })
+        })
+            .then((response) => response.json())
+            .then((responseChat) => {
+                dispatch(postChatSuccess(responseChat))
+
+            })
+            .catch((error) => {
+                dispatch(errorPostChat(error))
+            })
+    }
+
+}
+
+//Delete For Rejected
 export const deleteSuccess = (deleteDATASuccess) => ({
     type: "DELETE_DATA_GALANG",
     deleteDATASuccess
 })
 
-export const deleteReject = (_id, type ) => {
+export const deleteReject = (_id, type) => {
 
     return dispatch => {
 
-        if (type == "panti" ){
+        if (type == "panti") {
             return fetch(`${API_URL}/pantis/${_id}`, {
                 method: 'DELETE',
                 headers: {
@@ -18,11 +81,11 @@ export const deleteReject = (_id, type ) => {
                     'Content-Type': 'application/json'
                 }
             })
-            .then((response) => response.json())
-            .then((responseDelete) => {
-                dispatch(deleteSuccess(responseDelete))
-            })
-        }else{
+                .then((response) => response.json())
+                .then((responseDelete) => {
+                    dispatch(deleteSuccess(responseDelete))
+                })
+        } else {
 
             return fetch(`${API_URL}/sesamas/${_id}`, {
                 method: 'DELETE',
@@ -30,13 +93,14 @@ export const deleteReject = (_id, type ) => {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 }
+
             })
-            .then((response) => response.json())
-            .then((responseDelete) => {
-                dispatch(deleteSuccess(responseDelete))
-            })
+                .then((response) => response.json())
+                .then((responseDelete) => {
+                    dispatch(deleteSuccess(responseDelete))
+                })
         }
-    }   
+    }
 }
 
 
@@ -55,7 +119,7 @@ export const postPanti = (
 
 
     return dispatch => {
-        
+
         // dispatch(postDataPanti( idUser , nama, alamat, deskripsi, jumlahOrang, location, fotoPanti))
         return fetch(`${API_URL}/pantis/${idUser}`, {
             method: 'POST',
@@ -83,8 +147,8 @@ export const postPanti = (
                 })
                     .then((response) => response.json())
                     .then((responseJson) => {
-                        
-                        
+
+
                         // dispatch(postPantiSuccess(responseJson.data))
 
 
@@ -462,10 +526,10 @@ export const postSesama = (
     location,
     fotoSesama) => {
     console.log("idACT", idUser);
-    
+
 
     return dispatch => {
-        
+
         return fetch(`${API_URL}/sesamas/${idUser}`, {
             method: 'POST',
             headers: {

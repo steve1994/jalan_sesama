@@ -92,10 +92,14 @@ export default class DetailGLItem extends React.Component {
 
           <CardItem style={{ justifyContent: "flex-end", marginTop: 60 }}>
             <Right>
+              {status == "pending" ? 
+              <View/> 
+              :
               <Button
                 onPress={() => this.props.navigation.navigate("beriDonasi")} style={{ backgroundColor: '#268026', padding: "5%" }}>
                 <Text style={{ fontSize: 12 }}>Donasi</Text>
               </Button>
+              }
             </Right>
           </CardItem>
 

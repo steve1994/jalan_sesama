@@ -35,20 +35,20 @@ export default class UserItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[]
-      
+      data: []
+
     }
     this.handleLogout = this.handleLogout.bind(this)
   }
 
   handleLogout() {
-    
-    
+
+
     this.props.processLogout(
       this.props.navigation.navigate("Home")
     )
 
-    
+
   }
 
 
@@ -57,7 +57,6 @@ export default class UserItem extends React.Component {
 
   render() {
     let { _id, nama, alamat, foto, showDetail } = this.props
-    console.log("userItem",  _id, nama, alamat, foto);
     let idUser = _id
 
     return (
@@ -74,12 +73,12 @@ export default class UserItem extends React.Component {
                 <View>
                   <Text style={{ color: "black", textAlign: "left", fontWeight: "bold", }}>
                     Nama    : {nama}
-            </Text>
+                  </Text>
                 </View>
                 <View>
                   <Text style={{ color: "black", textAlign: "left", fontWeight: "bold" }}>
                     Alamat  : {alamat}
-            </Text>
+                  </Text>
                 </View>
 
               </Card>
@@ -90,30 +89,15 @@ export default class UserItem extends React.Component {
         </Card>
         <Card>
           <View>
-            {/* <Button
-              style={{
-                textAlign: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: 5
-                
-              }}
-              onPress={() => (this.props.navigation.navigate("galangKamu"))}
-              success>
-              <Text style={{ color: "black", textAlign: "left", fontWeight: "bold", }}>
-                List Donasi
-            </Text>
-            </Button> */}
-
             <Button
               style={{
                 textAlign: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
                 margin: 5
-                
+
               }}
-              onPress={() => {showDetail(idUser); this.props.navigation.navigate("GLdanaProfile")}}
+              onPress={() => { showDetail(idUser); this.props.navigation.navigate("GLdanaProfile") }}
               success>
               <Text style={{ color: "black", textAlign: "left", fontWeight: "bold", }}>
                 List Donasi
@@ -175,6 +159,7 @@ export default class UserItem extends React.Component {
                   alignItems: 'center',
                   margin: 5,
                 }}
+                onPress={() => this.props.navigation.navigate("ChatMessage")}
                 primary>
                 <Text style={{ color: "white", textAlign: "left", fontWeight: "bold" }}>
                   Chat Admin

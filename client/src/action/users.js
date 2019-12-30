@@ -1,6 +1,6 @@
 import { request } from "../helpers/accessAPI";
 
-const API_URL = "http://192.168.1.25:3001/api";
+const API_URL = "http://192.168.100.12:3001/api";
 
 
 //POST PROFILE
