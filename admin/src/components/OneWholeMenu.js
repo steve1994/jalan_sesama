@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import Dashboard from './Dashboard';
-import Inbox from './Inbox';
+import Inbox from '../container/Inbox/Inbox';
 import Notification from './Notification';
 import Verification from './Verification';
 import DataPanti from './DataPanti';
@@ -9,6 +9,7 @@ import DataSesama from './DataSesama';
 import ListDonasi from './ListDonasi';
 import Login from './Login';
 import Register from './Register';
+import ChatItem from '../container/Inbox/ChatItem';
 
 export default class OneWholeMenu extends React.Component {
 
@@ -86,6 +87,9 @@ export default class OneWholeMenu extends React.Component {
                     </Route>
                     <Route path="/register">
                         {localStorage.getItem("user") ? <Redirect to='/' /> : <Register />}
+                    </Route>
+                    <Route path="/chatItem">
+                        {localStorage.getItem("user") ? <ChatItem /> : <Redirect to="/login" />}
                     </Route>
                   </Switch>
 

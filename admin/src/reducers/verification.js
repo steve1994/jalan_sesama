@@ -2,6 +2,7 @@ const verification = (state = [], action) => {
     switch(action.type) {
         case 'PUT_STATUS_SUCCESS':
         case 'LOAD_VERIFICATION_SUCCESS':
+            console.log("VERIFICATION SUCCESS",action.pantisData,action.sesamasData);
             let pantis = action.pantisData.data.map((item,index) => {
                 console.log("PANTI STATUS : ", item.status);
                 return {OriginId: item._id,

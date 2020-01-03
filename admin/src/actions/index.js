@@ -1,12 +1,36 @@
 import axios from 'axios';
 var path = require('path');
 
-const API_URL = 'http://192.168.3.75:3001/api/'
+const API_URL = 'http://192.168.100.12:3001/api/'
 
 const request = axios.create({
     baseURL: API_URL,
     timeout: 1000
 })
+
+
+// loadDataMessage
+export const loadMessageSuccess = (loadChatSuccess) => ({
+    type: "LOAD_MESSAGE_SUCCESS",
+    loadChatSuccess  
+})
+
+export const loadMessageFailed = (loadChatFailed) => ({
+    type:"LOAD_MESSAGE_FAILED",
+    loadChatFailed
+})
+
+export const loadMessage = () =>  {
+    return dispatch => {
+        return request.get(`chats/listChat`)
+        .then((responseGetChat) => {
+            dispatch(loadMessageSuccess(responseGetChat))
+        })
+        .catch((error) => {
+            dispatch(loadMessageFailed(error))
+        })
+    }
+}
 
 export const loadVerificationSuccess = (pantisData, sesamasData) => ({
     type: 'LOAD_VERIFICATION_SUCCESS',
@@ -26,6 +50,7 @@ export const loadVerification = () => {
                 return request.get(`sesamas`)
                     .then(function (response) {
                         let sesamasData = response;
+                        console.log('PANTI AND SESAMA', pantisData, sesamasData);
                         dispatch(loadVerificationSuccess(pantisData, sesamasData));
                     })
             })
@@ -398,6 +423,7 @@ export const postRegisterUser = (nama, alamat, username, password) => {
     return dispatch => {
         return request.post('users/admin', { nama, alamat, username, password })
             .then(function (response) {
+                window.location.href = '/login';
                 dispatch(postRegisterSuccess(response.data));
             })
             .catch(function (error) {

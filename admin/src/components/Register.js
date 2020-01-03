@@ -31,12 +31,13 @@ class Register extends React.Component {
         this.setState({password:event.target.value});
     }
 
-    clickRegisterButton() {
+    clickRegisterButton(e) {
+        e.preventDefault();
         this.props.postRegisterUser(this.state.nama,
                                     this.state.alamat,
                                     this.state.username,
                                     this.state.password);
-        this.props.history.push('/login');
+        // this.props.history.push('/login');
     }
 
     render() {
